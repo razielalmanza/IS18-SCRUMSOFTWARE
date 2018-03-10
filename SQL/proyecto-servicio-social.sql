@@ -1,6 +1,8 @@
 -- Caso de uso 
 -- 	    Registrar
 
+-- Encargado:
+--      Almanza Ibarra Raziel
 -- Usando la BD ForoCiencias
 -- y un esquema de la misma, modeloForo
 
