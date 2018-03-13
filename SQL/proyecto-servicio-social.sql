@@ -118,3 +118,23 @@ insert into usuario(
 	val3,
 	val4
 	);
+
+
+
+-- --------------------------------- --
+--  Caso de uso:
+--       Agregar respuesta
+--  Responsable:
+--       Ximena Lezama Hernández
+-- --------------------------------- --
+
+-- ENTITDAD
+CREATE TABLE AGREGA_RESPUESTA(
+    NO_PREGUNTA INT NOT NULL,
+    NOM_USUARIO_PREGUNTA VARCHAR2(255) NOT NULL,
+    NOM_USUARIO_RESPUESTA VARCHAR2(255) NOT NULL,
+    PREGUNTA VARCHAR2(255) NOT NULL,
+    RESPUESTA VARCHAR2(255),
+    PRIMARY KEY(NO_PREGUNTA)
+    
+);
