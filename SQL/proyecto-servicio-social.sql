@@ -87,6 +87,6 @@ $$ language sql stable;
 --  Registros de prueba
 -- ================================= --
 INSERT INTO modeloForo.Usuario( nombreUsuario, correoCiencias, contrasena, genero, fechaNacimiento ) VALUES ( 'LuisLazaro88', 'luis_lazaro@ciencias.unam.mx', 'password', 'Masculino', '1988-02-25' );
-INSERT INTO modeloForo.Usuario( nombreUsuario, correoCiencias, contrasena, genero, fechaNacimiento ) VALUES ( 'Miguel', 'luis_lazaro@ciencias.unam.mx', 'password', 'Masculino', '1988-02-25' );
+INSERT INTO modeloForo.Usuario( nombreUsuario, correoCiencias, contrasena, genero, fechaNacimiento ) VALUES ( 'Miguel', 'miguel_pinia@ciencias.unam.mx', 'pinia88', 'Masculino', '1988-02-25' );
 
 COMMIT;
