@@ -1,0 +1,11 @@
+127.0.0.1 - - [27/Mar/2018:21:27:27 -0600] "GET /ForoCiencias/ HTTP/1.1" 200 2922 http-bio-8080-exec-1 5281
+127.0.0.1 - - [27/Mar/2018:21:27:27 -0600] "GET /ForoCiencias/javax.faces.resource/jquery/3.3.1-1/jquery.min.js.xhtml?ln=webjars HTTP/1.1" 304 - http-bio-8080-exec-4 46
+127.0.0.1 - - [27/Mar/2018:21:27:27 -0600] "GET /ForoCiencias/javax.faces.resource/bootstrap/4.0.0-2/css/bootstrap.min-jsf.css.xhtml?ln=webjars HTTP/1.1" 304 - http-bio-8080-exec-3 52
+127.0.0.1 - - [27/Mar/2018:21:27:27 -0600] "GET /ForoCiencias/javax.faces.resource/theme.css.xhtml?ln=primefaces-aristo HTTP/1.1" 304 - http-bio-8080-exec-2 68
+127.0.0.1 - - [27/Mar/2018:21:27:27 -0600] "GET /ForoCiencias/javax.faces.resource/bootstrap/4.0.0-2/js/bootstrap.min.js.xhtml?ln=webjars HTTP/1.1" 304 - http-bio-8080-exec-5 50
+127.0.0.1 - - [27/Mar/2018:21:27:40 -0600] "POST /ForoCiencias/index.xhtml HTTP/1.1" 302 - http-bio-8080-exec-9 295
+127.0.0.1 - - [27/Mar/2018:21:27:40 -0600] "GET /ForoCiencias/secured/inicio.xhtml HTTP/1.1" 200 2539 http-bio-8080-exec-10 118
+127.0.0.1 - - [27/Mar/2018:21:27:40 -0600] "GET /ForoCiencias/javax.faces.resource/bootstrap/4.0.0-2/css/bootstrap.min-jsf.css.xhtml?ln=webjars HTTP/1.1" 304 - http-bio-8080-exec-6 4
+127.0.0.1 - - [27/Mar/2018:21:27:40 -0600] "GET /ForoCiencias/javax.faces.resource/theme.css.xhtml?ln=primefaces-aristo HTTP/1.1" 304 - http-bio-8080-exec-7 13
+127.0.0.1 - - [27/Mar/2018:21:27:40 -0600] "GET /ForoCiencias/javax.faces.resource/jquery/3.3.1-1/jquery.min.js.xhtml?ln=webjars HTTP/1.1" 304 - http-bio-8080-exec-8 8
+127.0.0.1 - - [27/Mar/2018:21:27:40 -0600] "GET /ForoCiencias/javax.faces.resource/bootstrap/4.0.0-2/js/bootstrap.min.js.xhtml?ln=webjars HTTP/1.1" 304 - http-bio-8080-exec-3 1
