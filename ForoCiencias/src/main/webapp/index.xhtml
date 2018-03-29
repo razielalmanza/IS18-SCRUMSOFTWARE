@@ -6,6 +6,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
+      
       template="/WEB-INF/template.xhtml"
       >
     <h:head>
@@ -55,12 +56,12 @@
           </ul>
           <br /> <br /> <br />
           <div class="wrap-input100 validate-input">
-            <h:inputTextarea class="input100" rows="5" cols="30"   />
+            <h:inputTextarea rows="5" cols="30"  class="input100" id="respuesta" value="#{AgregaPregunta.respuesta}" />
             <h:outputText id="display" />
             <span class="focus-input100"></span>
           </div>
           <div class="container-contact100-form-btn">
-            <h:commandButton class="contact100-form-btn" value="Responder" action="#{responder.responder}" rendered="#{!responder.respuestaIn}" /> 
+            <h:commandButton class="contact100-form-btn" value="Responder" action="#{responder.responder}" rendered="#{!ButtonView.respuestaIn}" /> 
           </div>
         </h:form>
       </div>
