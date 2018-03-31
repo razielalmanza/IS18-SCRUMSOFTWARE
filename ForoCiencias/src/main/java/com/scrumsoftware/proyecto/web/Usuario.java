@@ -1,5 +1,9 @@
 package com.scrumsoftware.proyecto.web;
 
+/**
+ *
+ * @author ximenalezama
+ */
 public class Usuario {
 
     private String usuario;
