@@ -4,23 +4,20 @@
              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
              xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
     
-  <persistence-unit name="forociencias" transaction-type="JTA">
-      
-    <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+        <persistence-unit name="forociencias" transaction-type="JTA">
+
+        <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+
+        <class>com.mx.fciencias.scrumsoftware.forociencias.entities.Usuario</class>
+        <class>com.mx.fciencias.scrumsoftware.forociencias.entities.Pregunta</class>
+
+        <properties>
+            <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/forociencias" />
+            <property name="javax.persistence.jdbc.user" value="marco" />
+            <property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver" />
+            <property name="javax.persistence.jdbc.password" value="marco" />
+        </properties>
     
-    <class>com.mx.fciencias.scrumsoftware.forociencias.entities.Usuario</class>
-    <class>com.mx.fciencias.scrumsoftware.forociencias.entities.Pregunta</class>
-    <class>com.miguel.proyecto.model.Login></class>
-    
-    <!--<exclude-unlisted-classes>true</exclude-unlisted-classes>-->
-    
-    <properties>
-      <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/forociencias"/>
-      <property name="javax.persistence.jdbc.user" value="marco"/>
-      <property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver"/>
-      <property name="javax.persistence.jdbc.password" value="marco"/>
-    </properties>
-    
-  </persistence-unit>
+    </persistence-unit>
   
 </persistence>
