@@ -4,67 +4,103 @@
    PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd" >
 
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html"
-      
-      template="/WEB-INF/template.xhtml"
-      >
+<html 
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    template="/WEB-INF/template.xhtml"
+    xmlns:f="http://xmlns.jcp.org/jsf/core">
+    
     <h:head>
-    <title>
-      ForoCiencias
-    </title>
-    <meta content="" />
-    <link rel="stylesheet" href="AgregaRespuesta.css"/>
+        
+        <title>ForoCiencias</title>
+        
+        <meta content="" />
+        
+        <link rel="stylesheet" href="default.css"/>
+        
     </h:head>
-  <h:body>
-    <div class="container-contact100 ">
-      <div class="wrap-contact100 " style="background-color:#B2C8F6;">
-        <h:form class="contact100-form validate-form" >
-          <img
-          src="https://vignette.wikia.nocookie.net/althistory/images/8/81/Escudo-UNAM-escalable.png/revision/latest?cb=20150805030724&amp;path-prefix=es"
-          style="max-width: 50px; max-height: 50px" alt="" class="center" />
-          <span class="contact100-form-title"
-          style="color:#190F42; font-family:Impact; font-size:300%; text-align:center;">
-          Foro Ciencias </span>
-          <ul id="qa_submitted_questions" class="qa_questions">
-            <li class="qa_sq">
-              <div class="qa_divider"></div>
-              <div class="qa_li_container">
-                <div class="qa_bullet"></div>
-                <div class="qa_sq_question">
-                  <div class="qa_q_txt">
+    
+    <h:body>
+
+        <header>
+            
+
+
+        </header>
+        
+        <div class="container-contact100 ">
+            
+            <div class="wrap-contact100 " style="background-color:#B2C8F6;">
+              
+                <h:form class="contact100-form validate-form" >
+
+                    <img 
+                        src="https://vignette.wikia.nocookie.net/althistory/images/8/81/Escudo-UNAM-escalable.png/revision/latest?cb=20150805030724&amp;path-prefix=es"
+                        style="max-width: 50px; max-height: 50px" 
+                        alt="" 
+                        class="center" />
+
+                    <span 
+                        class="contact100-form-title"
+                        style="color:#190F42; font-family:Impact; font-size:300%; text-align:center;">Foro Ciencias </span>
+
                     <table align="center" width="*%">
-                      <tr>
-                        <td>
-                          <img
-                          src="https://upload.wikimedia.org/wikipedia/commons/4/41/Cicero.PNG"
-                          style="max-width: 100px; max-height: 100px" alt="" />
-                        </td>
-                        <td>
-                          Lorem ipsum dolor sit amet, consectetur adipiscing
-                          elit, sed do eiusmod tempor incididunt ut labore et
-                          dolore magna aliqua. Ut enim ad minim veniam, quis
-                          nostrud exercitation ullamco laboris nisi ut aliquip
-                          ex ea commodo consequat.
-                        </td>
-                      </tr>
+                        <tr>
+                            <td>
+                                <img
+                                    src="https://upload.wikimedia.org/wikipedia/commons/4/41/Cicero.PNG"
+                                    style="max-width: 100px; max-height: 100px" 
+                                    alt="" />
+                            </td>
+                            <td class="bienvenida">
+                                Mensaje de bienvenida
+                            </td>
+                        </tr>
                     </table>
-                  </div>
-                </div>
-              </div>
-            </li>
-          </ul>
-          <br /> <br /> <br />
-          <div class="wrap-input100 validate-input">
-            <h:inputTextarea rows="5" cols="30"  class="input100" id="respuesta" value="#{AgregaPregunta.respuesta}" />
-            <h:outputText id="display" />
-            <span class="focus-input100"></span>
-          </div>
-          <div class="container-contact100-form-btn">
-            <h:commandButton class="contact100-form-btn" value="Responder" action="#{responder.responder}" rendered="#{!ButtonView.respuestaIn}" /> 
-          </div>
-        </h:form>
-      </div>
-    </div>
-  </h:body>
+
+                    <h:dataTable value="#{preguntaBean.preguntaList}" var="pregunta" 
+                        styleClass="order-table"
+    			headerClass="order-table-header"
+    			rowClasses="order-table-odd-row,order-table-even-row">
+
+                        <h:column>
+                            <f:facet name="header">Título</f:facet>
+                            <a href="">#{pregunta.titulo}</a>
+                        </h:column>
+
+                        <h:column>
+                            <f:facet name="header">Contenido</f:facet>
+                            #{pregunta.contenido}
+                        </h:column>
+                        
+                        <h:column>
+                            <f:facet name="header">Autor</f:facet>
+                            <a href="">#{pregunta.preguntaPK.usuario.nombreUsuario}</a>
+                        </h:column>
+                        
+                        <h:column>
+                            <f:facet name="header">Fecha y hora de creación</f:facet>
+                            #{pregunta.fechaYHora}
+                        </h:column>
+
+                    </h:dataTable>
+
+                    <br/><br/><br/>
+
+                    <div class="container-contact100-form-btn">
+
+                      <h:commandButton class="contact100-form-btn" value="Hacer pregunta" action="newxhtml" rendered="#{!ButtonView.respuestaIn}" /> 
+
+                    </div>
+
+                </h:form>
+                
+            </div>
+                        
+        </div>
+            
+        
+            
+    </h:body>
+    
 </html> 

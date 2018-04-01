@@ -4,41 +4,96 @@
   <groupId>com.mx.fciencias.scrumsoftware</groupId>
   <artifactId>ForoCiencias</artifactId>
   <packaging>war</packaging>
-  <version>1.0-SNAPSHOT</version>
-  <name>ForoCiencias Maven Webapp</name>
+  <version>1.0.1-SNAPSHOT</version>
+  <name>ForoCiencias</name>
   <url>http://maven.apache.org</url>
+  
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <maven.compiler.source>1.8</maven.compiler.source>
+    <maven.compiler.target>1.8</maven.compiler.target>
+  </properties>
+  
   <dependencies>
+      
+    <dependency>
+        <groupId>postgresql</groupId>
+        <artifactId>postgresql</artifactId>
+        <version>9.1-901-1.jdbc4</version>
+    </dependency>
+
+      
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
       <version>3.8.1</version>
       <scope>test</scope>
     </dependency>
+    
+   <dependency>
+      <groupId>com.sun.faces</groupId>
+      <artifactId>jsf-api</artifactId>
+      <version>2.2.16</version>
+    </dependency>
+
+    <dependency>
+      <groupId>com.sun.faces</groupId>
+      <artifactId>jsf-impl</artifactId>
+      <version>2.2.16</version>
+    </dependency>
+    
+    <dependency>
+        <groupId>javax.faces</groupId>
+        <artifactId>javax.faces-api</artifactId>
+        <version>2.2</version>
+        <scope>provided</scope>
+    </dependency>
+    
+    <dependency>
+        <groupId>org.hibernate</groupId>
+        <artifactId>hibernate-core</artifactId>
+        <version>5.2.16.Final</version>
+    </dependency>
+
+<!--    <dependency>
+        <groupId>javax.persistence</groupId>
+        <artifactId>javax.persistence-api</artifactId>
+        <version>2.2</version>
+    </dependency>-->
+
+
+    <dependency>
+        <groupId>javax.servlet</groupId>
+        <artifactId>javax.servlet-api</artifactId>
+        <version>4.0.0</version>
+        <scope>provided</scope>
+    </dependency>
+
   </dependencies>
 
   <build> 
     <finalName>ForoCiencias</finalName>
     <plugins>
-      <!-- Set JDK Compiler Level -->
-      <plugin> 
-        <groupId>org.apache.maven.plugins</groupId> 
-        <artifactId>maven-compiler-plugin</artifactId> 
-        <version>2.3.2</version>
-        <configuration>
-          <source>${jdk-version}</source>
-          <target>${jdk-version}</target> 
-        </configuration>
-      </plugin>
+        <!-- Set JDK Compiler Level -->
+        <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-compiler-plugin</artifactId>
+            <version>3.0</version>
+            <configuration>
+                <source>1.8</source>
+                <target>1.8</target>
+            </configuration>
+        </plugin>
 
       <!-- For Maven Tomcat Plugin -->
-      <plugin> 
-        <groupId>org.apache.tomcat.maven</groupId> 
-        <artifactId>tomcat7-maven-plugin</artifactId> 
-        <version>2.2</version>
-        <configuration>
-          <path>/ForoCiencias</path> 
-        </configuration>
-      </plugin>
+        <plugin> 
+            <groupId>org.apache.tomcat.maven</groupId> 
+            <artifactId>tomcat7-maven-plugin</artifactId> 
+            <version>2.2</version>
+            <configuration>
+              <path>/ForoCiencias</path> 
+            </configuration>
+        </plugin>
      </plugins> 
    </build>
 
