@@ -1,0 +1,60 @@
+<DOCTYPE html>
+<html>
+    <head>
+      <meta http-equiv="Content-Type" content="text/html; php ;charset=utf-8">
+      <script type="text/javascript" src="jquery.js"></script>
+      <title> Agragar pregunta </title>
+      <style>
+.button {
+  display: inline-block;
+  border-radius: 4px;
+  background-color: #f4511e;
+  border: none;
+  color: #FFFFFF;
+  text-align: center;
+  font-size: 14px;
+  padding: 7px;
+  width: 100px;
+  transition: all 0.5s;
+  cursor: pointer;
+  margin: 3px;
+}
+
+.button span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+}
+
+.button span:after {
+  content: '»';
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -20px;
+  transition: 0.5s;
+}
+
+.button:hover span {
+  padding-right: 25px;
+}
+
+.button:hover span:after {
+  opacity: 1;
+  right: 0;
+}
+
+pos.b1{
+  position:relative;
+  left: 2000px;
+}
+</style>
+    </head>
+    <body>
+      <button class="button" style="vertical-align:middle"><span>Sign Up</span></button>
+      <form action="/Users/EssExx/PaginaDePregunta.html">
+      <button class="button" class =  "pos.b1" style= "vertical-align:middle"><span>Ask ! </span></button>
+    </form>
+    </body>
+</html>

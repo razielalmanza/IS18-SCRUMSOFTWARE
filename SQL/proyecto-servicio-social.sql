@@ -1,20 +1,10 @@
--- Caso de uso 
--- 	    Registrar
-
--- Usando la BD ForoCiencias
--- y un esquema de la misma, modeloForo
-
--- Insertando en la tabla usuario
-
-insert into usuario(
-	nombreUsuario,
-	correoCiencias,
-	password,
-	genero,
-	fechaNac
-	)values(
-	val1,
-	val2,
-	val3,
-	val4
-	);
+-- ENTITDAD
+CREATE TABLE AGREGA_RESPUESTA(
+    NO_PREGUNTA INT NOT NULL,
+    NOM_USUARIO_PREGUNTA VARCHAR2(255) NOT NULL,
+    NOM_USUARIO_RESPUESTA VARCHAR2(255) NOT NULL,
+    PREGUNTA VARCHAR2(255) NOT NULL,
+    RESPUESTA VARCHAR2(255),
+    PRIMARY KEY(NO_PREGUNTA)
+    
+);
