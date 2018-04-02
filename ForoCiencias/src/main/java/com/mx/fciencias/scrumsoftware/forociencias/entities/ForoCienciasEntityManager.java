@@ -1,32 +1,41 @@
 package com.mx.fciencias.scrumsoftware.forociencias.entities;
 
-import java.sql.Timestamp;
-import java.util.LinkedList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Persistence;
 import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
 import javax.persistence.TypedQuery;
-import javax.persistence.spi.PersistenceProvider;
 
+/**
+ * Clase encargada de las operaciones relacionadas con la base de datos.
+ */
 public class ForoCienciasEntityManager {
-        
+    
+    /* Objeto encargado de las operaciones relacionadas con la base de datos. */
     @PersistenceContext
     private static EntityManager entityManager;
 	
-	private boolean inTransaction = false;
+    /* Booleano para garantizar la serialización. */
+	private static boolean inTransaction = false;
     
+    /**
+     * Crea un nuevo manejador. Aunque el uso de la clase 
+     * javax.persistence.EntityManager es de modo singleton, esta clase no.
+     */
     public ForoCienciasEntityManager() {
         if (entityManager == null) {
-            entityManager= Persistence
+            entityManager = Persistence
                 .createEntityManagerFactory("forociencias")
                 .createEntityManager();
         }
-        //entityManager.
     }
 	
+    /**
+     * Guarda una instancia de una entidad.
+     * @param <T> una clase etiquetada con import javax.persistence.Entity.
+     * @param row la instancia de esta entidad. 
+     */
 	public <T> void save(T row){
 		if (!inTransaction) {
 			entityManager.getTransaction().begin();
@@ -37,6 +46,11 @@ public class ForoCienciasEntityManager {
 		}
 	}
 	
+    /**
+     * Elimina la instancia de la entidad.
+     * @param <T> una clase etiquetada con import javax.persistence.Entity.
+     * @param row la instancia de esta entidad.
+     */
 	public <T> void delete(T row){
 		if (!inTransaction) {
 			entityManager.getTransaction().begin();
@@ -47,15 +61,27 @@ public class ForoCienciasEntityManager {
 		}
 	}
 	
+    /**
+     * Persiste una instancia nueva de una entidad.
+     * @param <T> una clase etiquetada con import javax.persistence.Entity.
+     * @param row la instancia de esta entidad.
+     */
 	public <T> void persist(T row) {
 		entityManager.persist(row);
 	}
 
+    /**
+     * Comienza una transacción de recursos si no existía una iniciada.
+     */
 	public void beginTransaction() {
 		inTransaction = true;
 		entityManager.getTransaction().begin();
 	}
 	
+    /**
+     * Termina la transacción si existía una iniciada; guarda cambios a la base
+     * de datos.
+     */
 	public void endTransaction() {
 		if (inTransaction) {
 			entityManager.getTransaction().commit();
@@ -63,63 +89,49 @@ public class ForoCienciasEntityManager {
 		inTransaction = false;
 	}
 	
+    /**
+     * Retira la transacción actual.
+     */
 	public void rollBack() {
 		inTransaction = false;
 		entityManager.getTransaction().rollback();
 	}
 	
+    /**
+     * Cierrra el manejador de entidades.
+     */
 	public void close() {
 		entityManager.close();
 	}
 	
+    /**
+     * Limpia el contexto de persistencia de todas las instancias de entidades
+     * que estaba manejando.
+     */
 	public void clear() {
 		entityManager.clear();
 	}
 	
+    /**
+     * Búsqueda por llave primaria.
+     * @param <T> una clase etiquetada con import javax.persistence.Entity.
+     * @param cl La clase de la entidad.
+     * @param id La llave primaria.
+     * @return la instancia de la entidad o null si no existe.
+     */
 	public <T> T find(Class<T> cl, Long id) {
 		return entityManager.find(cl, id);
 	}
 	
+    /**
+     * Busca todas las preguntas en la base de datos.
+     * @return una lista de todas las preguntas guardadas.
+     */
 	public List<Pregunta> findAllPregunta() {
 		TypedQuery queryTotal = 
 			entityManager.createNamedQuery
 			("Pregunta.findAll", Pregunta.class);
 		return queryTotal.getResultList();
-//        Usuario usuario1 = new Usuario();
-//        usuario1.setNombreUsuario("Pedro");
-//        Usuario usuario2 = new Usuario();
-//        usuario2.setNombreUsuario("Ana");
-//        Usuario usuario3 = new Usuario();
-//        usuario3.setNombreUsuario("Juan");
-//        
-//        Pregunta pregunta1 = new Pregunta();
-//        pregunta1.setTitulo("Título de la pregunta 1");
-//        pregunta1.setContenido("Contenido de la pregunta 1");
-//        pregunta1.setFechaYHora(new Timestamp(System.currentTimeMillis()));
-//        PreguntaPK pk1 = new PreguntaPK();
-//        pk1.setUsuario(usuario1);
-//        pregunta1.setPreguntaPK(pk1);
-//        Pregunta pregunta2 = new Pregunta();
-//        pregunta2.setTitulo("Título de la pregunta 2");
-//        pregunta2.setContenido("Contenido de la pregunta 2");
-//        pregunta2.setFechaYHora(new Timestamp(System.currentTimeMillis()));
-//        PreguntaPK pk2 = new PreguntaPK();
-//        pk2.setUsuario(usuario2);
-//        pregunta2.setPreguntaPK(pk2);
-//        Pregunta pregunta3 = new Pregunta();
-//        pregunta3.setTitulo("Título de la pregunta 3");
-//        pregunta3.setContenido("Contenido de la pregunta 3");
-//        pregunta3.setFechaYHora(new Timestamp(System.currentTimeMillis()));
-//        PreguntaPK pk3 = new PreguntaPK();
-//        pk3.setUsuario(usuario3);
-//        pregunta3.setPreguntaPK(pk3);
-//        
-//        LinkedList<Pregunta> preguntas = new LinkedList<>();
-//        preguntas.add(pregunta1);
-//        preguntas.add(pregunta2);
-//        preguntas.add(pregunta3);
-//        return preguntas;
-        //return null;
 	}
 		
 }

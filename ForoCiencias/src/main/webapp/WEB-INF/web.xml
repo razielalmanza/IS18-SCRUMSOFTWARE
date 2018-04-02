@@ -32,6 +32,11 @@
     <welcome-file-list>
         <welcome-file>PrincipalVisitanteIH.xhtml</welcome-file>
     </welcome-file-list>
+    
+    <error-page>
+        <exception-type>java.lang.Exception</exception-type>
+        <location>/ErrorIH.xhtml</location>
+    </error-page>
 
     <!-- web fonts -->
     <mime-mapping>
