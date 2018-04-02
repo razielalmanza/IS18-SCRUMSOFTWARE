@@ -20,7 +20,7 @@
   </servlet-mapping>
   <servlet>
     <servlet-name>servlet</servlet-name>
-    <servlet-class>com.miguel.proyecto.Servlet</servlet-class>
+    <servlet-class>com.mx.fciencias.scrumsoftware.Servlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>servlet</servlet-name>
@@ -29,7 +29,7 @@
 
   <!-- Welcome page -->
   <welcome-file-list>
-    <welcome-file>index.xhtml</welcome-file>
+    <welcome-file>PrincipalVisitanteIH.xhtml</welcome-file>
   </welcome-file-list>
 
   <!-- web fonts -->
@@ -58,15 +58,15 @@
     <mime-type>image/x-icon</mime-type>
   </mime-mapping>
 
-  <!-- aplicamos el filtro sobre las páginas deseadas.-->
+  <!-- aplicamos el filtro sobre las páginas deseadas.
   <filter>
-    <filter-name>SessionFilter</filter-name>
-    <filter-class>com.miguel.proyecto.web.SessionFilter</filter-class>
+    <filter-name>SesionFilter</filter-name>
+    <filter-class>com.mx.fciencias.scrumsoftware.web.SesionFilter</filter-class>
   </filter>
   <filter-mapping>
-    <filter-name>SessionFilter</filter-name>
+    <filter-name>SesionFilter</filter-name>
     <url-pattern>/secured/*</url-pattern>
-  </filter-mapping>
+  </filter-mapping> -->
 
   <session-config>
     <session-timeout>60</session-timeout>

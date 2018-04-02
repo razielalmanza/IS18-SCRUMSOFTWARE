@@ -35,7 +35,7 @@
           <td><p:inputText value="#{registerController.user.correo}" required="true" id="Email"/></td>
         </tr>
         <tr>
-          <td>Fecha de Macimiento</td>
+          <td>Fecha de Nacimiento</td>
           <td><p:calendar value="#{registerController.user.fechaNac}" required="true" id="dateBirth"/></td>
         </tr>
          <tr>
@@ -50,7 +50,7 @@
         <tr>    
           <td colspan="2" align="center">
             <p:commandButton action="#{registerController.addUser}" value="Registrar"/>
-            <p:commandButton value="Reset" update="RegistroForoCiencias" process="@this"  >
+            <p:commandButton value="Limpiar campos" update="RegistroForoCiencias" process="@this"  >
               <p:resetInput target="RegistroForoCiencias" />
             </p:commandButton>
           </td>
