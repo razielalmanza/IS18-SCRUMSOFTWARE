@@ -40,11 +40,11 @@ public class AgregaPregunta {
      * @return <code>String</code> - La direccion de la interfaz de usuario.
      */
     public String agrega () throws ValidatorException{
-        if (respuesta.length() == 0){
+        if (respuesta.equals("")){
+            return "ErrorAgregarRespIH?faces-redirect=true";
+        }else {
             return "RespuestaExitoIH?faces-redirect=true";
         }
-        return "ErrorAgregarRespIH?faces-redirect=true";
-        
     }
 
 }
