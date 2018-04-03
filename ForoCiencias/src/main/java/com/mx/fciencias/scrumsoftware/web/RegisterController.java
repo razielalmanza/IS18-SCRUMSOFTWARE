@@ -3,16 +3,20 @@ package com.mx.fciencias.scrumsoftware.web;
 import java.util.Locale;
 
 import com.mx.fciencias.scrumsoftware.model.SesionJPA;
+import com.mx.fciencias.scrumsoftware.model.Usuario;
 import com.mx.fciencias.scrumsoftware.model.SesionConexionBD;
 import com.mx.fciencias.scrumsoftware.model.ProveedorEntidadPersistencia;
 import javax.persistence.EntityManagerFactory;
-
+import java.util.Date;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 import java.util.regex.Pattern;
+import com.mx.fciencias.scrumsoftware.model.SesionConexionBD;
+import java.text.ParseException;
 import java.util.regex.Matcher;
+import java.text.SimpleDateFormat;
 
 /**
  ,*
@@ -22,22 +26,22 @@ import java.util.regex.Matcher;
 @RequestScoped
 public class RegisterController {
 
-    private Usuario user;
+    private UsuarioA user;
     private EntityManagerFactory entidad;
     private SesionJPA controladorJPA ;
 
   public RegisterController() {
         FacesContext.getCurrentInstance().getViewRoot().setLocale(new Locale("es-Mx"));
-        user = new Usuario();
-        //entidad = ProveedorEntidadPersistencia.proveer();
-        //controladorJPA = new SesionJPA( entidad );
+        user = new UsuarioA();
+        entidad = ProveedorEntidadPersistencia.proveer();
+        controladorJPA = new SesionJPA( entidad );
     }
     
-    public Usuario getUser() {
+    public UsuarioA getUser() {
         return user;
     }
 
-    public void setUser(Usuario user) {
+    public void setUser(UsuarioA user) {
         this.user = user;
     }
 
@@ -54,31 +58,45 @@ public class RegisterController {
         return matcher.find();
     }
     
-   public boolean yaExisteUsuario(){
-       // return controladorJPA.consultarRegistroUsuario( user.getUsuario() );
+    public boolean yaExiste(String user){
+       // return controladorJPA.consultarRegistroUsuario(user);
        return false;
+    }
+
+   // Recibe los parametros del usuario a crear en la tabla
+   public void inserta(String usuario,String contraseña,String fecha,String mail,String genero) throws ParseException{
+       // Crea la fecha de nacimiento TEMPORAL
+       String fechaTemp = "2018-04-23";
+       Date d = new SimpleDateFormat("yyyy-MM-dd").parse(fechaTemp);
+       java.sql.Date sqlDate = new java.sql.Date(d.getTime()); 
+       // Crea una nueva credencial que persistirá
+       Usuario cred = new Usuario(usuario,mail,contraseña,genero,sqlDate);
+       cred.setNombreUsuario(usuario);
+       controladorJPA.registroUsuario(cred);
    }
-   
-   //public void inserta(){
-     //  controladorJPA.registroUsuario(user.getUsuario(),user.getContraseña());
-   //}
     
-    public String addUser() { 
+    public String addUser() throws ParseException { 
+            String usuario = user.getUsuario();
+            String contraseña = user.getContraseña();
+            String fecha = user.getFechaNac();
+            String mail = user.getCorreo();
+            String genero = user.getGenero();
             
-        if (!(emailValid(user.getCorreo())) || !user.getContraseña().equals(user.getConfirmacionContraseña())) {
+        if (!(emailValid(mail)) || !contraseña.equals(user.getConfirmacionContraseña())) {
             return "RegistroFallidoIH?faces-redirect=true";
         }else {
-           if(yaExisteUsuario()){
+            if(yaExiste(usuario)){
                 user = null;
-               return "RegistroFallidoIH?faces-redirect=true";
-           }else{
-                user = null;
-                //inserta();
-            return "RegistroExitosoIH?faces-redirect=true";
-           }  
-           
+                return "RegistroFallidoIH?faces-redirect=true";
+               }else{
+                inserta(usuario,contraseña,fecha,mail,genero);
+                user = null;     
+                return "RegistroExitosoIH?faces-redirect=true";
+            }
         }
+           
+    }
        
     }
 
-}
+

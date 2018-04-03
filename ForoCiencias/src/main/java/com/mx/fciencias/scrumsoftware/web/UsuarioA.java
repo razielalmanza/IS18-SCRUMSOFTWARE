@@ -1,6 +1,6 @@
 package com.mx.fciencias.scrumsoftware.web;
 
-public class Usuario {
+public class UsuarioA {
     
     private String usuario;
     private String contraseña;

@@ -1,6 +1,7 @@
 package com.mx.fciencias.scrumsoftware.model;
 
 import com.mx.fciencias.scrumsoftware.model.exceptions.NonexistentEntityException;
+import com.mx.fciencias.scrumsoftware.model.SesionConexionBD;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -226,7 +227,7 @@ public class SesionJPA implements Serializable {
      * @param nombreUsuario - EL nombre de usuario.
      * @return <code>boolean</code> - si ya existe en la DB.
      */
-    public boolean consultarRegistroUsuario( String nombreUsuario ) {
+    public boolean consultarRegistroUsuario(String nombreUsuario) {
         EntityManager entidad = getEntityManager();
         Query q = entidad.createNamedQuery( "SesionConexionBD.findByUsuario" ).setParameter( 1, nombreUsuario );
         if (q.getResultList().isEmpty() ) {
@@ -237,15 +238,15 @@ public class SesionJPA implements Serializable {
     
       /**
      * Registra
-     * @param nombreUsuario - EL nombre de usuario.
-     * @param password - Contraseña
+     * @param user - EL objeto de tipo Usuario (entidad) a persistir
+     * @param 
      * @return <code>void</code> -
      */
-    public void registroUsuario( String nombreUsuario,String password ) {
+    public void registroUsuario(Usuario user) {
         EntityManager entidad = getEntityManager();
-        Query q = entidad.createNamedQuery( "SesionConexionBD.insertUsuario" ).setParameter( 1, nombreUsuario ).setParameter(1, password);
-        if (q.getResultList().isEmpty() ) {
-            
-        }
+        entidad.getTransaction().begin();
+        entidad.persist(user);
+        entidad.getTransaction().commit();
+       
     }
 }

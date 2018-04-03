@@ -14,7 +14,7 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 import javax.xml.bind.annotation.XmlRootElement;
-
+import java.sql.Date;
 /**
  *  Definicion de las consultas necesarias para validar el registro de un usuario
  */
@@ -23,7 +23,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 @NamedQueries( { @NamedQuery(name = "SesionConexionBD.findAll", query = "SELECT l FROM SesionConexionBD l" ),
                                  //@NamedQuery(name = "SesionConexionBD.insertUsuario", 
-                                   //      query = "INSERT INTO SesionConexionBD( nombreUsuario, correoCiencias, contrasena, genero, fechaNacimiento ) "
+                                   //      query = "INSERT INTO SesionConexionBD( nombreUsuario, correoCiencias, contrasena, genero, fechaNacimientoNacimiento ) "
                                      //            + "VALUES ( l.nombreUsuario, 'luis_lazaro@ciencias.unam.mx', l.contraseña, 'Masculino', '1988-02-25' );" ),
                                  
 				 @NamedQuery(name = "SesionConexionBD.findById", query = "SELECT l FROM SesionConexionBD l WHERE l.idUsuario = :id" ),
@@ -43,7 +43,7 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author <a href="mailto:luis_lazaro@ciencias.unam.mx">Jose Luis Vazquez Lazaro</a>
  * @version 1.2
  */
-public class SesionConexionBD implements Serializable {
+public class Usuario implements Serializable {
 
 	// Atributos.
 	/* Llave primaria del usuario dentro de la BD */
@@ -57,37 +57,69 @@ public class SesionConexionBD implements Serializable {
     @Basic(optional = false)
     @Column(nullable = false, length = 2147483647)
     private String nombreUsuario;
+     /* correoCiencias del usuario dentro de la BD */
+    @Basic(optional = false)
+    @Column(nullable = false, length = 2147483647)
+    private String correoCiencias;
     /* Contraseña del usuario dentro de la BD */
     @Basic(optional = false)
     @Column(nullable = false, length = 2147483647)
     private String contrasena;
+    
+         /* Genero d usuario dentro de la BD */
+    @Basic(optional = false)
+    @Column(nullable = false, length = 2147483647)
+    private String genero;
+     /* fechaNacimiento de nac del usuario dentro de la BD */
+    @Basic(optional = false)
+    @Column(nullable = false, length = 2147483647)
+    private Date fechaNacimiento;
+
+    public String getcorreoCiencias() {
+        return correoCiencias;
+    }
+
+    public void setcorreoCiencias(String correoCiencias) {
+        this.correoCiencias = correoCiencias;
+    }
+
+    public Date getfechaNacimiento() {
+        return fechaNacimiento;
+    }
+
+    public void setfechaNacimiento(Date fechaNacimiento) {
+        this.fechaNacimiento = fechaNacimiento;
+    }
+
+    public String getGenero() {
+        return genero;
+    }
+
+    public void setGenero(String genero) {
+        this.genero = genero;
+    }
 
 	// Metodos constructores.
     /**
      * Constructor sin parametros.
      */
-    public SesionConexionBD() {
+    public Usuario() {
     }
 
-    /**
-     * Permite crear un objeto de tipo <code>SesionConexionBD</code> a partir de una Llave primaria.
-     * @param idUsuario - La llave primaria.
-     */
-    public SesionConexionBD( Integer idUsuario ) {
-        this.idUsuario = idUsuario;
-    }
 
     /**
-     * Permite crear un objeto de tipo <code>SesionConexionBD</code> a partir de una Llave primaria, un
+     * Permite crear un objeto de tipo <code>Usuario</code> a partir de una Llave primaria, un
      * nombre de usuario y una contraseña.
      * @param idUsuario - La llave primaria.
      * @param nombreUsuario - El nombre de usuario.
      * @param contrasena - La contraseña de usuario.
      */
-    public SesionConexionBD( Integer idUsuario, String nombreUusuario, String contrasena ) {
-        this.idUsuario = idUsuario;
+    public Usuario(String nombreUusuario,String correoCiencias, String contrasena,String genero,Date fechaNacimiento ) {
         this.nombreUsuario = nombreUsuario;
         this.contrasena = contrasena;
+        this.fechaNacimiento = fechaNacimiento;
+        this.correoCiencias = correoCiencias;
+        this.genero = genero;
     }
 
     // Metodos de acceso y modificacion.
@@ -160,10 +192,10 @@ public class SesionConexionBD implements Serializable {
     @Override
     public boolean equals( Object object ) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if ( !( object instanceof SesionConexionBD ) ) {
+        if ( !( object instanceof Usuario ) ) {
             return false;
         }
-        SesionConexionBD other = ( SesionConexionBD ) object;
+        Usuario other = ( Usuario ) object;
         if ( ( this.idUsuario == null && other.idUsuario != null ) || ( this.idUsuario != null && !this.idUsuario.equals( other.idUsuario ) ) ) {
             return false;
         }
@@ -176,7 +208,7 @@ public class SesionConexionBD implements Serializable {
      */
     @Override
     public String toString() {
-        return "com.mx.fciencias.scrumsoftware.model.model.SesionConexionBD[ idUsuario=" + idUsuario + " ]";
+        return "com.mx.fciencias.scrumsoftware.model.model.Usuario[ idUsuario=" + idUsuario + " ]";
     }
 
 }
