@@ -1,2 +1,0 @@
-0:0:0:0:0:0:0:1 - - [12/Mar/2018:03:23:40 -0600] "GET /ForoCiencias/ HTTP/1.1" 200 52 http-bio-8080-exec-1 1491
-0:0:0:0:0:0:0:1 - - [12/Mar/2018:03:23:40 -0600] "GET /favicon.ico HTTP/1.1" 404 - http-bio-8080-exec-2 0
