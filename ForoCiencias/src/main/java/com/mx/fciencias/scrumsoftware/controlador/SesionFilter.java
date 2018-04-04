@@ -1,4 +1,4 @@
-package com.mx.fciencias.scrumsoftware.web;
+package com.mx.fciencias.scrumsoftware.controlador;
 
 import java.io.IOException;
 import javax.servlet.Filter;

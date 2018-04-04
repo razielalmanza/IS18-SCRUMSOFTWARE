@@ -1,4 +1,4 @@
-package com.mx.fciencias.scrumsoftware.model.exceptions;
+package com.mx.fciencias.scrumsoftware.modelo.exceptions;
 
 /**
  *  La clase <code>NonexistentEntityException</code> define una nueva excepcion.

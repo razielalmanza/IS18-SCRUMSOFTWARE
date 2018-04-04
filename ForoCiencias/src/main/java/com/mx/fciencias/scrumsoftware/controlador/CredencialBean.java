@@ -1,6 +1,6 @@
-package com.mx.fciencias.scrumsoftware.web;
+package com.mx.fciencias.scrumsoftware.controlador;
 
-import com.mx.fciencias.scrumsoftware.model.SesionConexionBD;
+import com.mx.fciencias.scrumsoftware.modelo.SesionConexionBD;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;

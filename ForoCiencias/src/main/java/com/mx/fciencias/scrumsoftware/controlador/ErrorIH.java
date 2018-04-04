@@ -1,4 +1,4 @@
-package com.mx.fciencias.scrumsoftware.web;
+package com.mx.fciencias.scrumsoftware.controlador;
 
 /**
  *  La clase <code>ErrorIH</code> define objetos que permiten manejar los errores del

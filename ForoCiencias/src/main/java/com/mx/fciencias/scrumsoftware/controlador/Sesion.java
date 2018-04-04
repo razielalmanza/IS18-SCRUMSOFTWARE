@@ -1,8 +1,8 @@
-package com.mx.fciencias.scrumsoftware.web;
+package com.mx.fciencias.scrumsoftware.controlador;
 
-import com.mx.fciencias.scrumsoftware.model.ProveedorEntidadPersistencia;
-import com.mx.fciencias.scrumsoftware.model.SesionConexionBD;
-import com.mx.fciencias.scrumsoftware.model.SesionJPA;
+import com.mx.fciencias.scrumsoftware.modelo.ProveedorEntidadPersistencia;
+import com.mx.fciencias.scrumsoftware.modelo.SesionConexionBD;
+import com.mx.fciencias.scrumsoftware.modelo.SesionJPA;
 import java.util.Locale;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;

@@ -1,4 +1,4 @@
-package com.mx.fciencias.scrumsoftware.model;
+package com.mx.fciencias.scrumsoftware.modelo;
 
 import java.io.Serializable;
 import javax.persistence.Basic;

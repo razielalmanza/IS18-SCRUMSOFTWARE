@@ -1,4 +1,4 @@
-package com.mx.fciencias.scrumsoftware.model;
+package com.mx.fciencias.scrumsoftware.modelo;
 
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;

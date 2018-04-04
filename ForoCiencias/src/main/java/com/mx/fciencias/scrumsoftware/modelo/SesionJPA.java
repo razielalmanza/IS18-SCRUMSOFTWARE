@@ -1,6 +1,6 @@
-package com.mx.fciencias.scrumsoftware.model;
+package com.mx.fciencias.scrumsoftware.modelo;
 
-import com.mx.fciencias.scrumsoftware.model.exceptions.NonexistentEntityException;
+import com.mx.fciencias.scrumsoftware.modelo.exceptions.NonexistentEntityException;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.EntityManager;
