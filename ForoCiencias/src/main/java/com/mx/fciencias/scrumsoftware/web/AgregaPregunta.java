@@ -33,10 +33,6 @@ public class AgregaPregunta {
     // Metodos de implementacion.
     /**
      * Inicializa la sesion de usuario a partir de la credencial identificada.
-     *
-     * @param arg0
-     * @param arg1
-     * @param arg2
      * @return <code>String</code> - La direccion de la interfaz de usuario.
      */
     public String agrega () throws ValidatorException{
