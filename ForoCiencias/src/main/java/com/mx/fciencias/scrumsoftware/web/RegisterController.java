@@ -58,9 +58,11 @@ public class RegisterController {
         return matcher.find();
     }
     
-    public boolean yaExiste(String user){
-       // return controladorJPA.consultarRegistroUsuario(user);
-       return false;
+    public boolean yaExiste(String usuario){
+       Usuario l = controladorJPA.consultarRegistroUsuario(usuario);
+         boolean logged = l != null;
+         return logged;
+       //return false;
     }
 
    // Recibe los parametros del usuario a crear en la tabla

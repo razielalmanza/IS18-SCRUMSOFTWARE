@@ -27,7 +27,7 @@ import javax.xml.bind.annotation.XmlRootElement;
                                      //            + "VALUES ( l.nombreUsuario, 'luis_lazaro@ciencias.unam.mx', l.contraseña, 'Masculino', '1988-02-25' );" ),
                                  
 				 @NamedQuery(name = "SesionConexionBD.findById", query = "SELECT l FROM SesionConexionBD l WHERE l.idUsuario = :id" ),
-				 @NamedQuery(name = "SesionConexionBD.findByUsuario", query = "SELECT l FROM SesionConexionBD l WHERE l.nombreUsuario = :nombreUsuario" ),
+				 @NamedQuery(name = "SesionConexionBD.findByUsuario", query = "SELECT l FROM Usuario l WHERE l.nombreUsuario = :nombreUsuario" ),
 				 @NamedQuery(name = "SesionConexionBD.findByPassword", query = "SELECT l FROM SesionConexionBD l WHERE l.contrasena = :contrasena" ) } )
 @NamedNativeQueries(value = { @NamedNativeQuery( name = "SesionConexionBD.canSesionConexionBD", query = "select modeloforo.verificar(?, ?)" ),
 							  @NamedNativeQuery( name = "SesionConexionBD.findByUsuarioAndPassword",

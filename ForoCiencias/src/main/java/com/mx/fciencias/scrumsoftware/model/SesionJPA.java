@@ -2,12 +2,14 @@ package com.mx.fciencias.scrumsoftware.model;
 
 import com.mx.fciencias.scrumsoftware.model.exceptions.NonexistentEntityException;
 import com.mx.fciencias.scrumsoftware.model.SesionConexionBD;
+import com.mx.fciencias.scrumsoftware.model.Usuario;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
@@ -227,13 +229,13 @@ public class SesionJPA implements Serializable {
      * @param nombreUsuario - EL nombre de usuario.
      * @return <code>boolean</code> - si ya existe en la DB.
      */
-    public boolean consultarRegistroUsuario(String nombreUsuario) {
+     public Usuario consultarRegistroUsuario( String nombreUsuario ) {
         EntityManager entidad = getEntityManager();
-        Query q = entidad.createNamedQuery( "SesionConexionBD.findByUsuario" ).setParameter( 1, nombreUsuario );
-        if (q.getResultList().isEmpty() ) {
-            return true;                // No encontró usuario pues es vacía
+        TypedQuery<Usuario> q = entidad.createNamedQuery( "Usuario.findByUsuario",Usuario.class ).setParameter("nombreUsuario", nombreUsuario);
+        if ( q.getResultList().isEmpty() ) {
+            return null;
         }
-        return false;                   // Encontró pues no es vacia
+        return ( Usuario ) q.getSingleResult();
     }
     
       /**

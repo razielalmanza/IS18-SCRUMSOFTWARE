@@ -21,14 +21,8 @@ import java.sql.Date;
 @Entity
 @Table( catalog = "forociencias", schema = "modeloforo", uniqueConstraints = { @UniqueConstraint( columnNames = { "nombreusuario" } ) } )
 @XmlRootElement
-@NamedQueries( { @NamedQuery(name = "SesionConexionBD.findAll", query = "SELECT l FROM SesionConexionBD l" ),
-                                 //@NamedQuery(name = "SesionConexionBD.insertUsuario", 
-                                   //      query = "INSERT INTO SesionConexionBD( nombreUsuario, correoCiencias, contrasena, genero, fechaNacimientoNacimiento ) "
-                                     //            + "VALUES ( l.nombreUsuario, 'luis_lazaro@ciencias.unam.mx', l.contraseña, 'Masculino', '1988-02-25' );" ),
-                                 
-				 @NamedQuery(name = "SesionConexionBD.findById", query = "SELECT l FROM SesionConexionBD l WHERE l.idUsuario = :id" ),
-				 @NamedQuery(name = "SesionConexionBD.findByUsuario", query = "SELECT l FROM SesionConexionBD l WHERE l.nombreUsuario = :nombreUsuario" ),
-				 @NamedQuery(name = "SesionConexionBD.findByPassword", query = "SELECT l FROM SesionConexionBD l WHERE l.contrasena = :contrasena" ) } )
+@NamedQueries( { @NamedQuery(name = "SesionConexionBD.findAll", query = "SELECT l FROM SesionConexionBD l" ) ,
+ @NamedQuery(name = "Usuario.findByUsuario", query = "SELECT l FROM Usuario l WHERE l.nombreUsuario = :nombreUsuario" )} )
 @NamedNativeQueries(value = { @NamedNativeQuery( name = "SesionConexionBD.canSesionConexionBD", query = "select modeloforo.verificar(?, ?)" ),
 							  @NamedNativeQuery( name = "SesionConexionBD.findByUsuarioAndPassword",
 												 query = "SELECT idUsuario, nombreUsuario FROM modeloforo.usuario WHERE nombreusuario = ?1 AND contrasena = crypt(?2, contrasena)",
@@ -65,7 +59,6 @@ public class Usuario implements Serializable {
     @Basic(optional = false)
     @Column(nullable = false, length = 2147483647)
     private String contrasena;
-    
          /* Genero d usuario dentro de la BD */
     @Basic(optional = false)
     @Column(nullable = false, length = 2147483647)
@@ -74,6 +67,43 @@ public class Usuario implements Serializable {
     @Basic(optional = false)
     @Column(nullable = false, length = 2147483647)
     private Date fechaNacimiento;
+      /* fechaNacimiento de nac del usuario dentro de la BD */
+    @Basic(optional = false)
+    @Column(nullable = false, length = 2147483647)
+    private char cuentaVerificada;
+    
+   
+    // Metodos constructores.
+    /**
+     * Constructor sin parametros.
+     */
+    public Usuario() {
+    }
+
+
+    /**
+     * Permite crear un objeto de tipo <code>Usuario</code> a partir de una Llave primaria, un
+     * nombre de usuario y una contraseña.
+     * @param idUsuario - La llave primaria.
+     * @param nombreUsuario - El nombre de usuario.
+     * @param contrasena - La contraseña de usuario.
+     */
+    public Usuario(String nombreUusuario,String correoCiencias, String contrasena,String genero,Date fechaNacimiento ) {
+        this.nombreUsuario = nombreUsuario;
+        this.contrasena = contrasena;
+        this.fechaNacimiento = fechaNacimiento;
+        this.correoCiencias = correoCiencias;
+        this.genero = genero;
+        this.cuentaVerificada = 'N';
+    }
+
+    public char getcuentaVerificada() {
+        return cuentaVerificada;
+    }
+
+    public void setcuentaVerificada(char cuentaVerificada) {
+        this.cuentaVerificada = cuentaVerificada;
+    }
 
     public String getcorreoCiencias() {
         return correoCiencias;
@@ -96,29 +126,6 @@ public class Usuario implements Serializable {
     }
 
     public void setGenero(String genero) {
-        this.genero = genero;
-    }
-
-	// Metodos constructores.
-    /**
-     * Constructor sin parametros.
-     */
-    public Usuario() {
-    }
-
-
-    /**
-     * Permite crear un objeto de tipo <code>Usuario</code> a partir de una Llave primaria, un
-     * nombre de usuario y una contraseña.
-     * @param idUsuario - La llave primaria.
-     * @param nombreUsuario - El nombre de usuario.
-     * @param contrasena - La contraseña de usuario.
-     */
-    public Usuario(String nombreUusuario,String correoCiencias, String contrasena,String genero,Date fechaNacimiento ) {
-        this.nombreUsuario = nombreUsuario;
-        this.contrasena = contrasena;
-        this.fechaNacimiento = fechaNacimiento;
-        this.correoCiencias = correoCiencias;
         this.genero = genero;
     }
 
