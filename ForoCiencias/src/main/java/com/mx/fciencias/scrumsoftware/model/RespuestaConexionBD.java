@@ -12,9 +12,11 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
-
+import javax.xml.bind.annotation.XmlRootElement;
 /**
  * La clase <code>RespuestaConexionBD</code> define objetos que permiten
  * consultar la base de datos
@@ -28,19 +30,28 @@ import javax.persistence.UniqueConstraint;
  * Definicion de las consultas necesarias para validar el registro de un usuario
  */
 @Entity
-@Table(catalog = "forociencias", schema = "modeloforo", uniqueConstraints = {
-    @UniqueConstraint(columnNames = {"respuesta"})})
+@Table( catalog = "forociencias", schema = "modeloforo", uniqueConstraints = { @UniqueConstraint( columnNames = { "nombreusuario" } ) } )
+@XmlRootElement
+@NamedQueries( { @NamedQuery(name = "RespuestaConexionBD.findAll", query = "SELECT l FROM RespuestaConexionBD l" ),
+                                 
+				 @NamedQuery(name = "RespuestaConexionBD.findById", query = "SELECT l FROM RespuestaConexionBD l WHERE l.idPregunta = :id" ),
+				 @NamedQuery(name = "RespuestaConexionBD.findByAnswer", query = "SELECT l FROM RespuestaConexionBD l WHERE l.respuesta = :respuesta" ) } )
+
+
 
 public class RespuestaConexionBD implements Serializable {
 
     // Atributos.
-    /* Llave primaria de la respuesta dentro de la BD */
+    /* Llave primaria del usuario dentro de la BD */
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(nullable = false)
     private Integer idRespuesta;
+    /* Nombre del usuario dentro de la BD */
+    @Basic(optional = false)
+    @Column(nullable = false, length = 2147483647)
     private String respuesta;
     
     // Metodos constructores.
@@ -61,7 +72,7 @@ public class RespuestaConexionBD implements Serializable {
     /**
      * Permite crear un objeto de tipo <code>SesionConexionBD</code> a partir de una Llave primaria, un
      * nombre de usuario y una contraseña.
-     * @param idPregunta - La llave primaria.
+     * @param idRespuesta - La llave primaria.
      * @param respuesta - respuesta de la pregunta.
      */
     public RespuestaConexionBD( Integer idRespuesta, String respuesta) {
@@ -80,7 +91,7 @@ public class RespuestaConexionBD implements Serializable {
 
     /**
      * Cambia la llave primaria de este objeto por el que se pasa como parametro.
-     * @param nuevoElemento - El nuevo elemento contenido es este
+     * @param nuevoIdRespuesta - El nuevo elemento contenido es este
      * <code>Nodo</code>.
      */
     public void setIdRespuesta( Integer nuevoIdRespuesta ) {
@@ -97,7 +108,7 @@ public class RespuestaConexionBD implements Serializable {
 
     /**
      * Cambia el nombre de usuario de este objeto por el que se pasa como parametro.
-     * @param nuevoNombreUsuario - El nuevo nombre de usuario.
+     * @param Respuesta - El nuevo nombre de usuario.
      */
     public void setRespuesta( String Respuesta ) {
         this.respuesta = Respuesta;
@@ -109,6 +120,6 @@ public class RespuestaConexionBD implements Serializable {
      */
     @Override
     public String toString() {
-        return "com.mx.fciencias.scrumsoftware.model.model.SesionConexionBD[ idRespuesta=" + idRespuesta + " ]";
+        return "com.mx.fciencias.scrumsoftware.model.model.RespuestaConexionBD[ idRespuesta=" + idRespuesta + " ]";
     }
 }
