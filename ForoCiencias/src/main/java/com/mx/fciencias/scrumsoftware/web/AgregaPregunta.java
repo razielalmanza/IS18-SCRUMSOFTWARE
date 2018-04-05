@@ -5,6 +5,9 @@
  */
 package com.mx.fciencias.scrumsoftware.web;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.component.UIComponent;
@@ -42,5 +45,11 @@ public class AgregaPregunta {
             return "RespuestaExitoIH?faces-redirect=true";
         }
     }
+    public void inserta(String respuesta) throws ParseException{
+       // Crea la fecha
+       String fechaTemp = "2018-04-23";
+       Date d = new SimpleDateFormat("yyyy-MM-dd").parse(fechaTemp);
+       java.sql.Date sqlDate = new java.sql.Date(d.getTime()); 
+   }
 
 }
