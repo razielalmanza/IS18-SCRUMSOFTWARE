@@ -17,11 +17,11 @@
         <div class="collapse navbar-collapse">
             <div class="navbar-nav ml-auto">
                 <c:choose>
-                    <c:when test="#{credencialBean.estaRegistrado()}">
+                    <c:when test="#{inicioSesionIHBean.estaRegistrado()}">
                         <div class="my-2 my-lg-0">
                             <button class="btn btn-primary">
                                 <i class="fa fa-sign-in" aria-hidden="true"></i>
-                                #{credencialBean.usuario.nombreUsuario}
+                                #{inicioSesionIHBean.usuario.nombreUsuario}
                             </button>
                         </div>
                         <div class ="my-2 my-lg-0">
@@ -36,7 +36,8 @@
                         <h:form id="myForm" class="form-inline my-2 my-lg-0">
                             
                             <!-- Boton Registrar -->
-                            <h:commandButton value="Registrar"
+                            <h:commandButton action="RegistroIH?faces-redirect=true"
+                                             value="Registrar"
                                              class="btn btn-outline-success my-2 my-sm-0"/>
                             
                             <!-- Boton Entrar -->

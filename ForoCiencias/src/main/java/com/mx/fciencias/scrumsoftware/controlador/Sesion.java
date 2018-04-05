@@ -1,9 +1,11 @@
 package com.mx.fciencias.scrumsoftware.controlador;
 
 import com.mx.fciencias.scrumsoftware.modelo.ProveedorEntidadPersistencia;
-import com.mx.fciencias.scrumsoftware.modelo.SesionConexionBD;
-import com.mx.fciencias.scrumsoftware.modelo.SesionJPA;
+import com.mx.fciencias.scrumsoftware.modelo.Credencial;
+import com.mx.fciencias.scrumsoftware.modelo.ConexionBD;
+import com.mx.fciencias.scrumsoftware.vista.InicioSesionIH;
 import java.util.Locale;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
@@ -29,9 +31,9 @@ public class Sesion {
 	/* Entidad para la persistencia de una sesion de usuario */
     private EntityManagerFactory entidad;
     /* Sesion de usuario */
-    private SesionJPA controladorJPA;
+    private ConexionBD controladorJPA;
     /* Credencial de la sesion de usuario */
-    private Credencial credencial;
+    private InicioSesionIH credencial;
     /* Contador de intentos para iniciar sesion */
     private int intentos;
 
@@ -42,8 +44,8 @@ public class Sesion {
     public Sesion() {
     	FacesContext.getCurrentInstance().getViewRoot().setLocale( new Locale( "es-Mx" ) );
         entidad = ProveedorEntidadPersistencia.proveer();
-        controladorJPA = new SesionJPA( entidad );
-        credencial = new Credencial();
+        controladorJPA = new ConexionBD( entidad );
+        credencial = new InicioSesionIH();
         intentos = 0;
     }
 
@@ -52,7 +54,7 @@ public class Sesion {
      * Devueleve la credencial de esta sesion de usuario.
      * @return <code>Credencial</code> - La credencial de la sesion de usuario.
      */
-    public Credencial getCredencial() {
+    public InicioSesionIH getCredencial() {
         return credencial;
     }
     
@@ -68,7 +70,7 @@ public class Sesion {
      * Cambia la credencial de la sesion de usuario por la que se pasa como parametro.
      * @param nuevaCredencial - La nueva credencial de usuario.
      */
-    public void setCredencial( Credencial nuevaCredencial ) {
+    public void setCredencial( InicioSesionIH nuevaCredencial ) {
         this.credencial = nuevaCredencial;
     }
 
@@ -78,7 +80,7 @@ public class Sesion {
 	 * @return <code>String</code> - La direccion de la interfaz de usuario.
 	 */
     public String iniciarSesion() {
-        SesionConexionBD l = controladorJPA.consultarRegistro( credencial.getNombreUsuario(), credencial.getContrasena() );
+        Credencial l = controladorJPA.consultarRegistro( credencial.getNombreUsuario(), credencial.getContrasena() );
         boolean logged = l != null;
         if ( logged ) {
         	FacesContext context = getCurrentInstance();
@@ -88,7 +90,13 @@ public class Sesion {
         }
         else {
         	intentos++;
-        	return "ErrorInicioSesionIH?faces-redirect=true";
+        	if ( intentos == 3 ) {
+        		return "ErrorInicioSesionIH?faces-redirect=true";
+        	}
+        	else {
+        		FacesContext.getCurrentInstance().addMessage( null, new FacesMessage( FacesMessage.SEVERITY_ERROR, "Nombre de usuario y/o contraseña inválidos, o la cuenta no ha sido verificada.\n Inténtelo nuevamente.", "" ) );
+        		return null;
+        	}
         }
     }
     
@@ -99,7 +107,7 @@ public class Sesion {
 	 */    
     public String cerrarSesion() {
         try {
-        	SesionConexionBD l = controladorJPA.consultarRegistro( credencial.getNombreUsuario(), credencial.getContrasena() );
+        	Credencial l = controladorJPA.consultarRegistro( credencial.getNombreUsuario(), credencial.getContrasena() );
         	FacesContext context = getCurrentInstance();
         	context.getExternalContext().invalidateSession();
         	return "FinSesionIH?faces-redirect=true";

@@ -14,24 +14,22 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 import javax.xml.bind.annotation.XmlRootElement;
-
+import java.sql.Date;
 /**
  *  Definicion de las consultas necesarias para validar el registro de un usuario
  */
 @Entity
 @Table( catalog = "forociencias", schema = "modeloforo", uniqueConstraints = { @UniqueConstraint( columnNames = { "nombreusuario" } ) } )
 @XmlRootElement
-@NamedQueries( { @NamedQuery(name = "SesionConexionBD.findAll", query = "SELECT l FROM SesionConexionBD l" ),
-				 @NamedQuery(name = "SesionConexionBD.findById", query = "SELECT l FROM SesionConexionBD l WHERE l.idUsuario = :id" ),
-				 @NamedQuery(name = "SesionConexionBD.findByUsuario", query = "SELECT l FROM SesionConexionBD l WHERE l.nombreUsuario = :nombreUsuario" ),
-				 @NamedQuery(name = "SesionConexionBD.findByPassword", query = "SELECT l FROM SesionConexionBD l WHERE l.contrasena = :contrasena" ) } )
-@NamedNativeQueries(value = { @NamedNativeQuery( name = "SesionConexionBD.canSesionConexionBD", query = "select modeloforo.verificar(?, ?)" ),
-							  @NamedNativeQuery( name = "SesionConexionBD.findByUsuarioAndPassword",
+@NamedQueries( { @NamedQuery(name = "Credencial.findAll", query = "SELECT l FROM Credencial l" ) ,
+ @NamedQuery(name = "Usuario.findByUsuario", query = "SELECT l FROM Usuario l WHERE l.nombreUsuario = :nombreUsuario" )} )
+@NamedNativeQueries(value = { @NamedNativeQuery( name = "Credencial.canCredencial", query = "select modeloforo.verificar(?, ?)" ),
+							  @NamedNativeQuery( name = "Credencial.findByUsuarioAndPassword",
 												 query = "SELECT idUsuario, nombreUsuario FROM modeloforo.usuario WHERE nombreusuario = ?1 AND contrasena = crypt(?2, contrasena)",
-												 resultClass = SesionConexionBD.class ) } )
+												 resultClass = Credencial.class ) } )
 
 /**
- *  La clase <code>SesionConexionBD</code> define objetos que permiten consultar la base de datos del
+ *  La clase <code>Credencial</code> define objetos que permiten consultar la base de datos del
  * sistema con la finalidad de validar y recuperar la informacion de los usuaros registrados.
  *
  * Modificado: martes 27 de marzo de 2018.
@@ -39,7 +37,7 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author <a href="mailto:luis_lazaro@ciencias.unam.mx">Jose Luis Vazquez Lazaro</a>
  * @version 1.2
  */
-public class SesionConexionBD implements Serializable {
+public class Usuario implements Serializable {
 
 	// Atributos.
 	/* Llave primaria del usuario dentro de la BD */
@@ -53,37 +51,82 @@ public class SesionConexionBD implements Serializable {
     @Basic(optional = false)
     @Column(nullable = false, length = 2147483647)
     private String nombreUsuario;
+     /* correoCiencias del usuario dentro de la BD */
+    @Basic(optional = false)
+    @Column(nullable = false, length = 2147483647)
+    private String correoCiencias;
     /* Contraseña del usuario dentro de la BD */
     @Basic(optional = false)
     @Column(nullable = false, length = 2147483647)
     private String contrasena;
-
-	// Metodos constructores.
+         /* Genero d usuario dentro de la BD */
+    @Basic(optional = false)
+    @Column(nullable = false, length = 2147483647)
+    private String genero;
+     /* fechaNacimiento de nac del usuario dentro de la BD */
+    @Basic(optional = false)
+    @Column(nullable = false, length = 2147483647)
+    private Date fechaNacimiento;
+      /* fechaNacimiento de nac del usuario dentro de la BD */
+    @Basic(optional = false)
+    @Column(nullable = false, length = 2147483647)
+    private char cuentaVerificada;
+    
+   
+    // Metodos constructores.
     /**
      * Constructor sin parametros.
      */
-    public SesionConexionBD() {
+    public Usuario() {
     }
 
-    /**
-     * Permite crear un objeto de tipo <code>SesionConexionBD</code> a partir de una Llave primaria.
-     * @param idUsuario - La llave primaria.
-     */
-    public SesionConexionBD( Integer idUsuario ) {
-        this.idUsuario = idUsuario;
-    }
 
     /**
-     * Permite crear un objeto de tipo <code>SesionConexionBD</code> a partir de una Llave primaria, un
+     * Permite crear un objeto de tipo <code>Usuario</code> a partir de una Llave primaria, un
      * nombre de usuario y una contraseña.
      * @param idUsuario - La llave primaria.
      * @param nombreUsuario - El nombre de usuario.
      * @param contrasena - La contraseña de usuario.
      */
-    public SesionConexionBD( Integer idUsuario, String nombreUusuario, String contrasena ) {
-        this.idUsuario = idUsuario;
+    public Usuario(String nombreUusuario,String correoCiencias, String contrasena,String genero,Date fechaNacimiento ) {
         this.nombreUsuario = nombreUsuario;
         this.contrasena = contrasena;
+        this.fechaNacimiento = fechaNacimiento;
+        this.correoCiencias = correoCiencias;
+        this.genero = genero;
+        this.cuentaVerificada = 'N';
+    }
+
+    public char getcuentaVerificada() {
+        return cuentaVerificada;
+    }
+
+    public void setcuentaVerificada(char cuentaVerificada) {
+        this.cuentaVerificada = cuentaVerificada;
+    }
+
+    public String getcorreoCiencias() {
+        return correoCiencias;
+    }
+
+    public void setcorreoCiencias(String correoCiencias) {
+        this.correoCiencias = correoCiencias;
+    }
+
+    public Date getfechaNacimiento() {
+        return fechaNacimiento;
+    }
+
+    public void setfechaNacimiento(Date fechaNacimiento) {
+        this.fechaNacimiento = fechaNacimiento;
+    }
+
+    public String getGenero() {
+        return genero;
+    }
+
+    public void setGenero(String genero) {
+        this.genero = genero;
     }
 
     // Metodos de acceso y modificacion.
@@ -156,10 +199,10 @@ public class SesionConexionBD implements Serializable {
     @Override
     public boolean equals( Object object ) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if ( !( object instanceof SesionConexionBD ) ) {
+        if ( !( object instanceof Usuario ) ) {
             return false;
         }
-        SesionConexionBD other = ( SesionConexionBD ) object;
+        Usuario other = ( Usuario ) object;
         if ( ( this.idUsuario == null && other.idUsuario != null ) || ( this.idUsuario != null && !this.idUsuario.equals( other.idUsuario ) ) ) {
             return false;
         }
@@ -172,7 +215,7 @@ public class SesionConexionBD implements Serializable {
      */
     @Override
     public String toString() {
-        return "com.mx.fciencias.scrumsoftware.model.model.SesionConexionBD[ idUsuario=" + idUsuario + " ]";
+        return "com.mx.fciencias.scrumsoftware.model.model.Usuario[ idUsuario=" + idUsuario + " ]";
     }
 
 }
