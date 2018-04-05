@@ -204,6 +204,14 @@ public class ConexionBD implements Serializable {
     public boolean estaRegistrado( String nombreUsuario, String contrasena ) {
         EntityManager entidad = getEntityManager();
         Query q = entidad.createNamedQuery( "Credencial.canLogin" ).setParameter( 1, nombreUsuario ).setParameter( 2, contrasena );
+        boolean p =  ( boolean ) q.getSingleResult();
+        if ( p ) {
+        	System.out.println( "Si estas registrado y tu cuenta esta activada" );
+        }
+        else {
+        	System.out.println( "No estas registrado y tu cuenta no esta activada" );
+        }
+        
         return ( boolean ) q.getSingleResult();
     }
 

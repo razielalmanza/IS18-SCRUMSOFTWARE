@@ -25,7 +25,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 				 @NamedQuery(name = "Credencial.findById", query = "SELECT l FROM Credencial l WHERE l.idUsuario = :id" ),
 				 @NamedQuery(name = "Credencial.findByUsuario", query = "SELECT l FROM Credencial l WHERE l.nombreUsuario = :nombreUsuario" ),
 				 @NamedQuery(name = "Credencial.findByPassword", query = "SELECT l FROM Credencial l WHERE l.contrasena = :contrasena" ) } )
-@NamedNativeQueries(value = { @NamedNativeQuery( name = "Credencial.canLogin", query = "select modeloforo.verificar(?, ?)" ),
+@NamedNativeQueries(value = { @NamedNativeQuery( name = "Credencial.canLogin", query = "SELECT modeloforo.verificar(?, ?)" ),
 							  @NamedNativeQuery( name = "Credencial.findByUsuarioAndPassword",
 												 query = "SELECT idUsuario, nombreUsuario FROM modeloforo.usuario WHERE nombreusuario = ?1 AND contrasena = crypt(?2, contrasena)",
 												 resultClass = Credencial.class ) } )

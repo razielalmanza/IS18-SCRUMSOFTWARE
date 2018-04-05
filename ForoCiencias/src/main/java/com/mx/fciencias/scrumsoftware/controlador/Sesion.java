@@ -80,8 +80,8 @@ public class Sesion {
 	 * @return <code>String</code> - La direccion de la interfaz de usuario.
 	 */
     public String iniciarSesion() {
+        boolean logged = controladorJPA.estaRegistrado( credencial.getNombreUsuario(), credencial.getContrasena() );
         Credencial l = controladorJPA.consultarRegistro( credencial.getNombreUsuario(), credencial.getContrasena() );
-        boolean logged = l != null;
         if ( logged ) {
         	FacesContext context = getCurrentInstance();
         	context.getExternalContext().getSessionMap().put( "usuario", l );
