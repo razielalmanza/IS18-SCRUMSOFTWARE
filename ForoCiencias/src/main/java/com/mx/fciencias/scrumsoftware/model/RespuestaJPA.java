@@ -7,14 +7,12 @@ package com.mx.fciencias.scrumsoftware.model;
 
 import com.mx.fciencias.scrumsoftware.model.exceptions.NonexistentEntityException;
 import com.mx.fciencias.scrumsoftware.model.RespuestaConexionBD;
-import com.mx.fciencias.scrumsoftware.model.Usuario;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.Query;
-import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
@@ -194,18 +192,5 @@ public class RespuestaJPA implements Serializable{
     }
    
     
-     /**
-     * Registra
-     * @param user - EL objeto de tipo Usuario (entidad) a persistir
-     * @param 
-     * @return <code>void</code> -
-     */
-    public void registroUsuario(Usuario user) {
-        EntityManager entidad = getEntityManager();
-        entidad.getTransaction().begin();
-        entidad.persist(user);
-        entidad.getTransaction().commit();
-       
-    }
     
 }
