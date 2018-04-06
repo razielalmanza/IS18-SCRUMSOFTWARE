@@ -19,6 +19,7 @@ import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import org.apache.commons.codec.binary.Base64;
 
 /**
  * A singleton class for sending mail messages.
@@ -27,6 +28,12 @@ import javax.mail.internet.MimeMessage;
 
 
 public class Mail{
+    
+     public static String toToken(String text) {
+        byte[] encoded = Base64.encodeBase64(text.getBytes());
+        return new String(encoded);
+      
+    }
 
     public void sendMail(String token, String Subject, String To) {
         String Username = "scrumsoftwareis";
@@ -56,8 +63,8 @@ public class Mail{
               
             String contenido = "<a href="
                     + "http://localhost:8080/ForoCiencias/faces/ActivacionUsuarioIH.xhtml>"
-                 + "haz click aquí para activar tu cuenta, ingresa el siguien token: "
-                 + token + " </a>";
+                 + "Haga click aquí para activar tu cuenta.</a> <br> Ingresa el siguiente token: </br><b>"
+                 + toToken(token) + " </b>";
      
          message.setContent(contenido, "text/html");
  

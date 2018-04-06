@@ -12,7 +12,7 @@ import javax.persistence.EntityManagerFactory;
 import java.util.*;
 import javax.activation.*;
 import javax.faces.application.FacesMessage;
-import javax.servlet.http.HttpServletRequest;
+import org.apache.commons.codec.binary.Base64;
 
 /**
  *
@@ -21,7 +21,7 @@ import javax.servlet.http.HttpServletRequest;
 @ManagedBean
 @RequestScoped
 public class ActivacionUsuario {
-    String usuario;
+    String usuarioToken;
     private EntityManagerFactory entidad;
     private ConexionBD controladorJPA ;
 
@@ -31,17 +31,22 @@ public class ActivacionUsuario {
         controladorJPA = new ConexionBD( entidad );
     }
     
-    public String getUsuario() {
-        return usuario;
+    public String getUsuarioToken() {
+        return usuarioToken;
     }
 
-    public void setUsuario(String usuario) {
-        this.usuario = usuario;
+    public void setUsuarioToken(String usuarioToken) {
+        this.usuarioToken = usuarioToken;
     }
     
-
+    public String toText(String encoded){
+        
+        byte[] decoded = Base64.decodeBase64(encoded);      
+        return new String(decoded);
+         
+    }
     public String activaUsuario(){
-       
+         String usuario = toText(usuarioToken);
          Usuario l = controladorJPA.consultarRegistroUsuario(usuario);
          boolean logged = l != null;
         if(logged){
