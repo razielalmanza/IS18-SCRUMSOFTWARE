@@ -1,4 +1,4 @@
-package com.mx.fciencias.scrumsoftware.model;
+package com.mx.fciencias.scrumsoftware.modelo;
 
 import java.io.Serializable;
 import javax.persistence.Basic;
@@ -21,15 +21,15 @@ import java.sql.Date;
 @Entity
 @Table( catalog = "forociencias", schema = "modeloforo", uniqueConstraints = { @UniqueConstraint( columnNames = { "nombreusuario" } ) } )
 @XmlRootElement
-@NamedQueries( { @NamedQuery(name = "SesionConexionBD.findAll", query = "SELECT l FROM SesionConexionBD l" ) ,
- @NamedQuery(name = "Usuario.findByUsuario", query = "SELECT l FROM Usuario l WHERE l.nombreUsuario = :nombreUsuario" )} )
-@NamedNativeQueries(value = { @NamedNativeQuery( name = "SesionConexionBD.canSesionConexionBD", query = "select modeloforo.verificar(?, ?)" ),
-							  @NamedNativeQuery( name = "SesionConexionBD.findByUsuarioAndPassword",
+@NamedQueries( { @NamedQuery(name = "Credencial.findAll", query = "SELECT l FROM Credencial l" ) ,
+@NamedQuery(name = "Usuario.findByUsuario", query = "SELECT l FROM Usuario l WHERE l.nombreUsuario = :nombreUsuario" ) } )
+@NamedNativeQueries(value = { @NamedNativeQuery( name = "Credencial.canCredencial", query = "select modeloforo.verificar(?, ?)" ),
+							  @NamedNativeQuery( name = "Credencial.findByUsuarioAndPassword",
 												 query = "SELECT idUsuario, nombreUsuario FROM modeloforo.usuario WHERE nombreusuario = ?1 AND contrasena = crypt(?2, contrasena)",
-												 resultClass = SesionConexionBD.class ) } )
+												 resultClass = Credencial.class ) } )
 
 /**
- *  La clase <code>SesionConexionBD</code> define objetos que permiten consultar la base de datos del
+ *  La clase <code>Credencial</code> define objetos que permiten consultar la base de datos del
  * sistema con la finalidad de validar y recuperar la informacion de los usuaros registrados.
  *
  * Modificado: martes 27 de marzo de 2018.

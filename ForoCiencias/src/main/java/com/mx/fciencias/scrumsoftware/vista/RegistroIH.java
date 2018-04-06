@@ -1,6 +1,6 @@
-package com.mx.fciencias.scrumsoftware.web;
+package com.mx.fciencias.scrumsoftware.vista;
 
-public class UsuarioA {
+public class RegistroIH {
     
     private String usuario;
     private String contraseña;

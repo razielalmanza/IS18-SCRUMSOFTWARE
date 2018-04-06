@@ -1,7 +1,7 @@
-package com.mx.fciencias.scrumsoftware.web;
+package com.mx.fciencias.scrumsoftware.vista;
 
 /**
- *  La clase <code>Credencial</code> define objetos que permiten manejar la informacion
+ *  La clase <code>InicioSesionIH</code> define objetos que permiten manejar la informacion
  * de un usuario para iniciar sesion en el sistema.
  *
  * Modificado: martes 27 de marzo de 2018.
@@ -9,7 +9,7 @@ package com.mx.fciencias.scrumsoftware.web;
  * @author <a href="mailto:luis_lazaro@ciencias.unam.mx">Jose Luis Vazquez Lazaro</a>
  * @version 1.0
  */
-public class Credencial {
+public class InicioSesionIH {
 
 	// Atributos.
 	/* Nombre de usuario */

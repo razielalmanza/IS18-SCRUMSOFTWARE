@@ -1,6 +1,6 @@
-package com.mx.fciencias.scrumsoftware.web;
+package com.mx.fciencias.scrumsoftware.vista;
 
-import com.mx.fciencias.scrumsoftware.model.SesionConexionBD;
+import com.mx.fciencias.scrumsoftware.modelo.Credencial;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
@@ -8,7 +8,7 @@ import javax.faces.context.FacesContext;
 import static javax.faces.context.FacesContext.getCurrentInstance;
 
 /**
- *  La clase <code>UserBean</code> define objetos que permiten manejar la sesion de un
+ *  La clase <code>InicioSesionIHBean</code> define objetos que permiten manejar la sesion de un
  * usuario a partir de la interfaz de usuario.
  *
  * Modificado: martes 27 de marzo de 2018.
@@ -18,13 +18,13 @@ import static javax.faces.context.FacesContext.getCurrentInstance;
  */
 @ManagedBean
 @SessionScoped
-public class CredencialBean {
+public class InicioSesionIHBean {
 
 	// Metodos constructores.
     /**
      * Constructor sin parametros.
      */
-    public CredencialBean() {
+    public InicioSesionIHBean() {
     }
 
     // Metodos de implementacion.
@@ -34,17 +34,17 @@ public class CredencialBean {
      */
     public boolean estaRegistrado() {
         FacesContext context = getCurrentInstance();
-        SesionConexionBD l = ( SesionConexionBD ) context.getExternalContext().getSessionMap().get( "usuario" );
+        Credencial l = ( Credencial ) context.getExternalContext().getSessionMap().get( "usuario" );
         return l != null;
     }
 
     /**
      * Devuelve la informacion basica del usuario actual: id de usuario, nombre de usuario y contraseña.
-     * @return <code>SesionConexionBD</code> - La informacon basica del usuario.
+     * @return <code>Credencial</code> - La informacon basica del usuario.
      */
-    public SesionConexionBD getUsuario() {
+    public Credencial getUsuario() {
         FacesContext context = getCurrentInstance();
-        return ( SesionConexionBD ) context.getExternalContext().getSessionMap().get( "usuario" );
+        return ( Credencial ) context.getExternalContext().getSessionMap().get( "usuario" );
     }
 
 }

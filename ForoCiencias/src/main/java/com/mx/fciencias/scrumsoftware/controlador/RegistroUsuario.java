@@ -1,47 +1,49 @@
-package com.mx.fciencias.scrumsoftware.web;
+package com.mx.fciencias.scrumsoftware.controlador;
 
 import java.util.Locale;
 
-import com.mx.fciencias.scrumsoftware.model.SesionJPA;
-import com.mx.fciencias.scrumsoftware.model.Usuario;
-import com.mx.fciencias.scrumsoftware.model.SesionConexionBD;
-import com.mx.fciencias.scrumsoftware.model.ProveedorEntidadPersistencia;
+import com.mx.fciencias.scrumsoftware.modelo.ProveedorEntidadPersistencia;
+import com.mx.fciencias.scrumsoftware.modelo.Usuario;
+import com.mx.fciencias.scrumsoftware.modelo.ConexionBD;
+import com.mx.fciencias.scrumsoftware.vista.RegistroIH;
 import javax.persistence.EntityManagerFactory;
 import java.util.Date;
-import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 import java.util.regex.Pattern;
-import com.mx.fciencias.scrumsoftware.model.SesionConexionBD;
 import java.text.ParseException;
 import java.util.regex.Matcher;
 import java.text.SimpleDateFormat;
+import java.util.Properties;
+import javax.mail.*;
+import javax.mail.internet.*;
+import javax.servlet.http.HttpServletRequest;
 
 /**
  ,*
- ,* @author miguel
+ ,* @author raziel
  ,*/
 @ManagedBean
 @RequestScoped
-public class RegisterController {
+public class RegistroUsuario {
 
-    private UsuarioA user;
+    private RegistroIH user;
     private EntityManagerFactory entidad;
-    private SesionJPA controladorJPA ;
+    private ConexionBD controladorJPA ;
 
-  public RegisterController() {
+  public RegistroUsuario() {
         FacesContext.getCurrentInstance().getViewRoot().setLocale(new Locale("es-Mx"));
-        user = new UsuarioA();
+        user = new RegistroIH();
         entidad = ProveedorEntidadPersistencia.proveer();
-        controladorJPA = new SesionJPA( entidad );
+        controladorJPA = new ConexionBD( entidad );
     }
     
-    public UsuarioA getUser() {
+    public RegistroIH getUser() {
         return user;
     }
 
-    public void setUser(UsuarioA user) {
+    public void setUser(RegistroIH user) {
         this.user = user;
     }
 
@@ -76,6 +78,13 @@ public class RegisterController {
        cred.setNombreUsuario(usuario);
        controladorJPA.registroUsuario(cred);
    }
+   
+    public void enviaCorreo(String usuario,String mail){
+        Mail m = new Mail();
+        m.sendMail(usuario,"Confirmación cuenta ForoCiencias",mail);
+   }
+    
+    
     
     public String addUser() throws ParseException { 
             String usuario = user.getUsuario();
@@ -83,7 +92,6 @@ public class RegisterController {
             String fecha = user.getFechaNac();
             String mail = user.getCorreo();
             String genero = user.getGenero();
-            
         if (!(emailValid(mail)) || !contraseña.equals(user.getConfirmacionContraseña())) {
             return "RegistroFallidoIH?faces-redirect=true";
         }else {
@@ -92,6 +100,7 @@ public class RegisterController {
                 return "RegistroFallidoIH?faces-redirect=true";
                }else{
                 inserta(usuario,contraseña,fecha,mail,genero);
+               enviaCorreo(usuario,mail);
                 user = null;     
                 return "RegistroExitosoIH?faces-redirect=true";
             }

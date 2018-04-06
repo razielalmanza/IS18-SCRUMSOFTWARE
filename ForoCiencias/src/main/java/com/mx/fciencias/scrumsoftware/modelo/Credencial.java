@@ -1,4 +1,4 @@
-package com.mx.fciencias.scrumsoftware.model;
+package com.mx.fciencias.scrumsoftware.modelo;
 
 import java.io.Serializable;
 import javax.persistence.Basic;
@@ -19,23 +19,19 @@ import javax.xml.bind.annotation.XmlRootElement;
  *  Definicion de las consultas necesarias para validar el registro de un usuario
  */
 @Entity
-@Table( catalog = "forociencias", schema = "modeloforo", uniqueConstraints = { @UniqueConstraint( columnNames = { "nombreusuario" } ) } )
+@Table( catalog = "forociencias", schema = "modeloforo" )
 @XmlRootElement
-@NamedQueries( { @NamedQuery(name = "SesionConexionBD.findAll", query = "SELECT l FROM SesionConexionBD l" ),
-                                 //@NamedQuery(name = "SesionConexionBD.insertUsuario", 
-                                   //      query = "INSERT INTO SesionConexionBD( nombreUsuario, correoCiencias, contrasena, genero, fechaNacimiento ) "
-                                     //            + "VALUES ( l.nombreUsuario, 'luis_lazaro@ciencias.unam.mx', l.contraseña, 'Masculino', '1988-02-25' );" ),
-                                 
-				 @NamedQuery(name = "SesionConexionBD.findById", query = "SELECT l FROM SesionConexionBD l WHERE l.idUsuario = :id" ),
-				 @NamedQuery(name = "SesionConexionBD.findByUsuario", query = "SELECT l FROM Usuario l WHERE l.nombreUsuario = :nombreUsuario" ),
-				 @NamedQuery(name = "SesionConexionBD.findByPassword", query = "SELECT l FROM SesionConexionBD l WHERE l.contrasena = :contrasena" ) } )
-@NamedNativeQueries(value = { @NamedNativeQuery( name = "SesionConexionBD.canSesionConexionBD", query = "select modeloforo.verificar(?, ?)" ),
-							  @NamedNativeQuery( name = "SesionConexionBD.findByUsuarioAndPassword",
+@NamedQueries( { @NamedQuery(name = "Credencial.findAll", query = "SELECT l FROM Credencial l" ),
+				 @NamedQuery(name = "Credencial.findById", query = "SELECT l FROM Credencial l WHERE l.idUsuario = :id" ),
+				 @NamedQuery(name = "Credencial.findByUsuario", query = "SELECT l FROM Credencial l WHERE l.nombreUsuario = :nombreUsuario" ),
+				 @NamedQuery(name = "Credencial.findByPassword", query = "SELECT l FROM Credencial l WHERE l.contrasena = :contrasena" ) } )
+@NamedNativeQueries(value = { @NamedNativeQuery( name = "Credencial.canLogin", query = "SELECT modeloforo.verificar(?, ?)" ),
+							  @NamedNativeQuery( name = "Credencial.findByUsuarioAndPassword",
 												 query = "SELECT idUsuario, nombreUsuario FROM modeloforo.usuario WHERE nombreusuario = ?1 AND contrasena = crypt(?2, contrasena)",
-												 resultClass = SesionConexionBD.class ) } )
+												 resultClass = Credencial.class ) } )
 
 /**
- *  La clase <code>SesionConexionBD</code> define objetos que permiten consultar la base de datos del
+ *  La clase <code>Credencial</code> define objetos que permiten consultar la base de datos del
  * sistema con la finalidad de validar y recuperar la informacion de los usuaros registrados.
  *
  * Modificado: martes 27 de marzo de 2018.
@@ -43,7 +39,7 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author <a href="mailto:luis_lazaro@ciencias.unam.mx">Jose Luis Vazquez Lazaro</a>
  * @version 1.2
  */
-public class SesionConexionBD implements Serializable {
+public class Credencial implements Serializable {
 
 	// Atributos.
 	/* Llave primaria del usuario dentro de la BD */
@@ -66,25 +62,25 @@ public class SesionConexionBD implements Serializable {
     /**
      * Constructor sin parametros.
      */
-    public SesionConexionBD() {
+    public Credencial() {
     }
 
     /**
-     * Permite crear un objeto de tipo <code>SesionConexionBD</code> a partir de una Llave primaria.
+     * Permite crear un objeto de tipo <code>Credencial</code> a partir de una Llave primaria.
      * @param idUsuario - La llave primaria.
      */
-    public SesionConexionBD( Integer idUsuario ) {
+    public Credencial( Integer idUsuario ) {
         this.idUsuario = idUsuario;
     }
 
     /**
-     * Permite crear un objeto de tipo <code>SesionConexionBD</code> a partir de una Llave primaria, un
+     * Permite crear un objeto de tipo <code>Credencial</code> a partir de una Llave primaria, un
      * nombre de usuario y una contraseña.
      * @param idUsuario - La llave primaria.
      * @param nombreUsuario - El nombre de usuario.
      * @param contrasena - La contraseña de usuario.
      */
-    public SesionConexionBD( Integer idUsuario, String nombreUusuario, String contrasena ) {
+    public Credencial( Integer idUsuario, String nombreUusuario, String contrasena ) {
         this.idUsuario = idUsuario;
         this.nombreUsuario = nombreUsuario;
         this.contrasena = contrasena;
@@ -160,10 +156,10 @@ public class SesionConexionBD implements Serializable {
     @Override
     public boolean equals( Object object ) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if ( !( object instanceof SesionConexionBD ) ) {
+        if ( !( object instanceof Credencial ) ) {
             return false;
         }
-        SesionConexionBD other = ( SesionConexionBD ) object;
+        Credencial other = ( Credencial ) object;
         if ( ( this.idUsuario == null && other.idUsuario != null ) || ( this.idUsuario != null && !this.idUsuario.equals( other.idUsuario ) ) ) {
             return false;
         }
@@ -176,7 +172,7 @@ public class SesionConexionBD implements Serializable {
      */
     @Override
     public String toString() {
-        return "com.mx.fciencias.scrumsoftware.model.model.SesionConexionBD[ idUsuario=" + idUsuario + " ]";
+        return "com.mx.fciencias.scrumsoftware.model.model.Credencial[ idUsuario=" + idUsuario + " ]";
     }
 
 }
