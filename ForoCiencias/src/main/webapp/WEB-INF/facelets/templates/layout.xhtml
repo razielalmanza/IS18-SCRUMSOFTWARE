@@ -3,28 +3,31 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
-<h:head>
+    
+    <h:head>
 
-    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Foro Ciencias</title>
+        <title>Foro Ciencias</title>
 
-    <link rel="stylesheet" href="./resources/css/default.css"/>
-    <h:outputStylesheet library="webjars" name="bootstrap/4.0.0-2/css/bootstrap.min-jsf.css" />
+        <link rel="stylesheet" href="./resources/css/default.css"/>
+        <h:outputStylesheet library="webjars" name="bootstrap/4.0.0-2/css/bootstrap.min-jsf.css" />
 
-</h:head>
-<h:body>
+    </h:head>
+    
+    <h:body>
 
-    <ui:include src="./header.xhtml" />
-    <div class="container">
-        <ui:include src="./content.xhtml" />
-        <ui:include src="./footer.xhtml" />
-    </div>
+        <ui:include src="./header.xhtml" />
+        <div class="container">
+            <ui:include src="./content.xhtml" />
+            <ui:include src="./footer.xhtml" />
+        </div>
 
-    <!-- Los dejamos hasta abajo para que cargue la página más rápido-->
-    <h:outputScript library="webjars" name="jquery/3.3.1-1/jquery.min.js"/>
-    <h:outputScript library="webjars" name="bootstrap/4.0.0-2/js/bootstrap.min.js" />
+        <!-- Los dejamos hasta abajo para que cargue la página más rápido-->
+        <h:outputScript library="webjars" name="jquery/3.3.1-1/jquery.min.js"/>
+        <h:outputScript library="webjars" name="bootstrap/4.0.0-2/js/bootstrap.min.js" />
 
-</h:body>
+    </h:body>
+        
 </html>
