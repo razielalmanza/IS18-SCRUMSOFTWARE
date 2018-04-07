@@ -13,17 +13,17 @@
     <h:form id="Activacion">
       <table>
         <tr>
-          <td><p:messages id="messages" autoUpdate="true" closable="true" /></td>
+          <td><p:messages autoUpdate="true" closable="true" /></td>
         </tr>
       </table>
-      <table>
-        <tr>
-          <td>Token de usuario a activar: </td>
-          <td><p:inputText value="#{activacionUsuario.usuarioToken}" required="true" id="Username" size="10"/></td>
-        </tr>
+      
+            <p>Token de usuario a activar: </p>
+            <h:outputText value="#{param['token']}"></h:outputText><br></br>
+            <p:inputText placeholder="Ingrese el token aquí" value="#{activacionUsuario.usuarioToken}" required="true" size="10"/><br></br>
+        
         <tr>    
           <td colspan="2" align="center">
-              <p:commandButton action="#{activacionUsuario.activaUsuario()}" value="Activar"/>
+              <p:commandButton action="#{activacionUsuario.activaUsuario()}" value="Activar cuenta."/>
             <p:commandButton value="Limpiar campos" update="Activacion" process="@this"  >
               <p:resetInput target="Activacion" />
             </p:commandButton>
@@ -34,7 +34,6 @@
               <div> <a href="InicioSesionIH.xhtml">Incia sesión aquí.</a></div>
           </td>
         </tr>  
-      </table>
     </h:form>
   </h:body>
 </html>

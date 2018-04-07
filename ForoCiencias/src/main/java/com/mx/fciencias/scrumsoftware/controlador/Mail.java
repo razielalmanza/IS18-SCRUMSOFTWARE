@@ -62,7 +62,8 @@ public class Mail{
             message.setSubject(Subject);
               
             String contenido = "<a href="
-                    + "http://localhost:8080/ForoCiencias/faces/ActivacionUsuarioIH.xhtml>"
+                    + "http://localhost:8080/ForoCiencias/faces/ActivacionUsuarioIH.xhtml?token="
+                    + token + ">"
                  + "Haga click aquí para activar tu cuenta.</a> <br> Ingresa el siguiente token: </br><b>"
                  + toToken(token) + " </b>";
      
