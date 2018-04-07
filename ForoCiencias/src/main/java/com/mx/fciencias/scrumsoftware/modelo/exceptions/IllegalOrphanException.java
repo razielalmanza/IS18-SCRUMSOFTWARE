@@ -1,4 +1,4 @@
-package com.mx.fciencias.scrumsoftware.model.exceptions;
+package com.mx.fciencias.scrumsoftware.modelo.exceptions;
 
 import java.util.ArrayList;
 import java.util.List;

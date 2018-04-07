@@ -1,9 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package com.mx.fciencias.scrumsoftware.model;
+package com.mx.fciencias.scrumsoftware.modelo;
 
 import java.io.Serializable;
 import javax.persistence.Basic;
@@ -18,16 +13,7 @@ import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 import javax.xml.bind.annotation.XmlRootElement;
 /**
- * La clase <code>RespuestaConexionBD</code> define objetos que permiten
- * consultar la base de datos
- *
- * Modificado: martes 27 de marzo de 2018.
- *
- * @author <a href="mailto:lezama@ciencias.unam.mx">Lezama Hernandez Ximena</a>
- * @version 1.2
- */
-/**
- * Definicion de las consultas necesarias para validar el registro de un usuario
+ *  Definicion de las consultas necesarias para validar el registro de un usuario
  */
 @Entity
 @Table( catalog = "forociencias", schema = "modeloforo", uniqueConstraints = { @UniqueConstraint( columnNames = { "nombreusuario" } ) } )
@@ -37,13 +23,20 @@ import javax.xml.bind.annotation.XmlRootElement;
 				 @NamedQuery(name = "RespuestaConexionBD.findById", query = "SELECT l FROM RespuestaConexionBD l WHERE l.idPregunta = :id" ),
 				 @NamedQuery(name = "RespuestaConexionBD.findByAnswer", query = "SELECT l FROM RespuestaConexionBD l WHERE l.respuesta = :respuesta" ) } )
 
+/**
+ *  La clase <code>SesionConexionBD</code> define objetos que permiten consultar la base de datos del
+ * sistema con la finalidad de validar y recuperar la informacion de los usuaros registrados.
+ *
+ * Modificado: martes 27 de marzo de 2018.
+ *
+ * @author <a href="mailto:luis_lazaro@ciencias.unam.mx">Jose Luis Vazquez Lazaro</a>
+ * @version 1.2
+ */
+public class Respuesta implements Serializable {
 
-
-public class RespuestaConexionBD implements Serializable {
-
-    // Atributos.
-    /* Llave primaria del usuario dentro de la BD */
-    private static final long serialVersionUID = 1L;
+	// Atributos.
+	/* Llave primaria del usuario dentro de la BD */
+	private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
@@ -52,33 +45,31 @@ public class RespuestaConexionBD implements Serializable {
     /* Nombre del usuario dentro de la BD */
     @Basic(optional = false)
     @Column(nullable = false, length = 2147483647)
-    private String respuesta;
+    private String contenido;
+     
     
+   
     // Metodos constructores.
     /**
      * Constructor sin parametros.
      */
-    public RespuestaConexionBD() {
-    }
-    
-    /**
-     * Permite crear un objeto de tipo <code>RespuestaConexionBD</code> a partir de una Llave primaria.
-     * @param idRespuesta - La llave primaria.
-     */
-    public RespuestaConexionBD( Integer idRespuesta ) {
-        this.idRespuesta = idRespuesta;
+    public Respuesta() {
     }
 
+
     /**
-     * Permite crear un objeto de tipo <code>SesionConexionBD</code> a partir de una Llave primaria, un
+     * Permite crear un objeto de tipo <code>Usuario</code> a partir de una Llave primaria, un
      * nombre de usuario y una contraseña.
-     * @param idRespuesta - La llave primaria.
-     * @param respuesta - respuesta de la pregunta.
+     * @param idUsuario - La llave primaria.
+     * @param nombreUsuario - El nombre de usuario.
+     * @param contrasena - La contraseña de usuario.
      */
-    public RespuestaConexionBD( Integer idRespuesta, String respuesta) {
-        this.idRespuesta = idRespuesta;
-        this.respuesta = respuesta;
+    public Respuesta(String contenido ) {
+        this.contenido = contenido;
     }
+
+    
+   
 
     // Metodos de acceso y modificacion.
     /**
@@ -91,35 +82,38 @@ public class RespuestaConexionBD implements Serializable {
 
     /**
      * Cambia la llave primaria de este objeto por el que se pasa como parametro.
-     * @param nuevoIdRespuesta - El nuevo elemento contenido es este
+     * @param nuevoElemento - El nuevo elemento contenido es este
      * <code>Nodo</code>.
      */
-    public void setIdRespuesta( Integer nuevoIdRespuesta ) {
-        this.idRespuesta = nuevoIdRespuesta;
+    public void setIdUsuario( Integer nuevoIsRespuesta ) {
+        this.idRespuesta = nuevoIsRespuesta;
     }
 
     /**
      * Devueleve el nombre de usuario de este objeto.
      * @return <code>String</code> - El nombre de usuario.
      */
-    public String getRespuesta() {
-        return respuesta;
+    public String getContenido() {
+        return contenido;
     }
 
     /**
      * Cambia el nombre de usuario de este objeto por el que se pasa como parametro.
-     * @param Respuesta - El nuevo nombre de usuario.
+     * @param nuevoNombreUsuario - El nuevo nombre de usuario.
      */
-    public void setRespuesta( String Respuesta ) {
-        this.respuesta = Respuesta;
+    public void setContenido( String nuevoContenido ) {
+        this.contenido = nuevoContenido;
     }
+
     
+   
     /**
      * Convierte este objeto a cadena.
      * @return <code>String</code> - La representacion en cadena.
      */
     @Override
     public String toString() {
-        return "com.mx.fciencias.scrumsoftware.model.model.RespuestaConexionBD[ idRespuesta=" + idRespuesta + " ]";
+        return "com.mx.fciencias.scrumsoftware.model.model.Usuario[ idRespuesta=" + idRespuesta + " ]";
     }
+
 }

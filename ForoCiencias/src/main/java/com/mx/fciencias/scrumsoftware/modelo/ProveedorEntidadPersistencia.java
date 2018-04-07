@@ -1,4 +1,4 @@
-package com.mx.fciencias.scrumsoftware.model;
+package com.mx.fciencias.scrumsoftware.modelo;
 
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -9,7 +9,7 @@ import javax.persistence.Persistence;
  *
  * Modificado: martes 27 de marzo de 2018.
  *
- * @author <a href="lezama@ciencias.unam.mx">Lezama Ximena</a>
+ * @author <a href="mailto:luis_lazaro@ciencias.unam.mx">Jose Luis Vazquez Lazaro</a>
  * @version 1.0
  */
 public class ProveedorEntidadPersistencia {
