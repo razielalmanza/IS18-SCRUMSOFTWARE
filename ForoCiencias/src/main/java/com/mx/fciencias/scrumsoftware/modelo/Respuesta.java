@@ -18,10 +18,9 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Entity
 @Table( catalog = "forociencias", schema = "modeloforo", uniqueConstraints = { @UniqueConstraint( columnNames = { "nombreusuario" } ) } )
 @XmlRootElement
-@NamedQueries( { @NamedQuery(name = "RespuestaConexionBD.findAll", query = "SELECT l FROM RespuestaConexionBD l" ),
+@NamedQueries( { @NamedQuery(name = "ConexionBD.findAll", query = "SELECT l FROM ConexionBD l" ),
                                  
-				 @NamedQuery(name = "RespuestaConexionBD.findById", query = "SELECT l FROM RespuestaConexionBD l WHERE l.idPregunta = :id" ),
-				 @NamedQuery(name = "RespuestaConexionBD.findByAnswer", query = "SELECT l FROM RespuestaConexionBD l WHERE l.respuesta = :respuesta" ) } )
+				 @NamedQuery(name = "ConexionBD.findById", query = "SELECT l FROM ConexionBD l WHERE l.idPregunta = :id" ), } )
 
 /**
  *  La clase <code>SesionConexionBD</code> define objetos que permiten consultar la base de datos del
@@ -41,7 +40,7 @@ public class Respuesta implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(nullable = false)
-    private Integer idRespuesta;
+    private Integer id;
     /* Nombre del usuario dentro de la BD */
     @Basic(optional = false)
     @Column(nullable = false, length = 2147483647)
@@ -77,7 +76,7 @@ public class Respuesta implements Serializable {
      * @return <code>Integer</code> - La llave primaria.
      */
     public Integer getIdRespuesta() {
-        return idRespuesta;
+        return id;
     }
 
     /**
@@ -86,7 +85,7 @@ public class Respuesta implements Serializable {
      * <code>Nodo</code>.
      */
     public void setIdUsuario( Integer nuevoIsRespuesta ) {
-        this.idRespuesta = nuevoIsRespuesta;
+        this.id = nuevoIsRespuesta;
     }
 
     /**
@@ -113,7 +112,7 @@ public class Respuesta implements Serializable {
      */
     @Override
     public String toString() {
-        return "com.mx.fciencias.scrumsoftware.model.model.Usuario[ idRespuesta=" + idRespuesta + " ]";
+        return "com.mx.fciencias.scrumsoftware.model.model.Usuario[ id=" + id + " ]";
     }
 
 }

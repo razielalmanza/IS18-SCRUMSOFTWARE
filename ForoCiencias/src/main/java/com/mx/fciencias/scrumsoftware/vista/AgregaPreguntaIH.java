@@ -27,14 +27,17 @@ public class AgregaPreguntaIH {
     
     private EntityManagerFactory entidad;
     private ConexionBD respuestaJPA ;
-    private String respuesta;
+    private String contenido;
+    private Integer id;
+    private Integer user;
+
     
     public String getRespuesta() {
-        return respuesta;
+        return contenido;
     }
     
-    public void setRespuesta(String respuesta) {
-        this.respuesta = respuesta;
+    public void setRespuesta(String contenido) {
+        this.contenido = contenido;
     }
     
     public AgregaPreguntaIH(){
@@ -48,19 +51,20 @@ public class AgregaPreguntaIH {
      * @return <code>String</code> - La direccion de la interfaz de usuario.
      */
     public String agrega () throws ValidatorException, ParseException{
-        if (respuesta.equals("")){
+        if (contenido.equals("")){
             return "ErrorAgregarRespIH?faces-redirect=true";
         }else {
-            inserta(respuesta);
+            inserta(contenido);
             return "RespuestaExitoIH?faces-redirect=true";
         }
     }
-    public void inserta(String respuesta) throws ParseException{
+    
+    public void inserta(String contenido) throws ParseException{
        // Crea la fecha
        String fechaTemp = "2018-04-23";
        Date d = new SimpleDateFormat("yyyy-MM-dd").parse(fechaTemp);
        java.sql.Date sqlDate = new java.sql.Date(d.getTime()); 
-       Respuesta resp = new Respuesta(respuesta);
+       Respuesta resp = new Respuesta(contenido);
        respuestaJPA.registroRespuesta(resp);
    }
 
