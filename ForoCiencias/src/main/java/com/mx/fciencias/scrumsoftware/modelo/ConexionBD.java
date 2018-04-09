@@ -22,8 +22,8 @@ import javax.persistence.criteria.Root;
  */
 public class ConexionBD implements Serializable {
 
-	// Atributos.
-	/* Entidad de persistencia */
+    // Atributos.
+    /* Entidad de persistencia */
     private EntityManagerFactory entidad = null;
     
 
@@ -254,6 +254,22 @@ public class ConexionBD implements Serializable {
         EntityManager entidad = getEntityManager();
         entidad.getTransaction().begin();
         entidad.persist(user);
+        entidad.getTransaction().commit();
+       
+    }
+    
+    /**
+     * Activa usuario
+     * @param user - El nombre del usuario a activar en la BD
+     * @param 
+     * @return <code>void</code> -
+     */
+    public void activaUsuario(String nombreUsuario) {
+        EntityManager entidad = getEntityManager();
+        Usuario a = consultarRegistroUsuario(nombreUsuario);
+        a.setcuentaVerificada('S');
+        entidad.getTransaction().begin();
+        a = entidad.merge(a);
         entidad.getTransaction().commit();
        
     }

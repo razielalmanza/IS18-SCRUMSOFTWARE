@@ -22,7 +22,7 @@ import java.sql.Date;
 @Table( catalog = "forociencias", schema = "modeloforo", uniqueConstraints = { @UniqueConstraint( columnNames = { "nombreusuario" } ) } )
 @XmlRootElement
 @NamedQueries( { @NamedQuery(name = "Credencial.findAll", query = "SELECT l FROM Credencial l" ) ,
- @NamedQuery(name = "Usuario.findByUsuario", query = "SELECT l FROM Usuario l WHERE l.nombreUsuario = :nombreUsuario" )} )
+@NamedQuery(name = "Usuario.findByUsuario", query = "SELECT l FROM Usuario l WHERE l.nombreUsuario = :nombreUsuario" ) } )
 @NamedNativeQueries(value = { @NamedNativeQuery( name = "Credencial.canCredencial", query = "select modeloforo.verificar(?, ?)" ),
 							  @NamedNativeQuery( name = "Credencial.findByUsuarioAndPassword",
 												 query = "SELECT idUsuario, nombreUsuario FROM modeloforo.usuario WHERE nombreusuario = ?1 AND contrasena = crypt(?2, contrasena)",

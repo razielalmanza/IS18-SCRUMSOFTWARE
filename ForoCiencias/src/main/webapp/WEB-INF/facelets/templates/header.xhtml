@@ -6,20 +6,17 @@
                 xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
     
     <!-- Main jumbotron for a primary marketing message or call to action -->
-    <nav class="navbar navbar-expand-md navbar-dark fixed-top" style="background-color: rgb( 120, 40, 140 );">
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top" style="background-color: rgb( 218, 165, 32 );">
         <a class="navbar-brand" href="#">
-             <img src="https://upload.wikimedia.org/wikipedia/commons/5/5b/Escudo-facultad-ciencias-unam-escalable.svg" width="40" height="40"/>
-            Forociencias
+             <img src="https://upload.wikimedia.org/wikipedia/commons/5/5b/Escudo-facultad-ciencias-unam-escalable.svg" width="50" height="50" />
+             <b>ForoCiencias</b>
         </a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
         <div class="collapse navbar-collapse">
             <div class="navbar-nav ml-auto">
                 <c:choose>
                     <c:when test="#{inicioSesionIHBean.estaRegistrado()}">
                         <div class="my-2 my-lg-0">
-                            <button class="btn btn-primary">
+                            <button class="btn btn-danger active">
                                 <i class="fa fa-sign-in" aria-hidden="true"></i>
                                 #{inicioSesionIHBean.usuario.nombreUsuario}
                             </button>
@@ -28,7 +25,7 @@
                             <h:form id="exit">
                                 <h:commandButton action="#{sesion.cerrarSesion()}"
                     				 value="Salir"
-                    				 class="btn btn-outline-success my-2 my-sm-0"/>
+                    				 class="btn btn-success"/>
                             </h:form>
                         </div>
                     </c:when>
@@ -38,12 +35,12 @@
                             <!-- Boton Registrar -->
                             <h:commandButton action="RegistroIH?faces-redirect=true"
                                              value="Registrar"
-                                             class="btn btn-outline-success my-2 my-sm-0"/>
+                                             class="btn btn-outline-primary"/>
                             
                             <!-- Boton Entrar -->
                             <h:commandButton action="InicioSesionIH?faces-redirect=true"
                                              value="Entrar"
-                                             class="btn btn-outline-success my-2 my-sm-0"/>
+                                             class="btn btn-outline-secondary"/>
                         </h:form>
                     </c:otherwise>
                 </c:choose>
