@@ -1,4 +1,4 @@
-package com.mx.fciencias.scrumsoftware.modelo;
+    package com.mx.fciencias.scrumsoftware.modelo;
 
 import com.mx.fciencias.scrumsoftware.modelo.exceptions.NonexistentEntityException;
 import java.io.Serializable;
@@ -22,8 +22,8 @@ import javax.persistence.criteria.Root;
  */
 public class ConexionBD implements Serializable {
 
-	// Atributos.
-	/* Entidad de persistencia */
+    // Atributos.
+    /* Entidad de persistencia */
     private EntityManagerFactory entidad = null;
     
 

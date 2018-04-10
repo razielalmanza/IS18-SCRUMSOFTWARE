@@ -63,7 +63,7 @@ public class Mail{
               
             String contenido = "<a href="
                     + "http://localhost:8080/ForoCiencias/faces/ActivacionUsuarioIH.xhtml?token="
-                    + token + ">"
+                    + toToken(token) + ">"
                  + "Haga click aquí para activar tu cuenta.</a> <br> Ingresa el siguiente token: </br><b>"
                  + toToken(token) + " </b>";
      
