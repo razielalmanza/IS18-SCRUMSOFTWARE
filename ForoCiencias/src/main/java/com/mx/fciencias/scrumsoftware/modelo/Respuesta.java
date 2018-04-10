@@ -12,15 +12,13 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 import javax.xml.bind.annotation.XmlRootElement;
+import java.sql.Date;
 /**
  *  Definicion de las consultas necesarias para validar el registro de un usuario
  */
 @Entity
 @Table( catalog = "forociencias", schema = "modeloforo", uniqueConstraints = { @UniqueConstraint( columnNames = { "nombreusuario" } ) } )
 @XmlRootElement
-@NamedQueries( { @NamedQuery(name = "ConexionBD.findAll", query = "SELECT l FROM ConexionBD l" ),
-                                 
-				 @NamedQuery(name = "ConexionBD.findById", query = "SELECT l FROM ConexionBD l WHERE l.idPregunta = :id" ), } )
 
 /**
  *  La clase <code>SesionConexionBD</code> define objetos que permiten consultar la base de datos del
@@ -34,20 +32,40 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class Respuesta implements Serializable {
 
 	// Atributos.
-	/* Llave primaria del usuario dentro de la BD */
-	private static final long serialVersionUID = 1L;
+    /* Llave primaria del usuario dentro de la BD */
+    private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(nullable = false)
-    private Integer id;
+    private Integer idrespuesta;
     /* Nombre del usuario dentro de la BD */
     @Basic(optional = false)
     @Column(nullable = false, length = 2147483647)
     private String contenido;
-     
+     /* fecha da la respuesta de nac del usuario dentro de la BD */
+    @Basic(optional = false)
+    @Column(nullable = false, length = 2147483647)
+    private Date fecharespuesta;
+    
+    @Basic(optional = false)
+    @Column(nullable = false)
+    private Integer idpregunta;
+    
+     @Basic(optional = false)
+    @Column(nullable = false)
+    private Integer idusuario;
+
+    public Integer getIdusuario() {
+        return idusuario;
+    }
+
+    public void setIdusuario(Integer idusuario) {
+        this.idusuario = idusuario;
+    }
     
    
+    
     // Metodos constructores.
     /**
      * Constructor sin parametros.
@@ -63,8 +81,27 @@ public class Respuesta implements Serializable {
      * @param nombreUsuario - El nombre de usuario.
      * @param contrasena - La contraseña de usuario.
      */
-    public Respuesta(String contenido ) {
+    public Respuesta(String contenido , Date fecharespuesta) {
         this.contenido = contenido;
+        this.fecharespuesta = fecharespuesta;
+        idpregunta = 0;
+        idusuario = 0;
+    }
+
+    public Integer getIdrespuesta() {
+        return idrespuesta;
+    }
+
+    public void setIdrespuesta(Integer idrespuesta) {
+        this.idrespuesta = idrespuesta;
+    }
+
+    public Integer getIdpregunta() {
+        return idpregunta;
+    }
+
+    public void setIdpregunta(Integer idpregunta) {
+        this.idpregunta = idpregunta;
     }
 
     
@@ -76,7 +113,7 @@ public class Respuesta implements Serializable {
      * @return <code>Integer</code> - La llave primaria.
      */
     public Integer getIdRespuesta() {
-        return id;
+        return idrespuesta;
     }
 
     /**
@@ -85,7 +122,7 @@ public class Respuesta implements Serializable {
      * <code>Nodo</code>.
      */
     public void setIdUsuario( Integer nuevoIsRespuesta ) {
-        this.id = nuevoIsRespuesta;
+        this.idrespuesta = nuevoIsRespuesta;
     }
 
     /**
@@ -104,7 +141,21 @@ public class Respuesta implements Serializable {
         this.contenido = nuevoContenido;
     }
 
-    
+    /**
+     * Devueleve el nombre de usuario de este objeto.
+     * @return <code>String</code> - El nombre de usuario.
+     */
+    public Date getFecharespuesta() {
+        return fecharespuesta;
+    }
+
+    /**
+     * Cambia el nombre de usuario de este objeto por el que se pasa como parametro.
+     * @param nuevoNombreUsuario - El nuevo nombre de usuario.
+     */
+    public void setFecharespuesta( Date fecharespuesta ) {
+        this.fecharespuesta = fecharespuesta;
+    }
    
     /**
      * Convierte este objeto a cadena.
@@ -112,7 +163,7 @@ public class Respuesta implements Serializable {
      */
     @Override
     public String toString() {
-        return "com.mx.fciencias.scrumsoftware.model.model.Usuario[ id=" + id + " ]";
+        return "com.mx.fciencias.scrumsoftware.model.model.Usuario[ id=" + idrespuesta + " ]";
     }
 
 }

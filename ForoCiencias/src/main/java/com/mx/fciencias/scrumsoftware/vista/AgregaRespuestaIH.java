@@ -17,13 +17,14 @@ import javax.faces.context.FacesContext;
 import javax.faces.validator.ValidatorException;
 import javax.persistence.EntityManagerFactory;
 
+
 /**
  *
  * @author ximenalezama
  */
-@ManagedBean
+@ManagedBean(name="agregaRespuestaIH")
 @SessionScoped
-public class AgregaPreguntaIH {
+public class AgregaRespuestaIH {
     
     private EntityManagerFactory entidad;
     private ConexionBD respuestaJPA ;
@@ -32,15 +33,15 @@ public class AgregaPreguntaIH {
     private Integer user;
 
     
-    public String getRespuesta() {
+    public String getContenido() {
         return contenido;
     }
     
-    public void setRespuesta(String contenido) {
+    public void setContenido(String contenido) {
         this.contenido = contenido;
     }
     
-    public AgregaPreguntaIH(){
+    public AgregaRespuestaIH(){
         entidad = ProveedorEntidadPersistencia.proveer();
         respuestaJPA = new ConexionBD(entidad);
     }
@@ -61,10 +62,8 @@ public class AgregaPreguntaIH {
     
     public void inserta(String contenido) throws ParseException{
        // Crea la fecha
-       String fechaTemp = "2018-04-23";
-       Date d = new SimpleDateFormat("yyyy-MM-dd").parse(fechaTemp);
-       java.sql.Date sqlDate = new java.sql.Date(d.getTime()); 
-       Respuesta resp = new Respuesta(contenido);
+       java.sql.Date sqlDate = new java.sql.Date(System.currentTimeMillis());
+       Respuesta resp = new Respuesta(contenido, sqlDate);
        respuestaJPA.registroRespuesta(resp);
    }
 
