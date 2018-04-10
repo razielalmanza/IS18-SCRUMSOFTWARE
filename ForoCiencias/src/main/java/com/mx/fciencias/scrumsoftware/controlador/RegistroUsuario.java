@@ -15,10 +15,7 @@ import java.util.regex.Pattern;
 import java.text.ParseException;
 import java.util.regex.Matcher;
 import java.text.SimpleDateFormat;
-import java.util.Properties;
-import javax.mail.*;
-import javax.mail.internet.*;
-import javax.servlet.http.HttpServletRequest;
+
 
 /**
  ,*
@@ -68,13 +65,9 @@ public class RegistroUsuario {
     }
 
    // Recibe los parametros del usuario a crear en la tabla
-   public void inserta(String usuario,String contraseña,String fecha,String mail,String genero) throws ParseException{
-       // Crea la fecha de nacimiento TEMPORAL
-       String fechaTemp = "2018-04-23";
-       Date d = new SimpleDateFormat("yyyy-MM-dd").parse(fechaTemp);
-       java.sql.Date sqlDate = new java.sql.Date(d.getTime()); 
+   public void inserta(String usuario,String contraseña,java.sql.Date fecha,String mail,String genero) throws ParseException{
        // Crea una nueva credencial que persistirá
-       Usuario cred = new Usuario(usuario,mail,contraseña,genero,sqlDate);
+       Usuario cred = new Usuario(usuario,mail,contraseña,genero,fecha);
        cred.setNombreUsuario(usuario);
        controladorJPA.registroUsuario(cred);
    }
@@ -89,9 +82,10 @@ public class RegistroUsuario {
     public String addUser() throws ParseException { 
             String usuario = user.getUsuario();
             String contraseña = user.getContraseña();
-            String fecha = user.getFechaNac();
+            java.sql.Date fechaA = new java.sql.Date(user.getFechaNac().getTime());     // Crea el objeto date sql con el de tipo util
             String mail = user.getCorreo();
             String genero = user.getGenero();
+            
         if (!(emailValid(mail)) || !contraseña.equals(user.getConfirmacionContraseña())) {
             return "RegistroFallidoIH?faces-redirect=true";
         }else {
@@ -99,7 +93,7 @@ public class RegistroUsuario {
                 user = null;
                 return "RegistroFallidoIH?faces-redirect=true";
                }else{
-                inserta(usuario,contraseña,fecha,mail,genero);
+                inserta(usuario,contraseña,fechaA,mail,genero);
                enviaCorreo(usuario,mail);
                 user = null;     
                 return "RegistroExitosoIH?faces-redirect=true";
