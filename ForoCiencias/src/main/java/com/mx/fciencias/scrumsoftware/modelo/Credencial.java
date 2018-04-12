@@ -41,9 +41,9 @@ import javax.xml.bind.annotation.XmlRootElement;
  */
 public class Credencial implements Serializable {
 
-	// Atributos.
-	/* Llave primaria del usuario dentro de la BD */
-	private static final long serialVersionUID = 1L;
+    // Atributos.
+    /* Llave primaria del usuario dentro de la BD */
+    private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
@@ -58,7 +58,7 @@ public class Credencial implements Serializable {
     @Column(nullable = false, length = 2147483647)
     private String contrasena;
 
-	// Metodos constructores.
+    // Metodos constructores.
     /**
      * Constructor sin parametros.
      */

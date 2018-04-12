@@ -8,12 +8,12 @@
                 xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
     
     <h:head>
-        <title>InicioSesionIH</title>
+        <title>CreaPreguntaIH</title>
     </h:head>
     
     <h:body>
-        <h1>Iniciar sesión</h1> <br/>
-        <h:form id="Sesión">
+        <h1>Hacer pregunta</h1> <br/>
+        <h:form id="Preguntar">
             <table>
                 <tr>
                     <td><p:messages id="messages" autoUpdate="true" closable="true" /></td>
@@ -21,21 +21,21 @@
             </table>
             <table>
                 <tr>
-                    <td>Nombre de usuario</td>
-                    <td><p:inputText value="#{sesion.credencial.nombreUsuario}"
-                                     required="true" id="Nombre"
+                    <td>Título</td>
+                    <td><p:inputText value="#{creaPregunta.pregunta.titulo}"
+                                     required="true" id="Título"
                                      size="15" /></td>
                 </tr>
                 <tr>
-                    <td>Contraseña</td>
-                    <td><p:password value="#{sesion.credencial.contrasena}"
-                                    required="true" id="Contraseña"
-                                    size="15" /></td>
+                    <td>Contenido</td>
+                    <td><p:inputText value="#{creaPregunta.pregunta.contenido}"
+                                     required="true" id="Contenido"
+                                     size="15" /></td>
                 </tr>
                 <tr>
                     <td colspan="1" align="left">
-                        <p:commandButton action="#{sesion.iniciarSesion()}"
-                                         value="Acceder" />
+                        <p:commandButton action="#{creaPregunta.subirPregunta}"
+                                         value="Subir" />
                     </td>
                 </tr>
             </table>

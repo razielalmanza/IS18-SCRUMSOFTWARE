@@ -62,8 +62,8 @@ public class RegistroUsuario {
     
     public boolean yaExiste(String usuario){
        Usuario l = controladorJPA.consultarRegistroUsuario(usuario);
-         boolean logged = l != null;
-         return logged;
+       boolean logged = l != null;
+       return logged;
        //return false;
     }
 
@@ -84,8 +84,6 @@ public class RegistroUsuario {
         m.sendMail(usuario,"Confirmación cuenta ForoCiencias",mail);
    }
     
-    
-    
     public String addUser() throws ParseException { 
             String usuario = user.getUsuario();
             String contraseña = user.getContraseña();
@@ -104,10 +102,6 @@ public class RegistroUsuario {
                 user = null;     
                 return "RegistroExitosoIH?faces-redirect=true";
             }
-        }
-           
+        }       
     }
-       
-    }
-
-
+}

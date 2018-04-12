@@ -22,7 +22,7 @@ import javax.servlet.http.HttpSession;
  */
 public class SesionFilter implements Filter {
 
-	// Metodos constructores.
+    // Metodos constructores.
     /**
      * Constructor sin parametros.
      */
@@ -56,5 +56,4 @@ public class SesionFilter implements Filter {
     @Override
     public void destroy() {
     }
-
 }
