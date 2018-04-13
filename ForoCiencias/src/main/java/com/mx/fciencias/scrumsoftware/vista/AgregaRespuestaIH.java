@@ -8,12 +8,8 @@ import com.mx.fciencias.scrumsoftware.modelo.ProveedorEntidadPersistencia;
 import com.mx.fciencias.scrumsoftware.modelo.Respuesta;
 import com.mx.fciencias.scrumsoftware.modelo.ConexionBD;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
-import javax.faces.component.UIComponent;
-import javax.faces.context.FacesContext;
 import javax.faces.validator.ValidatorException;
 import javax.persistence.EntityManagerFactory;
 
@@ -62,8 +58,7 @@ public class AgregaRespuestaIH {
     
     public void inserta(String contenido) throws ParseException{
        // Crea la fecha
-       java.sql.Date sqlDate = new java.sql.Date(System.currentTimeMillis());
-       Respuesta resp = new Respuesta(contenido, sqlDate);
+       Respuesta resp = new Respuesta(contenido);
        respuestaJPA.registroRespuesta(resp);
    }
 

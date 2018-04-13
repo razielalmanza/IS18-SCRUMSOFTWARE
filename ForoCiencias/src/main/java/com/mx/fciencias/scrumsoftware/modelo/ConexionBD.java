@@ -22,12 +22,12 @@ import javax.persistence.criteria.Root;
  */
 public class ConexionBD implements Serializable {
 
-	// Atributos.
-	/* Entidad de persistencia */
+    // Atributos.
+    /* Entidad de persistencia */
     private EntityManagerFactory entidad = null;
     
 
-	// Metodos constructores.
+    // Metodos constructores.
     /**
      * Permite crear un objeto de tipo <code>ConexionBD</code> a partir de una entidad de
      * persistencia.
@@ -46,7 +46,7 @@ public class ConexionBD implements Serializable {
         return entidad.createEntityManager();
     }
 
-	// Metodos de implementacion.
+    // Metodos de implementacion.
     /**
      * Crea una sesion de usuario a partir de la credencial que se le pasa como parametro.
      * @param credencial - La informacion necesaria para que un usuario inicie sesion en el
@@ -244,7 +244,7 @@ public class ConexionBD implements Serializable {
         return ( Usuario ) q.getSingleResult();
     }
     
-      /**
+    /**
      * Registra
      * @param user - EL objeto de tipo Usuario (entidad) a persistir
      * @param 
@@ -255,8 +255,31 @@ public class ConexionBD implements Serializable {
         entidad.getTransaction().begin();
         entidad.persist(user);
         entidad.getTransaction().commit();
+    }
+    
+    /**
+     * Activa usuario
+     * @param user - El nombre del usuario a activar en la BD
+     * @param 
+     * @return <code>void</code> -
+     */
+    public void activaUsuario(String nombreUsuario) {
+        EntityManager entidad = getEntityManager();
+        Usuario a = consultarRegistroUsuario(nombreUsuario);
+        a.setcuentaVerificada('S');
+        entidad.getTransaction().begin();
+        a = entidad.merge(a);
+        entidad.getTransaction().commit();
        
     }
+    
+    public void subirPregunta( Pregunta pregunta ) {
+        EntityManager entidad = getEntityManager();
+        entidad.getTransaction().begin();
+        entidad.persist( pregunta );
+        entidad.getTransaction().commit();
+    }
+    
     public void registroRespuesta(Respuesta resp) {
         EntityManager entidad = getEntityManager();
         entidad.getTransaction().begin();

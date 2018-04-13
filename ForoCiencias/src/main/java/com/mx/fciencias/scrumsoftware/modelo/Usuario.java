@@ -22,7 +22,7 @@ import java.sql.Date;
 @Table( catalog = "forociencias", schema = "modeloforo", uniqueConstraints = { @UniqueConstraint( columnNames = { "nombreusuario" } ) } )
 @XmlRootElement
 @NamedQueries( { @NamedQuery(name = "Credencial.findAll", query = "SELECT l FROM Credencial l" ) ,
- @NamedQuery(name = "Usuario.findByUsuario", query = "SELECT l FROM Usuario l WHERE l.nombreUsuario = :nombreUsuario" )} )
+@NamedQuery(name = "Usuario.findByUsuario", query = "SELECT l FROM Usuario l WHERE l.nombreUsuario = :nombreUsuario" ) } )
 @NamedNativeQueries(value = { @NamedNativeQuery( name = "Credencial.canCredencial", query = "select modeloforo.verificar(?, ?)" ),
 							  @NamedNativeQuery( name = "Credencial.findByUsuarioAndPassword",
 												 query = "SELECT idUsuario, nombreUsuario FROM modeloforo.usuario WHERE nombreusuario = ?1 AND contrasena = crypt(?2, contrasena)",
@@ -39,9 +39,9 @@ import java.sql.Date;
  */
 public class Usuario implements Serializable {
 
-	// Atributos.
-	/* Llave primaria del usuario dentro de la BD */
-	private static final long serialVersionUID = 1L;
+    // Atributos.
+    /* Llave primaria del usuario dentro de la BD */
+    private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
@@ -88,7 +88,7 @@ public class Usuario implements Serializable {
      * @param nombreUsuario - El nombre de usuario.
      * @param contrasena - La contraseña de usuario.
      */
-    public Usuario(String nombreUusuario,String correoCiencias, String contrasena,String genero,Date fechaNacimiento ) {
+    public Usuario(String nombreUsuario,String correoCiencias, String contrasena,String genero,Date fechaNacimiento ) {
         this.nombreUsuario = nombreUsuario;
         this.contrasena = contrasena;
         this.fechaNacimiento = fechaNacimiento;
@@ -217,5 +217,4 @@ public class Usuario implements Serializable {
     public String toString() {
         return "com.mx.fciencias.scrumsoftware.model.model.Usuario[ idUsuario=" + idUsuario + " ]";
     }
-
 }

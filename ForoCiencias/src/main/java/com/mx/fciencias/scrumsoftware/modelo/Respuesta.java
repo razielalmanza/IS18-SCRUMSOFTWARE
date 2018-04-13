@@ -13,6 +13,7 @@ import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.sql.Date;
+import java.sql.Timestamp;
 /**
  *  Definicion de las consultas necesarias para validar el registro de un usuario
  */
@@ -46,7 +47,7 @@ public class Respuesta implements Serializable {
      /* fecha da la respuesta de nac del usuario dentro de la BD */
     @Basic(optional = false)
     @Column(nullable = false, length = 2147483647)
-    private Date fecharespuesta;
+    private Timestamp fecharespuesta;
     
     @Basic(optional = false)
     @Column(nullable = false)
@@ -81,11 +82,11 @@ public class Respuesta implements Serializable {
      * @param nombreUsuario - El nombre de usuario.
      * @param contrasena - La contraseña de usuario.
      */
-    public Respuesta(String contenido , Date fecharespuesta) {
+    public Respuesta(String contenido) {
         this.contenido = contenido;
-        this.fecharespuesta = fecharespuesta;
-        idpregunta = 0;
-        idusuario = 0;
+        this.fecharespuesta = new Timestamp( System.currentTimeMillis() );
+        idpregunta = 1;
+        idusuario = 3;
     }
 
     public Integer getIdrespuesta() {
@@ -145,7 +146,7 @@ public class Respuesta implements Serializable {
      * Devueleve el nombre de usuario de este objeto.
      * @return <code>String</code> - El nombre de usuario.
      */
-    public Date getFecharespuesta() {
+    public Timestamp getFecharespuesta() {
         return fecharespuesta;
     }
 
@@ -153,7 +154,7 @@ public class Respuesta implements Serializable {
      * Cambia el nombre de usuario de este objeto por el que se pasa como parametro.
      * @param nuevoNombreUsuario - El nuevo nombre de usuario.
      */
-    public void setFecharespuesta( Date fecharespuesta ) {
+    public void setFecharespuesta( Timestamp fecharespuesta ) {
         this.fecharespuesta = fecharespuesta;
     }
    

@@ -4,7 +4,6 @@ import com.mx.fciencias.scrumsoftware.modelo.Credencial;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
-
 import static javax.faces.context.FacesContext.getCurrentInstance;
 
 /**
@@ -20,7 +19,7 @@ import static javax.faces.context.FacesContext.getCurrentInstance;
 @SessionScoped
 public class InicioSesionIHBean {
 
-	// Metodos constructores.
+    // Metodos constructores.
     /**
      * Constructor sin parametros.
      */

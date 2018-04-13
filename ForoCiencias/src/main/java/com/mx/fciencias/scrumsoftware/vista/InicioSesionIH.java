@@ -11,12 +11,11 @@ package com.mx.fciencias.scrumsoftware.vista;
  */
 public class InicioSesionIH {
 
-	// Atributos.
-	/* Nombre de usuario */
-    public String nombreUsuario;
-    
-	/* Contraseña de usuario */    
-    public String contrasena;
+    // Atributos.
+    /* Nombre de usuario */
+    private String nombreUsuario;
+    /* Contraseña de usuario */    
+    private String contrasena;
 
     // Metodos de acceso y modificacion.
     /**

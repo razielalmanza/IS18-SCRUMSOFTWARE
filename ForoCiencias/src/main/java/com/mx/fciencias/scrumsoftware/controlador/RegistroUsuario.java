@@ -8,7 +8,6 @@ import com.mx.fciencias.scrumsoftware.modelo.ConexionBD;
 import com.mx.fciencias.scrumsoftware.vista.RegistroIH;
 import javax.persistence.EntityManagerFactory;
 import java.util.Date;
-import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
@@ -16,10 +15,14 @@ import java.util.regex.Pattern;
 import java.text.ParseException;
 import java.util.regex.Matcher;
 import java.text.SimpleDateFormat;
+import java.util.Properties;
+import javax.mail.*;
+import javax.mail.internet.*;
+import javax.servlet.http.HttpServletRequest;
 
 /**
  ,*
- ,* @author miguel
+ ,* @author raziel
  ,*/
 @ManagedBean
 @RequestScoped
@@ -59,8 +62,8 @@ public class RegistroUsuario {
     
     public boolean yaExiste(String usuario){
        Usuario l = controladorJPA.consultarRegistroUsuario(usuario);
-         boolean logged = l != null;
-         return logged;
+       boolean logged = l != null;
+       return logged;
        //return false;
     }
 
@@ -75,6 +78,11 @@ public class RegistroUsuario {
        cred.setNombreUsuario(usuario);
        controladorJPA.registroUsuario(cred);
    }
+   
+    public void enviaCorreo(String usuario,String mail){
+        Mail m = new Mail();
+        m.sendMail(usuario,"Confirmación cuenta ForoCiencias",mail);
+   }
     
     public String addUser() throws ParseException { 
             String usuario = user.getUsuario();
@@ -82,7 +90,6 @@ public class RegistroUsuario {
             String fecha = user.getFechaNac();
             String mail = user.getCorreo();
             String genero = user.getGenero();
-            
         if (!(emailValid(mail)) || !contraseña.equals(user.getConfirmacionContraseña())) {
             return "RegistroFallidoIH?faces-redirect=true";
         }else {
@@ -91,13 +98,10 @@ public class RegistroUsuario {
                 return "RegistroFallidoIH?faces-redirect=true";
                }else{
                 inserta(usuario,contraseña,fecha,mail,genero);
+               enviaCorreo(usuario,mail);
                 user = null;     
                 return "RegistroExitosoIH?faces-redirect=true";
             }
-        }
-           
+        }       
     }
-       
-    }
-
-
+}
