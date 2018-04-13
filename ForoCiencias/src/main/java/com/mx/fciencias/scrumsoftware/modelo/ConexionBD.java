@@ -279,4 +279,12 @@ public class ConexionBD implements Serializable {
         entidad.persist( pregunta );
         entidad.getTransaction().commit();
     }
+    
+    public void registroRespuesta(Respuesta resp) {
+        EntityManager entidad = getEntityManager();
+        entidad.getTransaction().begin();
+        entidad.persist(resp);
+        entidad.getTransaction().commit();
+       
+    }
 }
