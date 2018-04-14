@@ -9,8 +9,6 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 import javax.persistence.EntityManagerFactory;
-import java.util.*;
-import javax.activation.*;
 import javax.faces.application.FacesMessage;
 import org.apache.commons.codec.binary.Base64;
 

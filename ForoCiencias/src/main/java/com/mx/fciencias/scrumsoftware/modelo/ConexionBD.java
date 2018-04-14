@@ -1,4 +1,4 @@
-    package com.mx.fciencias.scrumsoftware.modelo;
+package com.mx.fciencias.scrumsoftware.modelo;
 
 import com.mx.fciencias.scrumsoftware.modelo.exceptions.NonexistentEntityException;
 import java.io.Serializable;
@@ -27,7 +27,7 @@ public class ConexionBD implements Serializable {
     private EntityManagerFactory entidad = null;
     
 
-	// Metodos constructores.
+    // Metodos constructores.
     /**
      * Permite crear un objeto de tipo <code>ConexionBD</code> a partir de una entidad de
      * persistencia.
@@ -46,7 +46,7 @@ public class ConexionBD implements Serializable {
         return entidad.createEntityManager();
     }
 
-	// Metodos de implementacion.
+    // Metodos de implementacion.
     /**
      * Crea una sesion de usuario a partir de la credencial que se le pasa como parametro.
      * @param credencial - La informacion necesaria para que un usuario inicie sesion en el
@@ -244,7 +244,7 @@ public class ConexionBD implements Serializable {
         return ( Usuario ) q.getSingleResult();
     }
     
-      /**
+    /**
      * Registra
      * @param user - EL objeto de tipo Usuario (entidad) a persistir
      * @param 
@@ -255,7 +255,6 @@ public class ConexionBD implements Serializable {
         entidad.getTransaction().begin();
         entidad.persist(user);
         entidad.getTransaction().commit();
-       
     }
     
     /**
@@ -270,6 +269,21 @@ public class ConexionBD implements Serializable {
         a.setcuentaVerificada('S');
         entidad.getTransaction().begin();
         a = entidad.merge(a);
+        entidad.getTransaction().commit();
+       
+    }
+    
+    public void subirPregunta( Pregunta pregunta ) {
+        EntityManager entidad = getEntityManager();
+        entidad.getTransaction().begin();
+        entidad.persist( pregunta );
+        entidad.getTransaction().commit();
+    }
+    
+    public void registroRespuesta(Respuesta resp) {
+        EntityManager entidad = getEntityManager();
+        entidad.getTransaction().begin();
+        entidad.persist(resp);
         entidad.getTransaction().commit();
        
     }

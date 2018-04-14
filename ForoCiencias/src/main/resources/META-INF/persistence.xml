@@ -3,13 +3,12 @@
   <persistence-unit name="PersistenceUnit" transaction-type="RESOURCE_LOCAL">
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
     <class>com.mx.fciencias.scrumsoftware.modelo.SesionConexionBD</class>
-    <class>com.mx.fciencias.scrumsoftware.modelo.Usuario</class>
     <exclude-unlisted-classes>True</exclude-unlisted-classes>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/forociencias"/>
-      <property name="javax.persistence.jdbc.user" value="postgres"/>
+      <property name="javax.persistence.jdbc.user" value="administrador"/>
       <property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver"/>
-      <property name="javax.persistence.jdbc.password" value="root"/>
+      <property name="javax.persistence.jdbc.password" value=""/>
       <property name="javax.persistence.schema-generation.database.action" value=""/>
     </properties>
   </persistence-unit>

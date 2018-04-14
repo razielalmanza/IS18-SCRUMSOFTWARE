@@ -7,15 +7,13 @@ import com.mx.fciencias.scrumsoftware.modelo.Usuario;
 import com.mx.fciencias.scrumsoftware.modelo.ConexionBD;
 import com.mx.fciencias.scrumsoftware.vista.RegistroIH;
 import javax.persistence.EntityManagerFactory;
-import java.util.Date;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 import java.util.regex.Pattern;
 import java.text.ParseException;
 import java.util.regex.Matcher;
-import java.text.SimpleDateFormat;
-
+import javax.faces.application.FacesMessage;
 
 /**
  ,*
@@ -59,14 +57,14 @@ public class RegistroUsuario {
     
     public boolean yaExiste(String usuario){
        Usuario l = controladorJPA.consultarRegistroUsuario(usuario);
-         boolean logged = l != null;
-         return logged;
+       boolean logged = l != null;
+       return logged;
        //return false;
     }
 
    // Recibe los parametros del usuario a crear en la tabla
    public void inserta(String usuario,String contraseña,java.sql.Date fecha,String mail,String genero) throws ParseException{
-       // Crea una nueva credencial que persistirá
+        // Crea una nueva credencial que persistirá
        Usuario cred = new Usuario(usuario,mail,contraseña,genero,fecha);
        cred.setNombreUsuario(usuario);
        controladorJPA.registroUsuario(cred);
@@ -77,9 +75,7 @@ public class RegistroUsuario {
         m.sendMail(usuario,"Confirmación cuenta ForoCiencias",mail);
    }
     
-    
-    
-    public String addUser() throws ParseException { 
+   public String addUser() throws ParseException { 
             String usuario = user.getUsuario();
             String contraseña = user.getContraseña();
             java.sql.Date fechaA = new java.sql.Date(user.getFechaNac().getTime());     // Crea el objeto date sql con el de tipo util
@@ -94,14 +90,11 @@ public class RegistroUsuario {
                 return "RegistroFallidoIH?faces-redirect=true";
                }else{
                 inserta(usuario,contraseña,fechaA,mail,genero);
-               enviaCorreo(usuario,mail);
+                enviaCorreo(usuario,mail);
                 user = null;     
                 return "RegistroExitosoIH?faces-redirect=true";
             }
         }
            
     }
-       
-    }
-
-
+}

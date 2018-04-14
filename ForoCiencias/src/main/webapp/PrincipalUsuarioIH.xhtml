@@ -27,6 +27,14 @@
                 <h1 class="display-3" align="center" >Preguntas y Respuestas</h1>
                 <p>
                     Contenido con botones activados.
+                    <h:form id="myForm" class="form-inline my-2 my-lg-0">
+                        <h:commandButton action="CreaPreguntaIH?faces-redirect=true"
+                                         value="Hacer Pregunta"
+                                         class="btn btn-outline-primary"/>
+                        <h:commandButton action="AgregaRespuestaIH?faces-redirect=true"
+                                         value="Hacer Respuesta"
+                                         class="btn btn-outline-primary"/>
+                    </h:form>
                 </p>
             </div>
         </div>

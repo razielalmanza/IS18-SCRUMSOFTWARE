@@ -11,7 +11,6 @@ import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.PersistenceException;
-
 import static javax.faces.context.FacesContext.getCurrentInstance;
 
 /**
@@ -27,8 +26,8 @@ import static javax.faces.context.FacesContext.getCurrentInstance;
 @SessionScoped
 public class Sesion {
 
-	// Atributos.
-	/* Entidad para la persistencia de una sesion de usuario */
+    // Atributos.
+    /* Entidad para la persistencia de una sesion de usuario */
     private EntityManagerFactory entidad;
     /* Sesion de usuario */
     private ConexionBD controladorJPA;
@@ -37,7 +36,7 @@ public class Sesion {
     /* Contador de intentos para iniciar sesion */
     private int intentos;
 
-	// Metodos constructores.
+    // Metodos constructores.
     /**
      * Constructor sin parametros.
      */
@@ -74,11 +73,11 @@ public class Sesion {
         this.credencial = nuevaCredencial;
     }
 
-	// Metodos de implementacion.
-	/**
-	 * Inicializa la sesion de usuario a partir de la credencial identificada.
-	 * @return <code>String</code> - La direccion de la interfaz de usuario.
-	 */
+    // Metodos de implementacion.
+    /**
+     * Inicializa la sesion de usuario a partir de la credencial identificada.
+     * @return <code>String</code> - La direccion de la interfaz de usuario.
+     */
     public String iniciarSesion() {
         boolean logged = controladorJPA.estaRegistrado( credencial.getNombreUsuario(), credencial.getContrasena() );
         Credencial l = controladorJPA.consultarRegistro( credencial.getNombreUsuario(), credencial.getContrasena() );
@@ -101,10 +100,10 @@ public class Sesion {
     }
     
     
-	/**
-	 * FInaliza la sesion actual.
-	 * @return <code>String</code> - La direccion de la interfaz de visitante.
-	 */    
+    /**
+     * FInaliza la sesion actual.
+     * @return <code>String</code> - La direccion de la interfaz de visitante.
+     */    
     public String cerrarSesion() {
         try {
         	Credencial l = controladorJPA.consultarRegistro( credencial.getNombreUsuario(), credencial.getContrasena() );
@@ -115,5 +114,5 @@ public class Sesion {
         catch ( PersistenceException e ) {
         	return "ErrorFinSesionIH?faces-redirect=true";
         }
-	}
+    }
 }
