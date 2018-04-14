@@ -30,13 +30,13 @@
           <td>Confirmar Contraseña</td>
           <td><p:password value="#{registroUsuario.user. confirmacionContraseña}" required="true" feedback="true" id="ConfirmPassword"/></td>
         </tr>
-        <tr>
+         <tr>
           <td>Correo @Ciencias</td>
           <td><p:inputText value="#{registroUsuario.user.correo}" required="true" id="Email"/></td>
         </tr>
         <tr>
           <td>Fecha de Nacimiento</td>
-          <td><p:calendar value="#{registroUsuario.user.fechaNac}" required="true" id="dateBirth"/></td>
+          <td><p:calendar value="#{registroUsuario.user.fechaNac}" required="true" pattern="yyyy-MM-dd"/></td>
         </tr>
          <tr>
           <td>Género</td>
