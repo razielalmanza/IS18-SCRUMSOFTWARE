@@ -13,9 +13,14 @@ import javax.faces.application.FacesMessage;
 import org.apache.commons.codec.binary.Base64;
 
 /**
- *
- * @author razie
- */
+- *  La clase <code>ActivacionUsuario</code>.
+  *
+- * Creado o modificado: martes 27 de marzo de 2018.
+- *
+- * @author <a href="mailto:razielmcr1@ciencias.unam.mx"></a>
+- * @version 1.1
++ * 
+  */
 @ManagedBean
 @RequestScoped
 public class ActivacionUsuario {
@@ -23,6 +28,11 @@ public class ActivacionUsuario {
     private EntityManagerFactory entidad;
     private ConexionBD controladorJPA ;
 
+     // Metodos constructores.
+    /**
+     * Constructor sin parametros.
+     * Inicializa la clase
+     */
   public ActivacionUsuario() {
         FacesContext.getCurrentInstance().getViewRoot().setLocale(new Locale("es-Mx"));
         entidad = ProveedorEntidadPersistencia.proveer();
@@ -37,12 +47,20 @@ public class ActivacionUsuario {
         this.usuarioToken = usuarioToken;
     }
     
+    /**
+     * Usado para pasar de Base64 a Texto
+     * @return <code>String</code> - El usuario que ingresaron en formato normal.
+     */
     public String toText(String encoded){
-        
         byte[] decoded = Base64.decodeBase64(encoded);      
         return new String(decoded);
          
     }
+    
+    /**
+     * Usado para el botón de activar registro
+     * @return <code>String</code> - La redirección según el input del usuario
+     */
     public String activaUsuario(){
          String usuario = toText(usuarioToken);
          Usuario l = controladorJPA.consultarRegistroUsuario(usuario);

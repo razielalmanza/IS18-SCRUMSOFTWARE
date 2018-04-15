@@ -1,15 +1,5 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package com.mx.fciencias.scrumsoftware.controlador;
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+package com.mx.fciencias.scrumsoftware.controlador;
 
 import java.util.Properties;
 import javax.mail.Message;
@@ -22,19 +12,35 @@ import javax.mail.internet.MimeMessage;
 import org.apache.commons.codec.binary.Base64;
 
 /**
- * A singleton class for sending mail messages.
- * @author raziel
- */
+- *  La clase <code>Mail</code> 
+- *
+- * Creado o modificado: martes 27 de marzo de 2018.
+- *
+- * @author <a href="mailto:razielmcr1@ciencias.unam.mx"></a>
+- * @version 1.1
+  */
 
 
 public class Mail{
     
-     public static String toToken(String text) {
+    
+    /**
+     * Envia correo al usuario.
+     * @param text - Usuario que se pasará a base 64 (tokne)
+     * @return <code>String</code> - El token segun el usuario.
+     */
+    public String toToken(String text) {
         byte[] encoded = Base64.encodeBase64(text.getBytes());
         return new String(encoded);
       
     }
-
+     
+    /**
+     * Envia correo al usuario.
+     * @param token - Token que se envía al usuario
+     * @param subject - Subject del mil a enviar.
+     * @param to - A quién se enviará
+     */
     public void sendMail(String token, String Subject, String To) {
         String Username = "scrumsoftwareis";
         String PassWord = "scrumsoftware2018";

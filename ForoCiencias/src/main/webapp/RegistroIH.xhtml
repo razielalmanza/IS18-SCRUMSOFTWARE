@@ -9,9 +9,9 @@
   </h:head>
   <h:body>
 
-    <h1>Registrar</h1> <br/>
+    <h1>RegistroIH</h1> <br/>
 
-    <h:form id="RegistroForoCiencias">
+    <h:form id="RegistroIH">
       <table>
         <tr>
           <td><p:messages id="messages" autoUpdate="true" closable="true" /></td>
@@ -27,11 +27,11 @@
           <td><p:password value="#{registroUsuario.user.contraseña}" required="true" feedback="true" id="Password"/></td>
         </tr>
         <tr>
-          <td>Confirmar Contraseña</td>
+          <td>Confirmar contraseña</td>
           <td><p:password value="#{registroUsuario.user. confirmacionContraseña}" required="true" feedback="true" id="ConfirmPassword"/></td>
         </tr>
          <tr>
-          <td>Correo @Ciencias</td>
+          <td>Correo @ciencias.unam.mx</td>
           <td><p:inputText value="#{registroUsuario.user.correo}" required="true" id="Email"/></td>
         </tr>
         <tr>
@@ -49,8 +49,8 @@
         <tr>    
           <td colspan="2" align="center">
             <p:commandButton action="#{registroUsuario.addUser}" value="Registrar"/>
-            <p:commandButton value="Limpiar campos" update="RegistroForoCiencias" process="@this"  >
-              <p:resetInput target="RegistroForoCiencias" />
+            <p:commandButton value="Limpiar campos" update="RegistroIH" process="@this"  >
+              <p:resetInput target="RegistroIH" />
             </p:commandButton>
           </td>
         </tr>
