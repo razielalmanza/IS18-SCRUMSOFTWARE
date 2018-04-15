@@ -150,6 +150,4 @@ $$ language sql stable;
 INSERT INTO modeloForo.Usuario( nombreUsuario, correoCiencias, contrasena, genero, fechaNacimiento, cuentaVerificada ) VALUES ( 'LuisLazaro88', 'luis_lazaro@ciencias.unam.mx', 'password', 'H', '1988-02-25', 'S' );
 INSERT INTO modeloForo.Usuario( nombreUsuario, correoCiencias, contrasena, genero, fechaNacimiento, cuentaVerificada ) VALUES ( 'Miguel', 'miguel_pinia@ciencias.unam.mx', 'pinia88', 'H', '1988-02-25', 'N' );
 
-INSERT INTO modeloForo.Pregunta( titulo, contenido, fechaPregunta, idUsuario ) VALUES ( 'Prueba', 'Contenido', '2016-11-16 06:43:19.77', 1 );
-
 COMMIT;
