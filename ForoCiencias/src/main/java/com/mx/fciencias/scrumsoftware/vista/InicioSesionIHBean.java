@@ -1,6 +1,7 @@
 package com.mx.fciencias.scrumsoftware.vista;
 
 import com.mx.fciencias.scrumsoftware.modelo.Credencial;
+import com.mx.fciencias.scrumsoftware.modelo.Pregunta;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
@@ -13,7 +14,7 @@ import static javax.faces.context.FacesContext.getCurrentInstance;
  * Modificado: martes 27 de marzo de 2018.
  *
  * @author <a href="mailto:luis_lazaro@ciencias.unam.mx">Jose Luis Vazquez Lazaro</a>
- * @version 1.0
+ * @version 1.2
  */
 @ManagedBean
 @SessionScoped
@@ -45,5 +46,13 @@ public class InicioSesionIHBean {
         FacesContext context = getCurrentInstance();
         return ( Credencial ) context.getExternalContext().getSessionMap().get( "usuario" );
     }
-
+    
+    /**
+     * Devuelve la información de la pregunta actual.
+     * @return <code>Pregunta</code> - La informacon básica de la pregunta actual.
+     */
+    public Pregunta getPregunta() {
+        FacesContext context = getCurrentInstance();
+        return ( Pregunta ) context.getExternalContext().getSessionMap().get( "pregunta" );
+    }
 }

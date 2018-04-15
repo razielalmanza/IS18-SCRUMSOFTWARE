@@ -15,26 +15,22 @@ import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.sql.Date;
+
 /**
  *  Definicion de las consultas necesarias para validar el registro de un usuario
  */
 @Entity
 @Table( catalog = "forociencias", schema = "modeloforo", uniqueConstraints = { @UniqueConstraint( columnNames = { "nombreusuario" } ) } )
 @XmlRootElement
-@NamedQueries( { @NamedQuery(name = "Credencial.findAll", query = "SELECT l FROM Credencial l" ) ,
-@NamedQuery(name = "Usuario.findByUsuario", query = "SELECT l FROM Usuario l WHERE l.nombreUsuario = :nombreUsuario" ) } )
-@NamedNativeQueries(value = { @NamedNativeQuery( name = "Credencial.canCredencial", query = "select modeloforo.verificar(?, ?)" ),
-							  @NamedNativeQuery( name = "Credencial.findByUsuarioAndPassword",
-												 query = "SELECT idUsuario, nombreUsuario FROM modeloforo.usuario WHERE nombreusuario = ?1 AND contrasena = crypt(?2, contrasena)",
-												 resultClass = Credencial.class ) } )
+@NamedQueries( { @NamedQuery(name = "Usuario.findById", query = "SELECT l FROM Usuario l WHERE l.idUsuario = :idUsuario" ) ,
+                 @NamedQuery(name = "Usuario.findByUsuario", query = "SELECT l FROM Usuario l WHERE l.nombreUsuario = :nombreUsuario" ) } )
 
 /**
- *  La clase <code>Credencial</code> define objetos que permiten consultar la base de datos del
- * sistema con la finalidad de validar y recuperar la informacion de los usuaros registrados.
+ *  La clase <code>Usuario</code>. 
  *
- * Modificado: martes 27 de marzo de 2018.
+ * Creado o modificado: martes 27 de marzo de 2018.
  *
- * @author <a href="mailto:luis_lazaro@ciencias.unam.mx">Jose Luis Vazquez Lazaro</a>
+ * @author <a href="mailto:"></a>
  * @version 1.2
  */
 public class Usuario implements Serializable {
@@ -72,14 +68,12 @@ public class Usuario implements Serializable {
     @Column(nullable = false, length = 2147483647)
     private char cuentaVerificada;
     
-   
     // Metodos constructores.
     /**
      * Constructor sin parametros.
      */
     public Usuario() {
     }
-
 
     /**
      * Permite crear un objeto de tipo <code>Usuario</code> a partir de una Llave primaria, un

@@ -18,7 +18,7 @@ import javax.servlet.http.HttpSession;
  * Modificado: martes 27 de marzo de 2018.
  *
  * @author <a href="mailto:luis_lazaro@ciencias.unam.mx">Jose Luis Vazquez Lazaro</a>
- * @version 1.0
+ * @version 1.1
  */
 public class SesionFilter implements Filter {
 
@@ -46,7 +46,6 @@ public class SesionFilter implements Filter {
             return;
         }
         chain.doFilter( request, response );
-
     }
 
     @Override

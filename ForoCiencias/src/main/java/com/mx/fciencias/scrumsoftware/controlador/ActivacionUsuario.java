@@ -9,12 +9,18 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 import javax.persistence.EntityManagerFactory;
+import java.util.*;
+import javax.activation.*;
 import javax.faces.application.FacesMessage;
 import org.apache.commons.codec.binary.Base64;
 
 /**
+ *  La clase <code>ActivacionUsuario</code>.
  *
- * @author razie
+ * Creado o modificado: martes 27 de marzo de 2018.
+ *
+ * @author <a href="mailto:"></a>
+ * @version 1.1
  */
 @ManagedBean
 @RequestScoped
@@ -22,8 +28,8 @@ public class ActivacionUsuario {
     String usuarioToken;
     private EntityManagerFactory entidad;
     private ConexionBD controladorJPA ;
-
-  public ActivacionUsuario() {
+    
+    public ActivacionUsuario() {
         FacesContext.getCurrentInstance().getViewRoot().setLocale(new Locale("es-Mx"));
         entidad = ProveedorEntidadPersistencia.proveer();
         controladorJPA = new ConexionBD( entidad );
@@ -59,5 +65,4 @@ public class ActivacionUsuario {
         }
         return null;
     }
-    
 }

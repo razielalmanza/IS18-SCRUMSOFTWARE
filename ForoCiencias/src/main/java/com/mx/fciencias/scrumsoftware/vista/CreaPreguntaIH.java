@@ -1,9 +1,17 @@
 package com.mx.fciencias.scrumsoftware.vista;
 
+/**
+ *  La clase <code>CreaPreguntaIH</code>.
+ *
+ * Creado y/o modificado: martes 27 de marzo de 2018.
+ *
+ * @author <a href="mailto:"></a>
+ * @version 1.1
+ */
 public class CreaPreguntaIH {
     
-    public String titulo;
-    public String contenido;
+    private String titulo;
+    private String contenido;
     
     public String getTitulo() {
         return titulo;

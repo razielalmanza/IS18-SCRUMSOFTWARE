@@ -1,7 +1,6 @@
 package com.mx.fciencias.scrumsoftware.controlador;
 
 import java.util.Locale;
-
 import com.mx.fciencias.scrumsoftware.modelo.ProveedorEntidadPersistencia;
 import com.mx.fciencias.scrumsoftware.modelo.Usuario;
 import com.mx.fciencias.scrumsoftware.modelo.ConexionBD;
@@ -13,12 +12,20 @@ import javax.faces.context.FacesContext;
 import java.util.regex.Pattern;
 import java.text.ParseException;
 import java.util.regex.Matcher;
-import javax.faces.application.FacesMessage;
+import java.text.SimpleDateFormat;
+import java.util.Properties;
+import javax.mail.*;
+import javax.mail.internet.*;
+import javax.servlet.http.HttpServletRequest;
 
 /**
- ,*
- ,* @author raziel
- ,*/
+ *  La clase <code>RegistroUsuario</code> 
+ *
+ * Creado o modificado: martes 27 de marzo de 2018.
+ *
+ * @author <a href="mailto:"></a>
+ * @version 1.3
+ */
 @ManagedBean
 @RequestScoped
 public class RegistroUsuario {
@@ -42,7 +49,6 @@ public class RegistroUsuario {
         this.user = user;
     }
 
-  
     // Valida el mail
     public boolean emailValid(String email){
         String cienciasDomain = "ciencias.unam.mx";
@@ -64,7 +70,6 @@ public class RegistroUsuario {
 
    // Recibe los parametros del usuario a crear en la tabla
    public void inserta(String usuario,String contraseña,java.sql.Date fecha,String mail,String genero) throws ParseException{
-        // Crea una nueva credencial que persistirá
        Usuario cred = new Usuario(usuario,mail,contraseña,genero,fecha);
        cred.setNombreUsuario(usuario);
        controladorJPA.registroUsuario(cred);
@@ -75,13 +80,13 @@ public class RegistroUsuario {
         m.sendMail(usuario,"Confirmación cuenta ForoCiencias",mail);
    }
     
-   public String addUser() throws ParseException { 
+    public String addUser() throws ParseException { 
             String usuario = user.getUsuario();
             String contraseña = user.getContraseña();
-            java.sql.Date fechaA = new java.sql.Date(user.getFechaNac().getTime());     // Crea el objeto date sql con el de tipo util
+            java.util.Date fecha = user.getFechaNac();
+            java.sql.Date fechaNac = new java.sql.Date(fecha.getTime());
             String mail = user.getCorreo();
             String genero = user.getGenero();
-            
         if (!(emailValid(mail)) || !contraseña.equals(user.getConfirmacionContraseña())) {
             return "RegistroFallidoIH?faces-redirect=true";
         }else {
@@ -89,12 +94,11 @@ public class RegistroUsuario {
                 user = null;
                 return "RegistroFallidoIH?faces-redirect=true";
                }else{
-                inserta(usuario,contraseña,fechaA,mail,genero);
-                enviaCorreo(usuario,mail);
+                inserta(usuario,contraseña,fechaNac,mail,genero);
+               enviaCorreo(usuario,mail);
                 user = null;     
                 return "RegistroExitosoIH?faces-redirect=true";
             }
-        }
-           
+        }       
     }
 }

@@ -7,18 +7,18 @@ import javax.persistence.Persistence;
  *  La clase <code>EntityProvider</code> define objetos que permiten crear una pagina de sesion
  * de usuario.
  *
- * Modificado: martes 27 de marzo de 2018.
+ * Creado y/o modificado: martes 27 de marzo de 2018.
  *
  * @author <a href="mailto:luis_lazaro@ciencias.unam.mx">Jose Luis Vazquez Lazaro</a>
- * @version 1.0
+ * @version 1.1
  */
 public class ProveedorEntidadPersistencia {
 
-	// Atributos.
-	/* Entidad de persistencia */
+    // Atributos.
+    /* Entidad de persistencia */
     private static EntityManagerFactory entidadPersistencia;
 
-	// Metodos constructores.
+    // Metodos constructores.
     /**
      * Constructor sin parametros.
      */

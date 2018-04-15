@@ -26,18 +26,18 @@ import javax.xml.bind.annotation.XmlRootElement;
 				 @NamedQuery(name = "Credencial.findByUsuario", query = "SELECT l FROM Credencial l WHERE l.nombreUsuario = :nombreUsuario" ),
 				 @NamedQuery(name = "Credencial.findByPassword", query = "SELECT l FROM Credencial l WHERE l.contrasena = :contrasena" ) } )
 @NamedNativeQueries(value = { @NamedNativeQuery( name = "Credencial.canLogin", query = "SELECT modeloforo.verificar(?, ?)" ),
-							  @NamedNativeQuery( name = "Credencial.findByUsuarioAndPassword",
-												 query = "SELECT idUsuario, nombreUsuario FROM modeloforo.usuario WHERE nombreusuario = ?1 AND contrasena = crypt(?2, contrasena)",
-												 resultClass = Credencial.class ) } )
+                              @NamedNativeQuery( name = "Credencial.findByUsuarioAndPassword",
+                                                 query = "SELECT idUsuario, nombreUsuario FROM modeloforo.usuario WHERE nombreusuario = ?1 AND contrasena = crypt(?2, contrasena)",
+						 resultClass = Credencial.class ) } )
 
 /**
  *  La clase <code>Credencial</code> define objetos que permiten consultar la base de datos del
  * sistema con la finalidad de validar y recuperar la informacion de los usuaros registrados.
  *
- * Modificado: martes 27 de marzo de 2018.
+ * Creado y/o modificado: martes 27 de marzo de 2018.
  *
  * @author <a href="mailto:luis_lazaro@ciencias.unam.mx">Jose Luis Vazquez Lazaro</a>
- * @version 1.2
+ * @version 1.1
  */
 public class Credencial implements Serializable {
 
@@ -174,5 +174,4 @@ public class Credencial implements Serializable {
     public String toString() {
         return "com.mx.fciencias.scrumsoftware.model.model.Credencial[ idUsuario=" + idUsuario + " ]";
     }
-
 }

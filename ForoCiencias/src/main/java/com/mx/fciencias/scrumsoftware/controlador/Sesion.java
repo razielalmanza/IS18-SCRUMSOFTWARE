@@ -2,9 +2,12 @@ package com.mx.fciencias.scrumsoftware.controlador;
 
 import com.mx.fciencias.scrumsoftware.modelo.ProveedorEntidadPersistencia;
 import com.mx.fciencias.scrumsoftware.modelo.Credencial;
+import com.mx.fciencias.scrumsoftware.modelo.Pregunta;
+import com.mx.fciencias.scrumsoftware.modelo.Respuesta;
+import com.mx.fciencias.scrumsoftware.modelo.Usuario;
 import com.mx.fciencias.scrumsoftware.modelo.ConexionBD;
 import com.mx.fciencias.scrumsoftware.vista.InicioSesionIH;
-import java.util.Locale;
+import java.util.*;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -99,20 +102,70 @@ public class Sesion {
         }
     }
     
-    
     /**
-     * FInaliza la sesion actual.
+     * Finaliza la sesion actual.
      * @return <code>String</code> - La direccion de la interfaz de visitante.
      */    
     public String cerrarSesion() {
         try {
-        	Credencial l = controladorJPA.consultarRegistro( credencial.getNombreUsuario(), credencial.getContrasena() );
-        	FacesContext context = getCurrentInstance();
-        	context.getExternalContext().invalidateSession();
-        	return "FinSesionIH?faces-redirect=true";
+            Credencial l = controladorJPA.consultarRegistro( credencial.getNombreUsuario(), credencial.getContrasena() );
+            FacesContext context = getCurrentInstance();
+            context.getExternalContext().invalidateSession();
+            return "FinSesionIH?faces-redirect=true";
         }
         catch ( PersistenceException e ) {
-        	return "ErrorFinSesionIH?faces-redirect=true";
+            return "ErrorFinSesionIH?faces-redirect=true";
         }
+    }
+    
+    /**
+     * Devuelve la lista de preguntas de la base de datos.
+     * @return <code>List<Pregunta></code> - La lista de preguntas de la base de datos.
+     */    
+    public List<Pregunta> darPreguntas() {
+        return controladorJPA.darPreguntas();
+    }
+    
+    /**
+     * Devuelve la información de un usuario a partir de su llave promaria.
+     * @param idUsuario - La llave primaria del usuario.
+     * @return <code>Usuario</code> - La información del usuario.
+     */    
+    public Usuario darUsuario( Integer idUsuario ) {
+        return controladorJPA.darUsuario( idUsuario );
+    }
+    
+    /**
+     * Establece la pregunta actual a responder.
+     * @param idPregunta - La llave primaria de la pregunta actual.
+     * @return <code>String</code> - La direccion de la interfaz para responder.
+     */
+    public String establecerPregunta( Integer idPregunta ) {
+        Pregunta p = new Pregunta();
+        p.setIdPregunta( idPregunta );
+        FacesContext context = getCurrentInstance();
+        context.getExternalContext().getSessionMap().put( "pregunta", p );
+        return "AgregaRespuestaIH?faces-redirect=true";
+    }
+    
+    /**
+     * Establece la pregunta de la que se desea conocer sus respuestas.
+     * @param idPregunta- La llave primaria de la pregunta.
+     * @return <code>String</code> - La direccion de la interfaz para visualizar las respuestas.
+     */
+    public String verRespuestasPregunta( Integer idPregunta ) {
+        Pregunta p = new Pregunta();
+        p.setIdPregunta( idPregunta );
+        FacesContext context = getCurrentInstance();
+        context.getExternalContext().getSessionMap().put( "pregunta", p );
+        return "VerRespuestasIH?faces-redirect=true";
+    }
+    
+    /**
+     * Devuelve la lista de respuestas de una pregunta.
+     * @return <code>List<Respuesta></code> - La lista de respuestas de la pregunta.
+     */    
+    public List<Respuesta> darRespuestas( Integer idPregunta ) {
+        return controladorJPA.darRespuestas( idPregunta );
     }
 }

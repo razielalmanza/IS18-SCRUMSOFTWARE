@@ -1,12 +1,22 @@
 package com.mx.fciencias.scrumsoftware.vista;
 
+import java.util.Date;
+
+/**
+ *  La clase <code>ResgistroIH</code>.
+ *
+ * Creado y/o modificado: martes 27 de marzo de 2018.
+ *
+ * @author <a href="mailto:"></a>
+ * @version 1.1
+ */
 public class RegistroIH {
     
     private String usuario;
     private String contraseña;
     private String confirmacionContraseña;
     private String correo;
-    private java.util.Date fechaNac;
+    private Date fechaNac;
     private String genero;
     
     public String getCorreo() {
@@ -17,11 +27,11 @@ public class RegistroIH {
         this.correo = correo;
     }
 
-    public java.util.Date getFechaNac() {
+    public Date getFechaNac() {
         return fechaNac;
     }
 
-    public void setFechaNac(java.util.Date fechaNac) {
+    public void setFechaNac(Date fechaNac) {
         this.fechaNac = fechaNac;
     }
 

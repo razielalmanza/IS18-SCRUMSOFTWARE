@@ -1,7 +1,9 @@
 <ui:composition template="/WEB-INF/facelets/templates/layout.xhtml"
                 xmlns="http://www.w3.org/1999/xhtml"
                 xmlns:h="http://xmlns.jcp.org/jsf/html"
-                xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:p="http://primefaces.org/ui">
     
     <ui:define name="content">
         <div class="jumbotron" style="background-color: rgb( 0, 61, 93 );">
@@ -14,29 +16,81 @@
                        el Servicio Social, las Opciones de Titulación correspondientes a cada licenciatura, etc.
                     </p>
                 </div>
-                <div class="alert alert-danger" role="alert">
-                    <p align="center">
-                        ¡Es necesario iniciar sesión para publicar preguntas y responder a preguntas ya publicadas!
-                    </p>
-                </div>
             </div>
         </div>
         
         <div class="jumbotron">
             <div class="container">
-                <h1 class="display-3" align="center" >Preguntas y Respuestas</h1>
+                <h1 class="display-3" align="center" >Discusión General</h1>
                 <p>
-                    Contenido con botones activados.
-                    <h:form id="myForm" class="form-inline my-2 my-lg-0">
+                    <h:form id="Preguntar" class="form-inline my-2 my-lg-0">
                         <h:commandButton action="CreaPreguntaIH?faces-redirect=true"
                                          value="Hacer Pregunta"
-                                         class="btn btn-outline-primary"/>
-                        <h:commandButton action="AgregaRespuestaIH?faces-redirect=true"
-                                         value="Hacer Respuesta"
-                                         class="btn btn-outline-primary"/>
+                                         class="btn btn-warning"/>
                     </h:form>
                 </p>
             </div>
+            <h:dataTable value="#{sesion.darPreguntas()}"
+                         var="pregunta" 
+                         styleClass="order-table"
+                         headerClass="order-table-header"
+                         rowClasses="order-table-odd-row,order-table-even-row">
+                <f:facet name="header">
+                    Preguntas de los usuarios
+                </f:facet>
+                
+                <h:column>
+                    <f:facet name="header">
+                        Título
+                    </f:facet>
+                    <h:outputText value="#{pregunta.titulo}" />
+                </h:column>
+                
+                <h:column>
+                    <f:facet name="header">
+                        Contenido
+                    </f:facet>
+                    <h:outputText value="#{pregunta.contenido}" />
+                </h:column>
+                
+                <h:column>
+                    <f:facet name="header">
+                        Autor
+                    </f:facet>
+                    <h:outputText value="#{sesion.darUsuario( pregunta.idUsuario ).getNombreUsuario()}" />
+                </h:column>
+                
+                <h:column>
+                    <f:facet name="header">
+                        Fecha y hora de creación
+                    </f:facet>
+                    <h:outputText value="#{pregunta.fechaPregunta}" />
+                </h:column>
+                
+                <h:column>
+                    <f:facet name="header">
+                    </f:facet>
+                    <p>
+                        <h:form id="Ver" class="form-inline my-2 my-lg-0">
+                            <h:commandButton action="#{sesion.verRespuestasPregunta( pregunta.idPregunta )}"
+                                             value="Ver respuestas"
+                                             class="btn btn-info"/>
+                        </h:form>
+                    </p>
+                </h:column>
+                
+                <h:column>
+                    <f:facet name="header"> 
+                    </f:facet>
+                    <p>
+                        <h:form id="Responder" class="form-inline my-2 my-lg-0">
+                            <h:commandButton action="#{sesion.establecerPregunta( pregunta.idPregunta )}"
+                                             value="Responder"
+                                             class="btn btn-dark"/>
+                        </h:form>
+                    </p>
+                </h:column>
+            </h:dataTable>
         </div>
         
         <div class="jumbotron" style="background-color: rgb( 218, 165, 32 );">

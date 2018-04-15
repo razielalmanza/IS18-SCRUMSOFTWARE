@@ -2,19 +2,18 @@ package com.mx.fciencias.scrumsoftware;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- *  La clase <code>Servlet/code> define objetos para utilizar servlets en la apicacion.
+ *  La clase <code>Servlet</code> define objetos para utilizar servlets en la apicacion.
  *
  * Modificado: martes 27 de marzo de 2018.
  *
  * @author <a href="mailto:luis_lazaro@ciencias.unam.mx">Jose Luis Vazquez Lazaro</a>
- * @version 1.0
+ * @version 1.1
  */
 @SuppressWarnings( "serial" )
 public class Servlet extends HttpServlet {

@@ -7,7 +7,7 @@ package com.mx.fciencias.scrumsoftware.vista;
  * Modificado: martes 27 de marzo de 2018.
  *
  * @author <a href="mailto:luis_lazaro@ciencias.unam.mx">Jose Luis Vazquez Lazaro</a>
- * @version 1.0
+ * @version 1.1
  */
 public class InicioSesionIH {
 
@@ -41,7 +41,6 @@ public class InicioSesionIH {
     public String getContrasena() {
         return contrasena;
     }
-
 
     /**
      * Cambia la contraseña de usuario de este objeto por la que se pasa como parametro.

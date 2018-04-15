@@ -18,13 +18,12 @@ import javax.persistence.PersistenceException;
 import static javax.faces.context.FacesContext.getCurrentInstance;
 
 /**
- *  La clase <code>Sesion</code> define objetos que permiten manejar la sesion de un
- * usuario registrado en el sistema a partir de su credencial de usuario.
+ *  La clase <code>CrearPregunta</code> 
  *
- * Modificado: martes 27 de marzo de 2018.
+ * Creado o modificado: martes 27 de marzo de 2018.
  *
  * @author <a href="mailto:luis_lazaro@ciencias.unam.mx">Jose Luis Vazquez Lazaro</a>
- * @version 1.5
+ * @version 1.1
  */
 @ManagedBean
 @SessionScoped
@@ -56,28 +55,40 @@ public class CreaPregunta {
     }
 
     // Metodos de implementacion.   
-    public void subir( String titulo, String contenido, Integer idUsuario ) {
-        Pregunta p = new Pregunta( titulo, contenido, idUsuario );
-        controladorJPA.subirPregunta( p );
+    public String subir( String titulo, String contenido, Integer idUsuario ) {
+        try {
+            Pregunta p = new Pregunta( titulo, contenido, idUsuario );
+            controladorJPA.subirPregunta( p );
+            return "CreaPreguntaExitosoIH?faces-redirect=true";
+        }
+        catch ( PersistenceException e ) {
+        	return "ErrorFinSesionIH?faces-redirect=true";
+        }
+
     }
     
     public String subirPregunta() { 
         String titulo = pregunta.getTitulo();
         String contenido = pregunta.getContenido();
-        //InicioSesionIHBean b = new InicioSesionIHBean();
-        //Integer idUsuario = b.getUsuario().getIdUsuario();
         FacesContext context = getCurrentInstance();
         Credencial c = ( Credencial ) context.getExternalContext().getSessionMap().get( "usuario" );
         Integer idUsuario = c.getIdUsuario();
-        if ( titulo.isEmpty() || contenido.isEmpty() ) {
+        if ( titulo.isEmpty() ) {
             pregunta = null;
-            return "CreaPreguntaFalloIH?faces-redirect=true";
+            FacesContext.getCurrentInstance().addMessage( null, new FacesMessage( FacesMessage.SEVERITY_ERROR, "La pregunta debe tener un título.", "" ) );
+            return null;
         }
         else {
-            subir( titulo, contenido, idUsuario );
-            pregunta = null;
-            return "CreaPreguntaExitoIH?faces-redirect=true";
+            if( contenido.isEmpty() ) {
+                pregunta = null;
+                FacesContext.getCurrentInstance().addMessage( null, new FacesMessage( FacesMessage.SEVERITY_ERROR, "La pregunta debe tener un contenido.", "" ) );
+                return null;
+            }
+            else {
+                String s = subir( titulo, contenido, idUsuario );
+                pregunta = null;
+                return s;
+            }
         }
-    }
-            
+    }           
 }

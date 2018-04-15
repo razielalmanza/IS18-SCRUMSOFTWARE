@@ -16,6 +16,7 @@ import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.sql.Date;
+
 /**
  *  Definicion de las consultas necesarias para validar el registro de un usuario
  */
@@ -27,9 +28,9 @@ import java.sql.Date;
 /**
  *  La clase <code>Pregunta</code>.
  *
- * Modificado: martes 27 de marzo de 2018.
+ * Creado y/o modificado: martes 27 de marzo de 2018.
  *
- * @author <a href="mailto:luis_lazaro@ciencias.unam.mx">Jose Luis Vazquez Lazaro</a>
+ * @author <a href="mailto:luis_lazaro">Jose Luis Vazquez Lazaro</a>
  * @version 1.2
  */
 public class Pregunta implements Serializable {
@@ -87,6 +88,14 @@ public class Pregunta implements Serializable {
 
     public void setTitulo( String nuevoTitulo ) {
         this.titulo = nuevoTitulo;
+    }
+    
+    public String getContenido() {
+        return contenido;
+    }
+
+    public void setContenido( String nuevoContenido ) {
+        this.contenido = nuevoContenido;
     }
 
     public Timestamp getFechaPregunta() {

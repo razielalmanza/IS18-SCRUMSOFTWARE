@@ -2,7 +2,7 @@ package com.mx.fciencias.scrumsoftware.modelo;
 
 import com.mx.fciencias.scrumsoftware.modelo.exceptions.NonexistentEntityException;
 import java.io.Serializable;
-import java.util.List;
+import java.util.*;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityNotFoundException;
@@ -15,10 +15,10 @@ import javax.persistence.criteria.Root;
  *  La clase <code>ConexionBD</code> define objetos que permiten manejar el acceso a la
  * base de datos del sistema utilizando JPA.
  *
- * Modificado: martes 27 de marzo de 2018.
+ * Creado y/o modificado: martes 27 de marzo de 2018.
  *
  * @author <a href="mailto:luis_lazaro@ciencias.unam.mx">Jose Luis Vazquez Lazaro</a>
- * @version 1.2
+ * @version 1.6
  */
 public class ConexionBD implements Serializable {
 
@@ -243,7 +243,21 @@ public class ConexionBD implements Serializable {
         }
         return ( Usuario ) q.getSingleResult();
     }
-    
+     
+    /**
+     * Devuelve la informacion de un usuario a partir de su llave primaria.
+     * @param idUsuario - EL nombre de usuario.
+     * @return <code>Usuario</code> - La información del usuario.
+     */
+     public Usuario darUsuario( Integer idUsuario ) {
+        EntityManager entidad = getEntityManager();
+        TypedQuery<Usuario> q = entidad.createNamedQuery( "Usuario.findById", Usuario.class ).setParameter( "idUsuario", idUsuario );
+        if ( q.getResultList().isEmpty() ) {
+            return null;
+        }
+        return ( Usuario ) q.getSingleResult();
+    }
+     
     /**
      * Registra
      * @param user - EL objeto de tipo Usuario (entidad) a persistir
@@ -280,11 +294,22 @@ public class ConexionBD implements Serializable {
         entidad.getTransaction().commit();
     }
     
-    public void registroRespuesta(Respuesta resp) {
+    public List<Pregunta> darPreguntas() {
+        EntityManager entidad = getEntityManager();
+        Query preguntas = entidad.createNamedQuery( "Pregunta.findAll", Pregunta.class );
+        return preguntas.getResultList();
+    }
+    
+    public void enviarRespuesta( Respuesta respuesta ) {
         EntityManager entidad = getEntityManager();
         entidad.getTransaction().begin();
-        entidad.persist(resp);
+        entidad.persist( respuesta );
         entidad.getTransaction().commit();
-       
+    }
+    
+    public List<Respuesta> darRespuestas( Integer idPregunta ) {
+        EntityManager entidad = getEntityManager();
+        Query respuestas = entidad.createNamedQuery( "Respuesta.findAll", Respuesta.class ).setParameter( "idPregunta", idPregunta );;
+        return respuestas.getResultList();
     }
 }

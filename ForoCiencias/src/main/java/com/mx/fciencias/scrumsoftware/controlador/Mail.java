@@ -1,15 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.mx.fciencias.scrumsoftware.controlador;
-
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 
 import java.util.Properties;
 import javax.mail.Message;
@@ -22,11 +11,13 @@ import javax.mail.internet.MimeMessage;
 import org.apache.commons.codec.binary.Base64;
 
 /**
- * A singleton class for sending mail messages.
- * @author raziel
+ *  La clase <code>Mail</code> 
+ *
+ * Creado o modificado: martes 27 de marzo de 2018.
+ *
+ * @author <a href="mailto:"></a>
+ * @version 1.1
  */
-
-
 public class Mail{
     
      public static String toToken(String text) {
@@ -63,7 +54,7 @@ public class Mail{
               
             String contenido = "<a href="
                     + "http://localhost:8080/ForoCiencias/faces/ActivacionUsuarioIH.xhtml?token="
-                    + toToken(token) + ">"
+                    + token + ">"
                  + "Haga click aquí para activar tu cuenta.</a> <br> Ingresa el siguiente token: </br><b>"
                  + toToken(token) + " </b>";
      
