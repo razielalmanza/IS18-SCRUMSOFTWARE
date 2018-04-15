@@ -1,0 +1,137 @@
+<ui:composition template="/WEB-INF/facelets/templates/layout.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:p="http://primefaces.org/ui">
+    
+    <ui:define name="content">
+        <div class="jumbotron" style="background-color: rgb( 0, 61, 93 );">
+            <div class="container">
+                <h1 class="display-3" align="center" style="color: rgb( 255, 255, 255 );"><br>¡Bienvenido!</br></h1>
+                <div class="alert alert-primary" role="alert">
+                    <p align="justify">
+                       En este sitio, los integrantes de la comunidad de la Facultad de Ciencias podrán aportar información y
+                       consultar dudas sobre los trámites más importantes para el egreso exitoso de las carreras, como son:
+                       el Servicio Social, las Opciones de Titulación correspondientes a cada licenciatura, etc.
+                    </p>
+                </div>
+                <div class="alert alert-danger" role="alert">
+                    <p align="center">
+                        ¡Es necesario iniciar sesión para publicar preguntas y responder a preguntas ya publicadas!
+                    </p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="jumbotron">
+            <div class="container">
+                <h1 class="display-3" align="center" >Discusión General</h1>
+                <p>
+                    <h:form id="Preguntar" class="form-inline my-2 my-lg-0">
+                        <h:commandButton value="Hacer Pregunta"
+                                         disabled="true"
+                                         class="btn btn-warning"/>
+                    </h:form>
+                </p>
+            </div>
+            <h:dataTable value="#{sesion.darPreguntas()}"
+                         var="pregunta" 
+                         styleClass="order-table"
+                         headerClass="order-table-header"
+                         rowClasses="order-table-odd-row,order-table-even-row">
+                <f:facet name="header">
+                    Preguntas de los usuarios
+                </f:facet>
+                
+                <h:column>
+                    <f:facet name="header">
+                        Título
+                    </f:facet>
+                    <h:outputText value="#{pregunta.titulo}" />
+                </h:column>
+                
+                <h:column>
+                    <f:facet name="header">
+                        Contenido
+                    </f:facet>
+                    <h:outputText value="#{pregunta.contenido}" />
+                </h:column>
+                
+                <h:column>
+                    <f:facet name="header">
+                        Autor
+                    </f:facet>
+                    <h:outputText value="#{sesion.darUsuario( pregunta.idUsuario ).getNombreUsuario()}" />
+                </h:column>
+                
+                <h:column>
+                    <f:facet name="header">
+                        Fecha y hora de creación
+                    </f:facet>
+                    <h:outputText value="#{pregunta.fechaPregunta}" />
+                </h:column>
+                
+                <h:column>
+                    <f:facet name="header">
+                    </f:facet>
+                    <p>
+                        <h:form id="Ver" class="form-inline my-2 my-lg-0">
+                            <h:commandButton action="#{sesion.verRespuestasPregunta( pregunta.idPregunta )}"
+                                             value="Ver respuestas"
+                                             class="btn btn-info"/>
+                        </h:form>
+                    </p>
+                </h:column>
+                
+                <h:column>
+                    <f:facet name="header"> 
+                    </f:facet>
+                    <p>
+                        <h:form id="Responder" class="form-inline my-2 my-lg-0">
+                            <h:commandButton value="Responder"
+                                             disabled="true"
+                                             class="btn btn-dark"/>
+                        </h:form>
+                    </p>
+                </h:column>
+            </h:dataTable>
+        </div>
+        
+        <div class="jumbotron" style="background-color: rgb( 218, 165, 32 );">
+            <div class="container">
+                <p align="center">Este sitio fue desarollado por</p>
+                <center>
+                    <img src="imágenes/logoSS.png" width="400" height="100" />
+                </center>
+                <br></br>
+                <p align="center">integrado por:</p>
+                <div class="alert alert-light" role="alert">
+                    <center>
+                        <b style="color: rgb( 0, 0, 0 );">Almanza Ibarra Raziel</b> <i>( Representante de Colaboración y Desarrollador )</i>
+                    </center>
+                </div>
+                <div class="alert alert-light" role="alert">
+                    <center>
+                        <b style="color: rgb( 0, 0, 0 );">Lezama Hernández María Ximena</b> <i>( Representante de Equipo y Desarrolladora )</i>
+                    </center>
+                </div>
+                <div class="alert alert-light" role="alert">
+                    <center>
+                        <b style="color: rgb( 0, 0, 0 );">Olea Olvera Marco Iván</b> <i>( Representante Técnico y Desarrollador )</i>
+                    </center>
+                </div>
+                <div class="alert alert-light" role="alert">
+                    <center>
+                        <b style="color: rgb( 0, 0, 0 );">Vázquez Lázaro José Luis</b> <i>( Representante de Calidad y Desarrollador )</i>
+                    </center>
+                </div>
+                <div class="alert alert-light" role="alert">
+                    <center>
+                        <b style="color: rgb( 0, 0, 0 );">Xie Yuguo</b> <i>( Representante de Colaboración y Desarrollador )</i>
+                    </center>
+                </div>
+            </div>
+        </div>
+    </ui:define>
+</ui:composition>
