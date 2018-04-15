@@ -1,22 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:ui="http://java.sun.com/jsf/facelets">
-    
     <head>
         <title>Registro Fallido</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     </head>
-    
     <body>
-        <h1>Registro fallido</h1> <br/>
-        <p style="color:red;">Verifica que el correo sea del dominio @ciencias.unam.mx y/o que tus contraseñas sean iguales.</p>
-        <h:form id="myForm" class="form-inline my-2 my-lg-0">
-            <h:commandButton action="RegistroIH?faces-redirect=true"
-                             value="Volver a intentarlo >>"
-                             class="btn btn-outline-primary"/>
-        </h:form>       
+        <div>Tu registro falló, verifica que las contraseñas no sean iguales y tu correo sea de dominio @ciencias.</div>
+       
+         <div>También tu correo y usuario debe ser único.</div>
+       <div>
+             <p>Regresar a la <h:link value="página de registro" outcome="RegistroIH?faces-redirect=true" /> para voler a intentar.</p> 
+        </div>
+       
     </body>
 </html>

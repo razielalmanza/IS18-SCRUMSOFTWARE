@@ -9,18 +9,12 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 import javax.persistence.EntityManagerFactory;
-import java.util.*;
-import javax.activation.*;
 import javax.faces.application.FacesMessage;
 import org.apache.commons.codec.binary.Base64;
 
 /**
- *  La clase <code>ActivacionUsuario</code>.
  *
- * Creado o modificado: martes 27 de marzo de 2018.
- *
- * @author <a href="mailto:"></a>
- * @version 1.1
+ * @author razie
  */
 @ManagedBean
 @RequestScoped
@@ -65,4 +59,5 @@ public class ActivacionUsuario {
         }
         return null;
     }
+    
 }

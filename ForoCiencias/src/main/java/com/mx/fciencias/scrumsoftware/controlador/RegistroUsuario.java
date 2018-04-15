@@ -1,32 +1,24 @@
 package com.mx.fciencias.scrumsoftware.controlador;
 
 import java.util.Locale;
+
 import com.mx.fciencias.scrumsoftware.modelo.ProveedorEntidadPersistencia;
 import com.mx.fciencias.scrumsoftware.modelo.Usuario;
 import com.mx.fciencias.scrumsoftware.modelo.ConexionBD;
 import com.mx.fciencias.scrumsoftware.vista.RegistroIH;
 import javax.persistence.EntityManagerFactory;
-import java.util.Date;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 import java.util.regex.Pattern;
 import java.text.ParseException;
 import java.util.regex.Matcher;
-import java.text.SimpleDateFormat;
-import java.util.Properties;
-import javax.mail.*;
-import javax.mail.internet.*;
-import javax.servlet.http.HttpServletRequest;
+import javax.faces.application.FacesMessage;
 
 /**
- *  La clase <code>RegistroUsuario</code> 
- *
- * Creado o modificado: martes 27 de marzo de 2018.
- *
- * @author <a href="mailto:"></a>
- * @version 1.3
- */
+ ,*
+ ,* @author raziel
+ ,*/
 @ManagedBean
 @RequestScoped
 public class RegistroUsuario {
@@ -71,13 +63,9 @@ public class RegistroUsuario {
     }
 
    // Recibe los parametros del usuario a crear en la tabla
-   public void inserta(String usuario,String contraseña,String fecha,String mail,String genero) throws ParseException{
-       // Crea la fecha de nacimiento TEMPORAL
-       String fechaTemp = "2018-04-23";
-       Date d = new SimpleDateFormat("yyyy-MM-dd").parse(fechaTemp);
-       java.sql.Date sqlDate = new java.sql.Date(d.getTime()); 
-       // Crea una nueva credencial que persistirá
-       Usuario cred = new Usuario(usuario,mail,contraseña,genero,sqlDate);
+   public void inserta(String usuario,String contraseña,java.sql.Date fecha,String mail,String genero) throws ParseException{
+        // Crea una nueva credencial que persistirá
+       Usuario cred = new Usuario(usuario,mail,contraseña,genero,fecha);
        cred.setNombreUsuario(usuario);
        controladorJPA.registroUsuario(cred);
    }
@@ -87,12 +75,13 @@ public class RegistroUsuario {
         m.sendMail(usuario,"Confirmación cuenta ForoCiencias",mail);
    }
     
-    public String addUser() throws ParseException { 
+   public String addUser() throws ParseException { 
             String usuario = user.getUsuario();
             String contraseña = user.getContraseña();
-            String fecha = user.getFechaNac();
+            java.sql.Date fechaA = new java.sql.Date(user.getFechaNac().getTime());     // Crea el objeto date sql con el de tipo util
             String mail = user.getCorreo();
             String genero = user.getGenero();
+            
         if (!(emailValid(mail)) || !contraseña.equals(user.getConfirmacionContraseña())) {
             return "RegistroFallidoIH?faces-redirect=true";
         }else {
@@ -100,11 +89,12 @@ public class RegistroUsuario {
                 user = null;
                 return "RegistroFallidoIH?faces-redirect=true";
                }else{
-                inserta(usuario,contraseña,fecha,mail,genero);
-               enviaCorreo(usuario,mail);
+                inserta(usuario,contraseña,fechaA,mail,genero);
+                enviaCorreo(usuario,mail);
                 user = null;     
                 return "RegistroExitosoIH?faces-redirect=true";
             }
-        }       
+        }
+           
     }
 }
