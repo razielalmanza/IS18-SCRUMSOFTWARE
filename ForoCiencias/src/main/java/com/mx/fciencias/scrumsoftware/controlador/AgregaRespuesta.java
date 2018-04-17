@@ -76,13 +76,11 @@ public class AgregaRespuesta {
         Integer idPregunta = p.getIdPregunta();
         Integer idUsuario = c.getIdUsuario();
         if ( contenido.isEmpty() ) {
-            respuesta = null;
             FacesContext.getCurrentInstance().addMessage( null, new FacesMessage( FacesMessage.SEVERITY_ERROR, "La respuesta no puede ser vacía.", "" ) );
             return null;
         }
         else {
             String s = enviar( contenido, idPregunta, idUsuario );
-            respuesta = null;
             return s;
         }
     }      
