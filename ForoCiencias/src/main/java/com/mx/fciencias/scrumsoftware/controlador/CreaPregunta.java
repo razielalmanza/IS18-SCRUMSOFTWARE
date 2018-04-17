@@ -62,31 +62,29 @@ public class CreaPregunta {
             return "CreaPreguntaExitosoIH?faces-redirect=true";
         }
         catch ( PersistenceException e ) {
-        	return "ErrorFinSesionIH?faces-redirect=true";
+        	return "CreaPreguntaFallidoIH?faces-redirect=true";
         }
 
     }
     
     public String subirPregunta() { 
         String titulo = pregunta.getTitulo();
+        System.out.println( "punto de prueba" );
         String contenido = pregunta.getContenido();
         FacesContext context = getCurrentInstance();
         Credencial c = ( Credencial ) context.getExternalContext().getSessionMap().get( "usuario" );
         Integer idUsuario = c.getIdUsuario();
         if ( titulo.isEmpty() ) {
-            pregunta = null;
             FacesContext.getCurrentInstance().addMessage( null, new FacesMessage( FacesMessage.SEVERITY_ERROR, "La pregunta debe tener un título.", "" ) );
             return null;
         }
         else {
             if( contenido.isEmpty() ) {
-                pregunta = null;
                 FacesContext.getCurrentInstance().addMessage( null, new FacesMessage( FacesMessage.SEVERITY_ERROR, "La pregunta debe tener un contenido.", "" ) );
                 return null;
             }
             else {
                 String s = subir( titulo, contenido, idUsuario );
-                pregunta = null;
                 return s;
             }
         }

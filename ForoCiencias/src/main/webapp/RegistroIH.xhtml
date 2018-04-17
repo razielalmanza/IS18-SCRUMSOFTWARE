@@ -4,57 +4,57 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:p="http://primefaces.org/ui">
-    
-    <h:head>
-        <title>RegistroIH</title>
-    </h:head>
-    
-    <h:body>
-        <h1>Registrar</h1> <br/>
-        <h:form id="RegistroIH">
-            <table>
-                <tr>
-                    <td><p:messages id="messages" autoUpdate="true" closable="true" /></td>
-                </tr>
-            </table>
-            <table>
-                <tr>
-                    <td>Nombre de usuario</td>
-                    <td><p:inputText value="#{registroUsuario.user.usuario}" required="true" id="Nombre" size="10"/></td>
-                </tr>
-                <tr>
-                    <td>Contraseña</td>
-                    <td><p:password value="#{registroUsuario.user.contraseña}" required="true" feedback="true" id="Contraseña"/></td>
-                </tr>
-                <tr>
-                    <td>Confirmar contraseña</td>
-                    <td><p:password value="#{registroUsuario.user. confirmacionContraseña}" required="true" feedback="true" id="Confirmación"/></td>
-                </tr>
-                <tr>
-                    <td>Correo @ciencias.unam.mx</td>
-                    <td><p:inputText value="#{registroUsuario.user.correo}" required="true" id="Correo"/></td>
-                </tr>
-                <tr>
-                    <td>Fecha de nacimiento</td>
-                    <td><p:calendar value="#{registroUsuario.user.fechaNac}" required="true" id="Fecha" pattern="yyyy-MM-dd"/></td>
-                </tr>
-                <tr>
-                    <td>Género</td>
-                    <td><p:selectOneListbox value="#{registroUsuario.user.genero}" required="true" id="Género">
-                            <f:selectItem itemLabel="Hombre" itemValue="H" />
-                            <f:selectItem itemLabel="Mujer" itemValue="M" />
-                        </p:selectOneListbox>
-                    </td>
-                </tr> 
-                <tr>    
-                    <td colspan="2" align="center">
-                        <p:commandButton action="#{registroUsuario.addUser}" value="Registrar" />
-                        <p:commandButton value="Limpiar campos" update="RegistroIH" process="@this"  >
-                            <p:resetInput target="RegistroIH" />
-                        </p:commandButton>
-                    </td>
-                </tr>
-            </table>
-        </h:form>
-    </h:body>
+  <h:head>
+    <title>RegistroIH</title>
+  </h:head>
+  <h:body>
+
+    <h1>RegistroIH</h1> <br/>
+
+    <h:form id="RegistroIH">
+      <table>
+        <tr>
+          <td><p:messages id="messages" autoUpdate="true" closable="true" /></td>
+        </tr>
+      </table>
+      <table>
+        <tr>
+          <td>Nombre de usuario</td>
+          <td><p:inputText value="#{registroUsuario.user.usuario}" required="true" id="Username" size="10"/></td>
+        </tr>
+        <tr>
+          <td>Contraseña</td>
+          <td><p:password value="#{registroUsuario.user.contraseña}" required="true" feedback="true" id="Password"/></td>
+        </tr>
+        <tr>
+          <td>Confirmar contraseña</td>
+          <td><p:password value="#{registroUsuario.user. confirmacionContraseña}" required="true" feedback="true" id="ConfirmPassword"/></td>
+        </tr>
+         <tr>
+          <td>Correo @ciencias.unam.mx</td>
+          <td><p:inputText value="#{registroUsuario.user.correo}" required="true" id="Email"/></td>
+        </tr>
+        <tr>
+          <td>Fecha de Nacimiento</td>
+          <td><p:calendar value="#{registroUsuario.user.fechaNac}" required="true" pattern="yyyy-MM-dd"/></td>
+        </tr>
+         <tr>
+          <td>Género</td>
+          <td><p:selectOneListbox value="#{registroUsuario.user.genero}" required="true" id="gender">
+             <f:selectItem itemLabel="Hombre" itemValue="H" />
+             <f:selectItem itemLabel="Mujer" itemValue="M" />
+             </p:selectOneListbox>
+          </td>
+        </tr> 
+        <tr>    
+          <td colspan="2" align="center">
+            <p:commandButton action="#{registroUsuario.addUser}" value="Registrar"/>
+            <p:commandButton value="Limpiar campos" update="RegistroIH" process="@this"  >
+              <p:resetInput target="RegistroIH" />
+            </p:commandButton>
+          </td>
+        </tr>
+      </table>
+    </h:form>
+  </h:body>
 </html>

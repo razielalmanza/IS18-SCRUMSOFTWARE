@@ -46,7 +46,7 @@
                     <f:facet name="header">
                         Autor
                     </f:facet>
-                    <h:outputText value="#{inicioSesionIHBean.usuario.nombreUsuario}" />
+                    <h:outputText value="#{sesion.darUsuario( respuesta.idUsuario ).getNombreUsuario()}" />
                 </h:column>
                 
                 <h:column>

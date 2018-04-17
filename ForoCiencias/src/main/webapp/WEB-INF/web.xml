@@ -32,6 +32,10 @@
         <welcome-file>PrincipalVisitanteIH.xhtml</welcome-file>
     </welcome-file-list>
     
+    <error-page>
+        <location>/ErrorIH.xhtml</location>
+    </error-page>
+    
     <!-- web fonts -->
     <mime-mapping>
         <extension>eot</extension>
