@@ -62,7 +62,7 @@ public class CreaPregunta {
             return "CreaPreguntaExitosoIH?faces-redirect=true";
         }
         catch ( PersistenceException e ) {
-        	return "CreaPreguntaFallidoIH?faces-redirect=true";
+        	return "ErrorIH?faces-redirect=true";
         }
 
     }

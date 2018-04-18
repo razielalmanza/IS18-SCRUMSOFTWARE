@@ -1,4 +1,3 @@
-
 package com.mx.fciencias.scrumsoftware.controlador;
 
 import java.util.Properties;
@@ -19,10 +18,7 @@ import org.apache.commons.codec.binary.Base64;
 - * @author <a href="mailto:razielmcr1@ciencias.unam.mx"></a>
 - * @version 1.1
   */
-
-
 public class Mail{
-    
     
     /**
      * Envia correo al usuario.
@@ -58,9 +54,7 @@ public class Mail{
                         return new PasswordAuthentication(Username, PassWord);
                     }
                 });
- 
         try {
- 
             Message message = new MimeMessage(session);
             message.setFrom(new InternetAddress(Username));
             message.setRecipients(Message.RecipientType.TO,

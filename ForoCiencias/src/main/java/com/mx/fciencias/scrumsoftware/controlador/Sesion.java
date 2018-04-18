@@ -85,20 +85,20 @@ public class Sesion {
         boolean logged = controladorJPA.estaRegistrado( credencial.getNombreUsuario(), credencial.getContrasena() );
         Credencial l = controladorJPA.consultarRegistro( credencial.getNombreUsuario(), credencial.getContrasena() );
         if ( logged ) {
-        	FacesContext context = getCurrentInstance();
-        	context.getExternalContext().getSessionMap().put( "usuario", l );
-        	intentos = 0;
-        	return "PrincipalUsuarioIH?faces-redirect=true";
+            FacesContext context = getCurrentInstance();
+            context.getExternalContext().getSessionMap().put( "usuario", l );
+            intentos = 0;
+            return "PrincipalUsuarioIH?faces-redirect=true";
         }
         else {
-        	intentos++;
-        	if ( intentos == 3 ) {
-        		return "ErrorInicioSesionIH?faces-redirect=true";
-        	}
-        	else {
-        		FacesContext.getCurrentInstance().addMessage( null, new FacesMessage( FacesMessage.SEVERITY_ERROR, "Nombre de usuario y/o contraseña inválidos, o la cuenta no ha sido verificada.\n Inténtelo nuevamente.", "" ) );
-        		return null;
-        	}
+            intentos++;
+            if ( intentos == 3 ) {
+                return "ErrorInicioSesionIH?faces-redirect=true";
+            }
+            else {
+                FacesContext.getCurrentInstance().addMessage( null, new FacesMessage( FacesMessage.SEVERITY_ERROR, "Nombre de usuario y/o contraseña inválidos, o la cuenta no ha sido verificada.\n Inténtelo nuevamente.", "" ) );
+                return null;
+            }
         }
     }
     
@@ -114,7 +114,7 @@ public class Sesion {
             return "FinSesionIH?faces-redirect=true";
         }
         catch ( PersistenceException e ) {
-            return "ErrorFinSesionIH?faces-redirect=true";
+            return "ErrorIH?faces-redirect=true";
         }
     }
     

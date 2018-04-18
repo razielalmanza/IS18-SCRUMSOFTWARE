@@ -63,7 +63,7 @@ public class AgregaRespuesta {
             return "AgregaRespuestaExitosoIH?faces-redirect=true";
         }
         catch ( PersistenceException e ) {
-        	return "AgregaRespuestaFallidoIH?faces-redirect=true";
+        	return "ErrorIH?faces-redirect=true";
         }
 
     }

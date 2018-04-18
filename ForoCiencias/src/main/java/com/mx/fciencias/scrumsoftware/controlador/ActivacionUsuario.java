@@ -73,9 +73,7 @@ public class ActivacionUsuario {
         }else{
             FacesContext.getCurrentInstance().addMessage(null
                                                          , new FacesMessage(FacesMessage.SEVERITY_ERROR, "Este usuario no existe en la BD", ""));
-
         }
         return null;
-    }
-    
+    }  
 }

@@ -1,7 +1,6 @@
 package com.mx.fciencias.scrumsoftware.controlador;
 
 import java.util.Locale;
-
 import com.mx.fciencias.scrumsoftware.modelo.ProveedorEntidadPersistencia;
 import com.mx.fciencias.scrumsoftware.modelo.Usuario;
 import com.mx.fciencias.scrumsoftware.modelo.ConexionBD;
@@ -15,7 +14,7 @@ import java.text.ParseException;
 import java.util.regex.Matcher;
 
  /**
-- *  La clase <code>RegistroUsuario</code> 
+- *  La clase <code>RegistroUsuario</code>. 
 - *
 - * Creado o modificado: martes 27 de marzo de 2018.
 - *
@@ -125,7 +124,6 @@ public class RegistroUsuario {
                 user = null;     
                 return "RegistroExitosoIH?faces-redirect=true";
             }
-        }
-           
+        }    
     }
 }
