@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+    
+    <head>
+        <title>Registro Fallido</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    </head>
+    
+    <body>
+        <h1>Registro fallido</h1> <br/>
+        <p style="color:red;">Verifica que el correo sea del dominio @ciencias.unam.mx y/o que tus contraseñas sean iguales.</p>
+        <p style="color:red;">El correo y usuario deben ser únicos también.</p>
+        <h:form id="myForm" class="form-inline my-2 my-lg-0">
+            <h:commandButton action="RegistroIH?faces-redirect=true"
+                             value="Volver a intentarlo >>"
+                             class="btn btn-outline-primary"/>
+        </h:form>       
+    </body>
+</html>
