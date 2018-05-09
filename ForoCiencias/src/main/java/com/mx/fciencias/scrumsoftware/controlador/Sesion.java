@@ -88,7 +88,14 @@ public class Sesion {
             FacesContext context = getCurrentInstance();
             context.getExternalContext().getSessionMap().put( "usuario", l );
             intentos = 0;
-            return "PrincipalUsuarioIH?faces-redirect=true";
+            char rol = l.getAdministrador();
+            System.out.println( rol );
+            if ( rol == 'S' ) {
+                return "PrincipalAdministradorIH?faces-redirect=true";
+            }
+            else {
+                return "PrincipalUsuarioIH?faces-redirect=true";
+            }
         }
         else {
             intentos++;

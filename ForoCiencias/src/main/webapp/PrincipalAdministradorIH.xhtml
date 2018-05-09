@@ -16,17 +16,29 @@
                        el Servicio Social, las Opciones de Titulación correspondientes a cada licenciatura, etc.
                     </p>
                 </div>
-                <div class="alert alert-danger" role="alert">
-                    <p align="center">
-                        ¡Es necesario iniciar sesión para publicar preguntas y responder a preguntas ya publicadas!
-                    </p>
-                </div>
             </div>
         </div>
         
         <div class="jumbotron">
             <div class="container">
                 <h1 class="display-3" align="center" >Discusión General</h1>
+            </div>
+            <div>
+                <p>
+                    <h:form id="Preguntar" class="form-inline my-2 my-lg-0">
+                        <h:commandButton action="CreaPreguntaIH?faces-redirect=true"
+                                         value="Hacer Pregunta"
+                                         class="btn btn-warning"/>
+                    </h:form>
+                </p>
+            </div>
+            <div>
+                <p>
+                    <h:form id="Usuarios" class="form-inline my-2 my-lg-0">
+                        <h:commandButton value="Mostrar usuarios"
+                                         class="btn btn-dark"/>
+                    </h:form>
+                </p>
             </div>
             <h:dataTable value="#{sesion.darPreguntas()}"
                          var="pregunta" 
@@ -73,6 +85,18 @@
                             <h:commandButton action="#{sesion.verRespuestasPregunta( pregunta.idPregunta )}"
                                              value="Ver respuestas"
                                              class="btn btn-info"/>
+                        </h:form>
+                    </p>
+                </h:column>
+                
+                <h:column>
+                    <f:facet name="header"> 
+                    </f:facet>
+                    <p>
+                        <h:form id="Responder" class="form-inline my-2 my-lg-0">
+                            <h:commandButton action="#{sesion.establecerPregunta( pregunta.idPregunta )}"
+                                             value="Responder"
+                                             class="btn btn-dark"/>
                         </h:form>
                     </p>
                 </h:column>

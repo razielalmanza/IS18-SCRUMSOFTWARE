@@ -27,7 +27,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 				 @NamedQuery(name = "Credencial.findByPassword", query = "SELECT l FROM Credencial l WHERE l.contrasena = :contrasena" ) } )
 @NamedNativeQueries(value = { @NamedNativeQuery( name = "Credencial.canLogin", query = "SELECT modeloforo.verificar(?, ?)" ),
                               @NamedNativeQuery( name = "Credencial.findByUsuarioAndPassword",
-                                                 query = "SELECT idUsuario, nombreUsuario FROM modeloforo.usuario WHERE nombreusuario = ?1 AND contrasena = crypt(?2, contrasena)",
+                                                 query = "SELECT idUsuario, nombreUsuario, administrador FROM modeloforo.usuario WHERE nombreusuario = ?1 AND contrasena = crypt(?2, contrasena)",
 						 resultClass = Credencial.class ) } )
 
 /**
@@ -57,6 +57,10 @@ public class Credencial implements Serializable {
     @Basic(optional = false)
     @Column(nullable = false, length = 2147483647)
     private String contrasena;
+    /* Rol del usuario */
+    @Basic(optional = false)
+    @Column(nullable = false, length = 2147483647)
+    private char administrador;
 
     // Metodos constructores.
     /**
@@ -80,10 +84,11 @@ public class Credencial implements Serializable {
      * @param nombreUsuario - El nombre de usuario.
      * @param contrasena - La contraseña de usuario.
      */
-    public Credencial( Integer idUsuario, String nombreUusuario, String contrasena ) {
+    public Credencial( Integer idUsuario, String nombreUsuario, String contrasena ) {
         this.idUsuario = idUsuario;
         this.nombreUsuario = nombreUsuario;
         this.contrasena = contrasena;
+        this.administrador = 'N';
     }
 
     // Metodos de acceso y modificacion.
@@ -134,6 +139,22 @@ public class Credencial implements Serializable {
      */
     public void setContrasena( String nuevaContrasena ) {
         this.contrasena = nuevaContrasena;
+    }
+    
+    /**
+     * Devueleve el rol de este usuario.
+     * @return <code>char</code> - 'S' si el usuario es administrador, 'N' en otro caso.
+     */
+    public char getAdministrador() {
+        return administrador;
+    }
+
+    /**
+     * Cambia el rol del usuario.
+     * @param nuevoRol - El nuevo rol del usuario.
+     */
+    public void setAdministrador( char nuevoRol ) {
+        this.administrador = nuevoRol;
     }
 
     // Metodos de implementacion.

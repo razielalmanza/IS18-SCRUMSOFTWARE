@@ -26,7 +26,6 @@ public class ConexionBD implements Serializable {
     /* Entidad de persistencia */
     private EntityManagerFactory entidad = null;
     
-
     // Metodos constructores.
     /**
      * Permite crear un objeto de tipo <code>ConexionBD</code> a partir de una entidad de
@@ -53,7 +52,7 @@ public class ConexionBD implements Serializable {
      * sistema (idUsuario, nombreUsuario y contrasena).
      */
     public void crear( Credencial credencial ) {
-		EntityManager entidad = null;
+        EntityManager entidad = null;
         try {
             entidad = getEntityManager();
             entidad.getTransaction().begin();
@@ -205,14 +204,7 @@ public class ConexionBD implements Serializable {
         EntityManager entidad = getEntityManager();
         Query q = entidad.createNamedQuery( "Credencial.canLogin" ).setParameter( 1, nombreUsuario ).setParameter( 2, contrasena );
         boolean p =  ( boolean ) q.getSingleResult();
-        if ( p ) {
-        	System.out.println( "Si estas registrado y tu cuenta esta activada" );
-        }
-        else {
-        	System.out.println( "No estas registrado y tu cuenta no esta activada" );
-        }
-        
-        return ( boolean ) q.getSingleResult();
+        return p;
     }
 
     /**
@@ -237,7 +229,7 @@ public class ConexionBD implements Serializable {
      */
      public Usuario consultarRegistroUsuario( String nombreUsuario ) {
         EntityManager entidad = getEntityManager();
-        TypedQuery<Usuario> q = entidad.createNamedQuery( "Usuario.findByUsuario",Usuario.class ).setParameter("nombreUsuario", nombreUsuario);
+        TypedQuery<Usuario> q = entidad.createNamedQuery( "Usuario.findByUsuario", Usuario.class ).setParameter( "nombreUsuario", nombreUsuario );
         if ( q.getResultList().isEmpty() ) {
             return null;
         }
@@ -261,28 +253,26 @@ public class ConexionBD implements Serializable {
     /**
      * Registra
      * @param user - EL objeto de tipo Usuario (entidad) a persistir
-     * @param 
      * @return <code>void</code> -
      */
-    public void registroUsuario(Usuario user) {
+    public void registroUsuario( Usuario user ) {
         EntityManager entidad = getEntityManager();
         entidad.getTransaction().begin();
-        entidad.persist(user);
+        entidad.persist( user );
         entidad.getTransaction().commit();
     }
     
     /**
      * Activa usuario
      * @param user - El nombre del usuario a activar en la BD
-     * @param 
      * @return <code>void</code> -
      */
-    public void activaUsuario(String nombreUsuario) {
+    public void activaUsuario( String nombreUsuario ) {
         EntityManager entidad = getEntityManager();
-        Usuario a = consultarRegistroUsuario(nombreUsuario);
-        a.setcuentaVerificada('S');
+        Usuario a = consultarRegistroUsuario( nombreUsuario );
+        a.setcuentaVerificada( 'S' );
         entidad.getTransaction().begin();
-        a = entidad.merge(a);
+        a = entidad.merge( a );
         entidad.getTransaction().commit();
        
     }
@@ -309,7 +299,7 @@ public class ConexionBD implements Serializable {
     
     public List<Respuesta> darRespuestas( Integer idPregunta ) {
         EntityManager entidad = getEntityManager();
-        Query respuestas = entidad.createNamedQuery( "Respuesta.findAll", Respuesta.class ).setParameter( "idPregunta", idPregunta );;
+        Query respuestas = entidad.createNamedQuery( "Respuesta.findAll", Respuesta.class ).setParameter( "idPregunta", idPregunta );
         return respuestas.getResultList();
     }
 }
