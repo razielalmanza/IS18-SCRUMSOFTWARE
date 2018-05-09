@@ -46,12 +46,14 @@ CREATE TABLE modeloForo.Usuario (
 	genero		 TEXT NOT NULL,
 	fechaNacimiento  DATE NOT NULL,
 	cuentaVerificada TEXT NOT NULL,
+	administrador	 TEXT NOT NULL,
 	CONSTRAINT usuarioUnico UNIQUE ( nombreUsuario ),
 	CONSTRAINT correoUnico UNIQUE ( correoCiencias ),
 	CONSTRAINT nombreUsuarioValido CHECK ( nombreUsuario ~ '^(\w|\.|\-)+$' ),
 	CONSTRAINT correoValido CHECK ( correoCiencias ~ '^((\w|\.|\-)+)@ciencias.unam.mx$' ),
 	CONSTRAINT generoValido CHECK ( genero ~ 'H|M' ),
-	CONSTRAINT cuentaValida CHECK ( cuentaVerificada ~ 'S|N' )
+	CONSTRAINT cuentaValida CHECK ( cuentaVerificada ~ 'S|N' ),
+	CONSTRAINT administradorValido CHECK ( administrador ~ 'S|N' )
 );
 COMMENT ON TABLE modeloForo.Usuario IS 'Contiene información de cada usuario.';
 COMMENT ON COLUMN modeloForo.Usuario.idUsuario IS 'El identificador único de cada usuario';
@@ -63,8 +65,9 @@ COMMENT ON COLUMN modeloForo.Usuario.fechaNacimiento IS 'La fecha de nacimiento 
 COMMENT ON COLUMN modeloForo.Usuario.cuentaVerificada IS 'Indica si la cuenta ha sido verificada.';
 COMMENT ON CONSTRAINT nombreUsuarioValido ON modeloForo.usuario IS 'El nombre del usuario debe contener al menos 1 y a lo más 20 letras sin acentos, números, ''.'', ''-'' ó ''_''.';
 COMMENT ON CONSTRAINT correoValido ON modeloForo.usuario IS 'El correo del usuario debe ser <c>@ciencias.unam.mx, donde <c> es al menos una letra sin acento, número, ''.'', ''-'' ó ''_''.';
-COMMENT ON CONSTRAINT generoValido ON modeloForo.usuario IS'El sexo debe ser o bien ''H'' o bien ''M''';
-COMMENT ON CONSTRAINT cuentaValida ON modeloForo.usuario IS'''S'' si la cuenta está validad, ''N'' en otro caso';
+COMMENT ON CONSTRAINT generoValido ON modeloForo.usuario IS 'El sexo debe ser o bien ''H'' o bien ''M''';
+COMMENT ON CONSTRAINT cuentaValida ON modeloForo.usuario IS '''S'' si la cuenta está validad, ''N'' en otro caso';
+COMMENT ON CONSTRAINT administradorValido ON modeloForo.usuario IS '''S'' si el usuario es administrador, ''N'' en otro caso';
 
 --  La tabla Pregunta contendra cada
 -- una de  las preguntas  hechas por
@@ -147,7 +150,11 @@ $$ language sql stable;
 -- ================================= --
 --  Registros de prueba
 -- ================================= --
-INSERT INTO modeloForo.Usuario( nombreUsuario, correoCiencias, contrasena, genero, fechaNacimiento, cuentaVerificada ) VALUES ( 'LuisLazaro88', 'luis_lazaro@ciencias.unam.mx', 'password', 'H', '1988-02-25', 'S' );
-INSERT INTO modeloForo.Usuario( nombreUsuario, correoCiencias, contrasena, genero, fechaNacimiento, cuentaVerificada ) VALUES ( 'Miguel', 'miguel_pinia@ciencias.unam.mx', 'pinia88', 'H', '1988-02-25', 'N' );
+INSERT INTO modeloForo.Usuario( nombreUsuario, correoCiencias, contrasena, genero, fechaNacimiento, cuentaVerificada, administrador ) VALUES ( 'LuisLazaro88', 'luis_lazaro@ciencias.unam.mx', 'password', 'H', '1988-02-25', 'S', 'S' );
+INSERT INTO modeloForo.Usuario( nombreUsuario, correoCiencias, contrasena, genero, fechaNacimiento, cuentaVerificada, administrador ) VALUES ( 'Miguel', 'miguel_pinia@ciencias.unam.mx', 'pinia88', 'H', '1988-02-25', 'S', 'N' );
+
+INSERT INTO modeloForo.Pregunta( titulo, contenido, fechaPregunta, idUsuario ) VALUES ( '¿IS es obligatoria?', 'En caso de que sea obligatoria, ¿qué tan pesada es la materia?', '2018-05-08', 1 );
+
+INSERT INTO modeloForo.Respuesta( contenido, fechaRespuesta, idPregunta, idUsuario ) VALUES ( 'La materia si es pesada, pero afortunadamente trabajas en equipo', '2018-05-08', 1, 1 );
 
 COMMIT;
