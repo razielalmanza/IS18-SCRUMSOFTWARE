@@ -22,83 +22,38 @@
         <div class="jumbotron">
             <div class="container">
                 <h1 class="display-3" align="center" >Discusión General</h1>
-            </div>
-            <div>
                 <p>
-                    <h:form id="Preguntar" class="form-inline my-2 my-lg-0">
-                        <h:commandButton action="CreaPreguntaIH?faces-redirect=true"
-                                         value="Hacer Pregunta"
-                                         class="btn btn-danger"/>
-                    </h:form>
+                    
                 </p>
             </div>
-            <div>
-                <p>
-                    <h:form id="Usuarios" class="form-inline my-2 my-lg-0">
-                        <h:commandButton value="Mostrar usuarios"
-                                         class="btn btn-warning"/>
-                    </h:form>
-                </p>
-            </div>
-            <h:dataTable value="#{sesion.darPreguntas()}"
-                         var="pregunta" 
+            <h:dataTable value="#{sesion.darRespuestas( inicioSesionIHBean.pregunta.idPregunta )}"
+                         var="respuesta" 
                          styleClass="order-table"
                          headerClass="order-table-header"
                          rowClasses="order-table-odd-row,order-table-even-row">
                 <f:facet name="header">
-                    Preguntas de los usuarios
+                    Respuestas
                 </f:facet>
-                
-                <h:column>
-                    <f:facet name="header">
-                        Título
-                    </f:facet>
-                    <h:outputText value="#{pregunta.titulo}" />
-                </h:column>
-                
+                                
                 <h:column>
                     <f:facet name="header">
                         Contenido
                     </f:facet>
-                    <h:outputText value="#{pregunta.contenido}" />
+                    <h:outputText value="#{respuesta.contenido}" />
                 </h:column>
                 
                 <h:column>
                     <f:facet name="header">
                         Autor
                     </f:facet>
-                    <h:outputText value="#{sesion.darUsuario( pregunta.idUsuario ).getNombreUsuario()}" />
+                    <h:outputText value="#{sesion.darUsuario( respuesta.idUsuario ).getNombreUsuario()}" />
                 </h:column>
                 
                 <h:column>
                     <f:facet name="header">
                         Fecha y hora de creación
                     </f:facet>
-                    <h:outputText value="#{pregunta.fechaPregunta}" />
-                </h:column>
-                
-                <h:column>
-                    <f:facet name="header">
-                    </f:facet>
-                    <p>
-                        <h:form id="Ver" class="form-inline my-2 my-lg-0">
-                            <h:commandButton action="#{sesion.verRespuestasPreguntaA( pregunta.idPregunta )}"
-                                             value="Ver respuestas"
-                                             class="btn btn-info"/>
-                        </h:form>
-                    </p>
-                </h:column>
-                
-                <h:column>
-                    <f:facet name="header"> 
-                    </f:facet>
-                    <p>
-                        <h:form id="Responder" class="form-inline my-2 my-lg-0">
-                            <h:commandButton action="#{sesion.establecerPregunta( pregunta.idPregunta )}"
-                                             value="Responder"
-                                             class="btn btn-dark"/>
-                        </h:form>
-                    </p>
+                    <h:outputText value="#{respuesta.fechaRespuesta}" />
                 </h:column>
                 
                 <h:column>

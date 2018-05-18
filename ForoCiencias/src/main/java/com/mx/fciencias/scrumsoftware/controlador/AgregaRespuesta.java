@@ -56,16 +56,21 @@ public class AgregaRespuesta {
     }
     
     // Metodos de implementacion.    
-    public String enviar( String contenido, Integer idPregunta, Integer idUsuario ) {
+    public String enviar( String contenido, Integer idPregunta, Integer idUsuario, char rol ) {
         try {
             Respuesta r = new Respuesta( contenido, idPregunta, idUsuario );
             controladorJPA.enviarRespuesta( r );
-            return "AgregaRespuestaExitosoIH?faces-redirect=true";
+            if ( rol == 'S' ) {
+                System.out.println( "Admin" );
+                return "AgregaRespuestaExitosoAIH?faces-redirect=true";    
+            }
+            else {
+                return "AgregaRespuestaExitosoIH?faces-redirect=true";
+            }
         }
         catch ( PersistenceException e ) {
         	return "ErrorIH?faces-redirect=true";
         }
-
     }
     
     public String enviarRespuesta() { 
@@ -75,12 +80,13 @@ public class AgregaRespuesta {
         Pregunta p = ( Pregunta ) context.getExternalContext().getSessionMap().get( "pregunta" );
         Integer idPregunta = p.getIdPregunta();
         Integer idUsuario = c.getIdUsuario();
+        char rol = c.getAdministrador();
         if ( contenido.isEmpty() ) {
             FacesContext.getCurrentInstance().addMessage( null, new FacesMessage( FacesMessage.SEVERITY_ERROR, "La respuesta no puede ser vacía.", "" ) );
             return null;
         }
         else {
-            String s = enviar( contenido, idPregunta, idUsuario );
+            String s = enviar( contenido, idPregunta, idUsuario, rol );
             return s;
         }
     }      

@@ -55,16 +55,20 @@ public class CreaPregunta {
     }
 
     // Metodos de implementacion.   
-    public String subir( String titulo, String contenido, Integer idUsuario ) {
+    public String subir( String titulo, String contenido, Integer idUsuario, char rol ) {
         try {
             Pregunta p = new Pregunta( titulo, contenido, idUsuario );
             controladorJPA.subirPregunta( p );
-            return "CreaPreguntaExitosoIH?faces-redirect=true";
+            if ( rol == 'S' ) {
+                return "CreaPreguntaExitosoAIH?faces-redirect=true";
+            }
+            else {
+                return "CreaPreguntaExitosoIH?faces-redirect=true";
+            }
         }
         catch ( PersistenceException e ) {
-        	return "ErrorIH?faces-redirect=true";
+            return "ErrorIH?faces-redirect=true";
         }
-
     }
     
     public String subirPregunta() { 
@@ -74,6 +78,7 @@ public class CreaPregunta {
         FacesContext context = getCurrentInstance();
         Credencial c = ( Credencial ) context.getExternalContext().getSessionMap().get( "usuario" );
         Integer idUsuario = c.getIdUsuario();
+        char rol = c.getAdministrador();
         if ( titulo.isEmpty() ) {
             FacesContext.getCurrentInstance().addMessage( null, new FacesMessage( FacesMessage.SEVERITY_ERROR, "La pregunta debe tener un título.", "" ) );
             return null;
@@ -84,7 +89,7 @@ public class CreaPregunta {
                 return null;
             }
             else {
-                String s = subir( titulo, contenido, idUsuario );
+                String s = subir( titulo, contenido, idUsuario, rol );
                 return s;
             }
         }

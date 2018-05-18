@@ -23,7 +23,7 @@ import static javax.faces.context.FacesContext.getCurrentInstance;
  * Modificado: martes 27 de marzo de 2018.
  *
  * @author <a href="mailto:luis_lazaro@ciencias.unam.mx">Jose Luis Vazquez Lazaro</a>
- * @version 1.5
+ * @version 1.6
  */
 @ManagedBean
 @SessionScoped
@@ -89,7 +89,6 @@ public class Sesion {
             context.getExternalContext().getSessionMap().put( "usuario", l );
             intentos = 0;
             char rol = l.getAdministrador();
-            System.out.println( rol );
             if ( rol == 'S' ) {
                 return "PrincipalAdministradorIH?faces-redirect=true";
             }
@@ -166,6 +165,19 @@ public class Sesion {
         FacesContext context = getCurrentInstance();
         context.getExternalContext().getSessionMap().put( "pregunta", p );
         return "VerRespuestasIH?faces-redirect=true";
+    }
+    
+        /**
+     * Establece la pregunta de la que se desea conocer sus respuestas.
+     * @param idPregunta- La llave primaria de la pregunta.
+     * @return <code>String</code> - La direccion de la interfaz para visualizar las respuestas.
+     */
+    public String verRespuestasPreguntaA( Integer idPregunta ) {
+        Pregunta p = new Pregunta();
+        p.setIdPregunta( idPregunta );
+        FacesContext context = getCurrentInstance();
+        context.getExternalContext().getSessionMap().put( "pregunta", p );
+        return "VerRespuestasAdministradorIH?faces-redirect=true";
     }
     
     /**
