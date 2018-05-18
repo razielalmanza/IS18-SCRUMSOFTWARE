@@ -134,7 +134,7 @@ COMMENT ON FUNCTION modeloForo.resguardar() IS 'Cifra la contraseña del usuario
 
 CREATE TRIGGER cifra BEFORE INSERT ON modeloForo.Usuario FOR EACH ROW EXECUTE PROCEDURE modeloForo.resguardar();
 
---  indica si un usuario esta o no
+--  Indica si un usuario esta o no
 -- registrado en la base de datos
 -- del sistema.
 CREATE OR REPLACE FUNCTION modeloForo.verificar( nombre TEXT, pass TEXT ) RETURNS BOOLEAN AS
@@ -146,6 +146,23 @@ $$
                               cuentaVerificada ~ 'S' );
 $$ language sql stable;
 
+--  Elimina una pregunta y todas
+-- las respuesta a sociadas a
+-- esta dentro del sistema.
+CREATE OR REPLACE FUNCTION modeloForo.eliminarPregunta( idP INT ) RETURNS BOOLEAN AS
+$$
+	DELETE
+	FROM modeloForo.Respuesta
+	WHERE IdPregunta = idP;
+
+	DELETE
+	FROM modeloForo.Pregunta
+	WHERE IdPregunta = idP;
+
+	SELECT EXISTS( SELECT 1
+		       FROM   modeloForo.Pregunta
+                       WHERE  idPregunta = idP );
+$$ language sql stable;
 
 -- ================================= --
 --  Registros de prueba
