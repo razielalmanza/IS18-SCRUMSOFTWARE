@@ -19,7 +19,7 @@ import java.util.regex.Matcher;
   * Creado o modificado: martes 27 de marzo de 2018.
   *
   * @author <a href="mailto:razielmcr1@ciencias.unam.mx"></a>
-  * @version 1.3
+  * @version 1.4
   */
 @ManagedBean
 @RequestScoped

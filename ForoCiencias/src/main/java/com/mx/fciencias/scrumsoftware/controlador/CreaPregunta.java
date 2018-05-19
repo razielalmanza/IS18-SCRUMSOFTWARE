@@ -23,7 +23,7 @@ import static javax.faces.context.FacesContext.getCurrentInstance;
  * Creado o modificado: martes 27 de marzo de 2018.
  *
  * @author <a href="mailto:luis_lazaro@ciencias.unam.mx">Jose Luis Vazquez Lazaro</a>
- * @version 1.1
+ * @version 1.2
  */
 @ManagedBean
 @SessionScoped
@@ -93,5 +93,16 @@ public class CreaPregunta {
                 return s;
             }
         }
-    }           
+    }    
+      
+    public String eliminarPregunta( String idPregunta ) {
+        try {
+            System.out.println( "Punto de control" );
+            controladorJPA.eliminarPregunta( idPregunta );
+            return "EliminaPreguntaExitosoIH?faces-redirect=true";
+        }
+        catch ( PersistenceException e ) {
+            return "ErrorIH?faces-redirect=true";
+        }
+    }
 }

@@ -18,7 +18,7 @@ import javax.persistence.criteria.Root;
  * Creado y/o modificado: martes 27 de marzo de 2018.
  *
  * @author <a href="mailto:luis_lazaro@ciencias.unam.mx">Jose Luis Vazquez Lazaro</a>
- * @version 1.6
+ * @version 1.7
  */
 public class ConexionBD implements Serializable {
 
@@ -203,7 +203,7 @@ public class ConexionBD implements Serializable {
     public boolean estaRegistrado( String nombreUsuario, String contrasena ) {
         EntityManager entidad = getEntityManager();
         Query q = entidad.createNamedQuery( "Credencial.canLogin" ).setParameter( 1, nombreUsuario ).setParameter( 2, contrasena );
-        boolean p =  ( boolean ) q.getSingleResult();
+        boolean p = ( boolean ) q.getSingleResult();
         return p;
     }
 
@@ -301,5 +301,18 @@ public class ConexionBD implements Serializable {
         EntityManager entidad = getEntityManager();
         Query respuestas = entidad.createNamedQuery( "Respuesta.findAll", Respuesta.class ).setParameter( "idPregunta", idPregunta );
         return respuestas.getResultList();
+    }
+    
+    /**
+     * Elimina una pregunta y todas sus respuestas a partir de su llave primaria.
+     * @param idPregunta - La llave primaria de la pregunta.
+     * @return <code>boolean</code> - true si la eliminacion tuvo exito, false
+     * en otro caso.
+     */ 
+    public boolean eliminarPregunta( String idPregunta ) {
+        EntityManager entidad = getEntityManager();
+        Query q = entidad.createNamedQuery( "Pregunta.eliminar" ).setParameter( 1, idPregunta );
+        boolean p =  ( boolean ) q.getSingleResult();
+        return p;
     }
 }

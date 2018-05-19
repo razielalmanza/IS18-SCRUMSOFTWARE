@@ -29,7 +29,7 @@ import java.sql.Timestamp;
  * Creado y/o modificado: martes 27 de marzo de 2018.
  *
  * @author <a href="mailto:"></a>
- * @version 1.2
+ * @version 1.3
  */
 public class Respuesta implements Serializable {
 

@@ -23,7 +23,7 @@ import static javax.faces.context.FacesContext.getCurrentInstance;
  * Modificado: martes 27 de marzo de 2018.
  *
  * @author <a href="mailto:luis_lazaro@ciencias.unam.mx">Jose Luis Vazquez Lazaro</a>
- * @version 1.6
+ * @version 1.7
  */
 @ManagedBean
 @SessionScoped

@@ -22,13 +22,13 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Table( catalog = "forociencias", schema = "modeloforo" )
 @XmlRootElement
 @NamedQueries( { @NamedQuery(name = "Credencial.findAll", query = "SELECT l FROM Credencial l" ),
-				 @NamedQuery(name = "Credencial.findById", query = "SELECT l FROM Credencial l WHERE l.idUsuario = :id" ),
-				 @NamedQuery(name = "Credencial.findByUsuario", query = "SELECT l FROM Credencial l WHERE l.nombreUsuario = :nombreUsuario" ),
-				 @NamedQuery(name = "Credencial.findByPassword", query = "SELECT l FROM Credencial l WHERE l.contrasena = :contrasena" ) } )
-@NamedNativeQueries(value = { @NamedNativeQuery( name = "Credencial.canLogin", query = "SELECT modeloforo.verificar(?, ?)" ),
-                              @NamedNativeQuery( name = "Credencial.findByUsuarioAndPassword",
-                                                 query = "SELECT idUsuario, nombreUsuario, administrador FROM modeloforo.usuario WHERE nombreusuario = ?1 AND contrasena = crypt(?2, contrasena)",
-						 resultClass = Credencial.class ) } )
+		 @NamedQuery(name = "Credencial.findById", query = "SELECT l FROM Credencial l WHERE l.idUsuario = :id" ),
+		 @NamedQuery(name = "Credencial.findByUsuario", query = "SELECT l FROM Credencial l WHERE l.nombreUsuario = :nombreUsuario" ),
+		 @NamedQuery(name = "Credencial.findByPassword", query = "SELECT l FROM Credencial l WHERE l.contrasena = :contrasena" ) } )
+@NamedNativeQueries( value = { @NamedNativeQuery( name = "Credencial.canLogin", query = "SELECT modeloforo.verificar(?, ?)" ),
+                               @NamedNativeQuery( name = "Credencial.findByUsuarioAndPassword",
+                                                  query = "SELECT idUsuario, nombreUsuario, administrador FROM modeloforo.usuario WHERE nombreusuario = ?1 AND contrasena = crypt(?2, contrasena)",
+						  resultClass = Credencial.class ) } )
 
 /**
  *  La clase <code>Credencial</code> define objetos que permiten consultar la base de datos del
@@ -37,7 +37,7 @@ import javax.xml.bind.annotation.XmlRootElement;
  * Creado y/o modificado: martes 27 de marzo de 2018.
  *
  * @author <a href="mailto:luis_lazaro@ciencias.unam.mx">Jose Luis Vazquez Lazaro</a>
- * @version 1.1
+ * @version 1.2
  */
 public class Credencial implements Serializable {
 

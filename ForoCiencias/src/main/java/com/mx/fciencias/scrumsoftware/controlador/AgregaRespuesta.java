@@ -24,7 +24,7 @@ import static javax.faces.context.FacesContext.getCurrentInstance;
  * Creado o modificado: martes 27 de marzo de 2018.
  *
  * @author <a href="mailto:"></a>
- * @version 1.1
+ * @version 1.2
  */
 @ManagedBean
 @SessionScoped
