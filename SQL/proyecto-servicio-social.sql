@@ -149,20 +149,24 @@ $$ language sql stable;
 --  Elimina una pregunta y todas
 -- las respuesta a sociadas a
 -- esta dentro del sistema.
-CREATE OR REPLACE FUNCTION modeloForo.eliminarPregunta( idP INT ) RETURNS BOOLEAN AS
+CREATE OR REPLACE FUNCTION modeloForo.eliminarPregunta( idP TEXT ) RETURNS BOOLEAN AS
 $$
+DECLARE
+	a INT;
+BEGIN
+	a := CAST( idP AS INT );
+	
 	DELETE
 	FROM modeloForo.Respuesta
-	WHERE IdPregunta = idP;
+	WHERE IdPregunta = a;
 
 	DELETE
 	FROM modeloForo.Pregunta
-	WHERE IdPregunta = idP;
+	WHERE IdPregunta = a;
 
-	SELECT EXISTS( SELECT 1
-		       FROM   modeloForo.Pregunta
-                       WHERE  idPregunta = idP );
-$$ language sql stable;
+	RETURN true;
+END;
+$$ language plpgsql volatile;
 
 -- ================================= --
 --  Registros de prueba
