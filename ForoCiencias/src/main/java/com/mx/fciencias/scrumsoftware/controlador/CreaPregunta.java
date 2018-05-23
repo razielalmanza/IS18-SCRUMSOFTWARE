@@ -95,10 +95,10 @@ public class CreaPregunta {
         }
     }    
       
-    public String eliminarPregunta( String idPregunta ) {
+    public String eliminarPregunta( String idRespuesta ) {
         try {
             System.out.println( "Punto de control" );
-            controladorJPA.eliminarPregunta( idPregunta );
+            controladorJPA.eliminarPregunta( idRespuesta );
             return "EliminaPreguntaExitosoIH?faces-redirect=true";
         }
         catch ( PersistenceException e ) {

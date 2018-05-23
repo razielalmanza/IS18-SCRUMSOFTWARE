@@ -315,4 +315,11 @@ public class ConexionBD implements Serializable {
         boolean p =  ( boolean ) q.getSingleResult();
         return p;
     }
+    
+    public boolean eliminarRespuesta( String idRespuesta ) {
+        EntityManager entidad = getEntityManager();
+        Query q = entidad.createNamedQuery( "Respuesta.eliminar" ).setParameter( 1, idRespuesta);
+        boolean p =  ( boolean ) q.getSingleResult();
+        return p;
+    }
 }
