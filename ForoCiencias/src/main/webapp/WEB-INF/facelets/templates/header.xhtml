@@ -12,6 +12,16 @@
              <font face="impact" size="5"><b>ForoCiencias</b></font>
         </a>
         <div class="collapse navbar-collapse">
+            <h:form id="buscar" class="form-inline my-2 my-lg-0">
+                <p:inputText 
+                             placeholder="Buscar contenido"
+                             required="false" 
+                             id="Buscar"
+                             size="25" />
+                <h:commandButton 
+                                 value="Buscar"
+                                 class="btn btn-info"/>
+            </h:form>
             <div class="navbar-nav ml-auto">
                 <c:choose>
                     <c:when test="#{inicioSesionIHBean.estaRegistrado()}">
@@ -30,7 +40,7 @@
                         </div>
                     </c:when>
                     <c:otherwise>
-                        <h:form id="myForm" class="form-inline my-2 my-lg-0">
+                        <h:form id="basicos" class="form-inline my-2 my-lg-0">
                             
                             <!-- Boton Registrar -->
                             <h:commandButton action="RegistroIH?faces-redirect=true"

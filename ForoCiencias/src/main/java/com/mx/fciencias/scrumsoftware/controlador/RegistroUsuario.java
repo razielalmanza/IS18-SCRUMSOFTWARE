@@ -14,13 +14,13 @@ import java.text.ParseException;
 import java.util.regex.Matcher;
 
  /**
-- *  La clase <code>RegistroUsuario</code>. 
-- *
-- * Creado o modificado: martes 27 de marzo de 2018.
-- *
-- * @author <a href="mailto:razielmcr1@ciencias.unam.mx"></a>
-- * @version 1.3
-- */
+  *  La clase <code>RegistroUsuario</code>. 
+  *
+  * Creado o modificado: martes 27 de marzo de 2018.
+  *
+  * @author <a href="mailto:razielmcr1@ciencias.unam.mx"></a>
+  * @version 1.4
+  */
 @ManagedBean
 @RequestScoped
 public class RegistroUsuario {

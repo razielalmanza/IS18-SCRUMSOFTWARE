@@ -31,7 +31,7 @@ import java.sql.Date;
  * Creado o modificado: martes 27 de marzo de 2018.
  *
  * @author <a href="mailto:"></a>
- * @version 1.2
+ * @version 1.3
  */
 public class Usuario implements Serializable {
 
@@ -47,7 +47,7 @@ public class Usuario implements Serializable {
     @Basic(optional = false)
     @Column(nullable = false, length = 2147483647)
     private String nombreUsuario;
-     /* correoCiencias del usuario dentro de la BD */
+    /* correoCiencias del usuario dentro de la BD */
     @Basic(optional = false)
     @Column(nullable = false, length = 2147483647)
     private String correoCiencias;
@@ -55,18 +55,22 @@ public class Usuario implements Serializable {
     @Basic(optional = false)
     @Column(nullable = false, length = 2147483647)
     private String contrasena;
-         /* Genero d usuario dentro de la BD */
+    /* Genero del usuario dentro de la BD */
     @Basic(optional = false)
     @Column(nullable = false, length = 2147483647)
     private String genero;
-     /* fechaNacimiento de nac del usuario dentro de la BD */
+    /* fechaNacimiento de nac del usuario dentro de la BD */
     @Basic(optional = false)
     @Column(nullable = false, length = 2147483647)
     private Date fechaNacimiento;
-      /* fechaNacimiento de nac del usuario dentro de la BD */
+    /* cuentaVerificada del usuario */
     @Basic(optional = false)
     @Column(nullable = false, length = 2147483647)
     private char cuentaVerificada;
+    /* indica el rol del usuario: normal o administrador */
+    @Basic(optional = false)
+    @Column(nullable = false, length = 2147483647)
+    private char administrador;
     
     // Metodos constructores.
     /**
@@ -82,15 +86,24 @@ public class Usuario implements Serializable {
      * @param nombreUsuario - El nombre de usuario.
      * @param contrasena - La contraseña de usuario.
      */
-    public Usuario(String nombreUsuario,String correoCiencias, String contrasena,String genero,Date fechaNacimiento ) {
+    public Usuario( String nombreUsuario, String correoCiencias, String contrasena, String genero, Date fechaNacimiento ) {
         this.nombreUsuario = nombreUsuario;
         this.contrasena = contrasena;
         this.fechaNacimiento = fechaNacimiento;
         this.correoCiencias = correoCiencias;
         this.genero = genero;
         this.cuentaVerificada = 'N';
+        this.administrador = 'N';
     }
 
+    public char getAdministrador() {
+        return administrador;
+    }
+
+    public void setAdministrador( char administrador ) {
+        this.administrador = administrador;
+    }
+    
     public char getcuentaVerificada() {
         return cuentaVerificada;
     }

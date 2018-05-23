@@ -27,13 +27,6 @@
         <div class="jumbotron">
             <div class="container">
                 <h1 class="display-3" align="center" >Discusión General</h1>
-                <p>
-                    <h:form id="Preguntar" class="form-inline my-2 my-lg-0">
-                        <h:commandButton value="Hacer Pregunta"
-                                         disabled="true"
-                                         class="btn btn-warning"/>
-                    </h:form>
-                </p>
             </div>
             <h:dataTable value="#{sesion.darPreguntas()}"
                          var="pregunta" 
@@ -80,18 +73,6 @@
                             <h:commandButton action="#{sesion.verRespuestasPregunta( pregunta.idPregunta )}"
                                              value="Ver respuestas"
                                              class="btn btn-info"/>
-                        </h:form>
-                    </p>
-                </h:column>
-                
-                <h:column>
-                    <f:facet name="header"> 
-                    </f:facet>
-                    <p>
-                        <h:form id="Responder" class="form-inline my-2 my-lg-0">
-                            <h:commandButton value="Responder"
-                                             disabled="true"
-                                             class="btn btn-dark"/>
                         </h:form>
                     </p>
                 </h:column>

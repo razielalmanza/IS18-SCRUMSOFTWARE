@@ -24,6 +24,7 @@ import java.sql.Date;
 @Table( catalog = "forociencias", schema = "modeloforo" )
 @XmlRootElement
 @NamedQueries( { @NamedQuery( name = "Pregunta.findAll", query = "SELECT p FROM Pregunta p" ) } )
+@NamedNativeQueries( value = { @NamedNativeQuery( name = "Pregunta.eliminar", query = "SELECT modeloforo.eliminarpregunta(?)" ) } )
 
 /**
  *  La clase <code>Pregunta</code>.
@@ -31,7 +32,7 @@ import java.sql.Date;
  * Creado y/o modificado: martes 27 de marzo de 2018.
  *
  * @author <a href="mailto:luis_lazaro">Jose Luis Vazquez Lazaro</a>
- * @version 1.2
+ * @version 1.3
  */
 public class Pregunta implements Serializable {
 

@@ -6,10 +6,7 @@ import com.mx.fciencias.scrumsoftware.modelo.Pregunta;
 import com.mx.fciencias.scrumsoftware.modelo.Credencial;
 import com.mx.fciencias.scrumsoftware.modelo.ConexionBD;
 import com.mx.fciencias.scrumsoftware.vista.AgregaRespuestaIH;
-import com.mx.fciencias.scrumsoftware.vista.InicioSesionIHBean;
 import java.util.Locale;
-import java.sql.Timestamp;
-import java.text.ParseException;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -24,7 +21,7 @@ import static javax.faces.context.FacesContext.getCurrentInstance;
  * Creado o modificado: martes 27 de marzo de 2018.
  *
  * @author <a href="mailto:"></a>
- * @version 1.1
+ * @version 1.2
  */
 @ManagedBean
 @SessionScoped
@@ -56,16 +53,21 @@ public class AgregaRespuesta {
     }
     
     // Metodos de implementacion.    
-    public String enviar( String contenido, Integer idPregunta, Integer idUsuario ) {
+    public String enviar( String contenido, Integer idPregunta, Integer idUsuario, char rol ) {
         try {
             Respuesta r = new Respuesta( contenido, idPregunta, idUsuario );
             controladorJPA.enviarRespuesta( r );
-            return "AgregaRespuestaExitosoIH?faces-redirect=true";
+            if ( rol == 'S' ) {
+                System.out.println( "Admin" );
+                return "AgregaRespuestaExitosoAIH?faces-redirect=true";    
+            }
+            else {
+                return "AgregaRespuestaExitosoIH?faces-redirect=true";
+            }
         }
         catch ( PersistenceException e ) {
         	return "ErrorIH?faces-redirect=true";
         }
-
     }
     
     public String enviarRespuesta() { 
@@ -75,13 +77,30 @@ public class AgregaRespuesta {
         Pregunta p = ( Pregunta ) context.getExternalContext().getSessionMap().get( "pregunta" );
         Integer idPregunta = p.getIdPregunta();
         Integer idUsuario = c.getIdUsuario();
+        char rol = c.getAdministrador();
         if ( contenido.isEmpty() ) {
             FacesContext.getCurrentInstance().addMessage( null, new FacesMessage( FacesMessage.SEVERITY_ERROR, "La respuesta no puede ser vacía.", "" ) );
             return null;
         }
         else {
-            String s = enviar( contenido, idPregunta, idUsuario );
+            String s = enviar( contenido, idPregunta, idUsuario, rol );
             return s;
         }
-    }      
+    }
+    
+    /**
+     * Elimina la Respuesta de la pregunta
+     * @param idRespuesta
+     * @return
+     */
+    public String eliminarRespuesta( String idRespuesta ) {
+        try {
+            System.out.println( "Punto de control" );
+            controladorJPA.eliminarRespuesta( idRespuesta);
+            return "EliminaRespuestaExitosoIH?faces-redirect=true";
+        }
+        catch (PersistenceException e ) {
+            return "ErrorIH?faces-redirect=true";
+        }
+    }
 }

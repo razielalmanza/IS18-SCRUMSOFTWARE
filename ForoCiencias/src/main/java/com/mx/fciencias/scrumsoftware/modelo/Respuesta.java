@@ -14,6 +14,8 @@ import javax.persistence.UniqueConstraint;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.sql.Date;
 import java.sql.Timestamp;
+import javax.persistence.NamedNativeQueries;
+import javax.persistence.NamedNativeQuery;
 
 /**
  *  Definicion de las consultas necesarias para validar el registro de un usuario
@@ -22,6 +24,7 @@ import java.sql.Timestamp;
 @Table( catalog = "forociencias", schema = "modeloforo" )
 @XmlRootElement
 @NamedQueries( { @NamedQuery( name = "Respuesta.findAll", query = "SELECT p FROM Respuesta p WHERE p.idPregunta = :idPregunta" ) } )
+@NamedNativeQueries( value = { @NamedNativeQuery( name = "Respuesta.eliminar", query = "SELECT modeloforo.eliminarRespuesta(?)" ) } )
 
 /**
  *  La clase <code>Respuesta</code>.
@@ -29,7 +32,7 @@ import java.sql.Timestamp;
  * Creado y/o modificado: martes 27 de marzo de 2018.
  *
  * @author <a href="mailto:"></a>
- * @version 1.2
+ * @version 1.3
  */
 public class Respuesta implements Serializable {
 

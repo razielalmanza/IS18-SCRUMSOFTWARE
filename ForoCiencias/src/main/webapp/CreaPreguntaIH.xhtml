@@ -16,21 +16,28 @@
         <h:form id="Preguntar">
             <table>
                 <tr>
-                    <td><p:messages id="messages" autoUpdate="true" closable="true" /></td>
+                    <td>
+                        <p:messages id="messages" autoUpdate="true" closable="true" />
+                    </td>
                 </tr>
             </table>
             <table>
                 <tr>
                     <td>Título</td>
-                    <td><p:inputText value="#{creaPregunta.pregunta.titulo}"
-                                     required="false" id="Título"
-                                     size="15" /></td>
+                    <td>
+                        <p:inputText value="#{creaPregunta.pregunta.titulo}"
+                                     required="false"
+                                     id="Título"
+                                     size="20" />
+                    </td>
                 </tr>
                 <tr>
                     <td>Contenido</td>
-                    <td><p:inputText value="#{creaPregunta.pregunta.contenido}"
-                                     required="false" id="Contenido"
-                                     size="15" /></td>
+                    <td>
+                        <p:inputTextarea value="#{creaPregunta.pregunta.contenido}"
+                                         required="false"
+                                         id="Contenido" />
+                    </td>
                 </tr>
                 <tr>
                     <td colspan="1" align="left">

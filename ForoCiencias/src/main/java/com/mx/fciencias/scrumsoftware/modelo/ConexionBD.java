@@ -18,7 +18,7 @@ import javax.persistence.criteria.Root;
  * Creado y/o modificado: martes 27 de marzo de 2018.
  *
  * @author <a href="mailto:luis_lazaro@ciencias.unam.mx">Jose Luis Vazquez Lazaro</a>
- * @version 1.6
+ * @version 1.7
  */
 public class ConexionBD implements Serializable {
 
@@ -26,7 +26,6 @@ public class ConexionBD implements Serializable {
     /* Entidad de persistencia */
     private EntityManagerFactory entidad = null;
     
-
     // Metodos constructores.
     /**
      * Permite crear un objeto de tipo <code>ConexionBD</code> a partir de una entidad de
@@ -53,7 +52,7 @@ public class ConexionBD implements Serializable {
      * sistema (idUsuario, nombreUsuario y contrasena).
      */
     public void crear( Credencial credencial ) {
-		EntityManager entidad = null;
+        EntityManager entidad = null;
         try {
             entidad = getEntityManager();
             entidad.getTransaction().begin();
@@ -204,15 +203,8 @@ public class ConexionBD implements Serializable {
     public boolean estaRegistrado( String nombreUsuario, String contrasena ) {
         EntityManager entidad = getEntityManager();
         Query q = entidad.createNamedQuery( "Credencial.canLogin" ).setParameter( 1, nombreUsuario ).setParameter( 2, contrasena );
-        boolean p =  ( boolean ) q.getSingleResult();
-        if ( p ) {
-        	System.out.println( "Si estas registrado y tu cuenta esta activada" );
-        }
-        else {
-        	System.out.println( "No estas registrado y tu cuenta no esta activada" );
-        }
-        
-        return ( boolean ) q.getSingleResult();
+        boolean p = ( boolean ) q.getSingleResult();
+        return p;
     }
 
     /**
@@ -237,7 +229,7 @@ public class ConexionBD implements Serializable {
      */
      public Usuario consultarRegistroUsuario( String nombreUsuario ) {
         EntityManager entidad = getEntityManager();
-        TypedQuery<Usuario> q = entidad.createNamedQuery( "Usuario.findByUsuario",Usuario.class ).setParameter("nombreUsuario", nombreUsuario);
+        TypedQuery<Usuario> q = entidad.createNamedQuery( "Usuario.findByUsuario", Usuario.class ).setParameter( "nombreUsuario", nombreUsuario );
         if ( q.getResultList().isEmpty() ) {
             return null;
         }
@@ -261,28 +253,26 @@ public class ConexionBD implements Serializable {
     /**
      * Registra
      * @param user - EL objeto de tipo Usuario (entidad) a persistir
-     * @param 
      * @return <code>void</code> -
      */
-    public void registroUsuario(Usuario user) {
+    public void registroUsuario( Usuario user ) {
         EntityManager entidad = getEntityManager();
         entidad.getTransaction().begin();
-        entidad.persist(user);
+        entidad.persist( user );
         entidad.getTransaction().commit();
     }
     
     /**
      * Activa usuario
      * @param user - El nombre del usuario a activar en la BD
-     * @param 
      * @return <code>void</code> -
      */
-    public void activaUsuario(String nombreUsuario) {
+    public void activaUsuario( String nombreUsuario ) {
         EntityManager entidad = getEntityManager();
-        Usuario a = consultarRegistroUsuario(nombreUsuario);
-        a.setcuentaVerificada('S');
+        Usuario a = consultarRegistroUsuario( nombreUsuario );
+        a.setcuentaVerificada( 'S' );
         entidad.getTransaction().begin();
-        a = entidad.merge(a);
+        a = entidad.merge( a );
         entidad.getTransaction().commit();
        
     }
@@ -309,7 +299,27 @@ public class ConexionBD implements Serializable {
     
     public List<Respuesta> darRespuestas( Integer idPregunta ) {
         EntityManager entidad = getEntityManager();
-        Query respuestas = entidad.createNamedQuery( "Respuesta.findAll", Respuesta.class ).setParameter( "idPregunta", idPregunta );;
+        Query respuestas = entidad.createNamedQuery( "Respuesta.findAll", Respuesta.class ).setParameter( "idPregunta", idPregunta );
         return respuestas.getResultList();
+    }
+    
+    /**
+     * Elimina una pregunta y todas sus respuestas a partir de su llave primaria.
+     * @param idPregunta - La llave primaria de la pregunta.
+     * @return <code>boolean</code> - true si la eliminacion tuvo exito, false
+     * en otro caso.
+     */ 
+    public boolean eliminarPregunta( String idPregunta ) {
+        EntityManager entidad = getEntityManager();
+        Query q = entidad.createNamedQuery( "Pregunta.eliminar" ).setParameter( 1, idPregunta );
+        boolean p =  ( boolean ) q.getSingleResult();
+        return p;
+    }
+    
+    public boolean eliminarRespuesta( String idRespuesta ) {
+        EntityManager entidad = getEntityManager();
+        Query q = entidad.createNamedQuery( "Respuesta.eliminar" ).setParameter( 1, idRespuesta);
+        boolean p =  ( boolean ) q.getSingleResult();
+        return p;
     }
 }
