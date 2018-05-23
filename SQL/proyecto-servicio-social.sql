@@ -168,6 +168,22 @@ BEGIN
 END;
 $$ language plpgsql volatile;
 
+CREATE OR REPLACE FUNCTION modeloForo.eliminarRespuesta( idR TEXT ) RETURNS BOOLEAN AS
+$$
+DECLARE
+	a INT;
+BEGIN
+	a := CAST( idR AS INT );
+	
+	DELETE
+	FROM modeloForo.Respuesta
+	WHERE idRespuesta = a;
+
+	RETURN true;
+END;
+$$ language plpgsql volatile;
+
+
 -- ================================= --
 --  Registros de prueba
 -- ================================= --

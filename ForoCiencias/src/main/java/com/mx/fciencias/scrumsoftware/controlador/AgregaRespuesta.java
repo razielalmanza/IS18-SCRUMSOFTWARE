@@ -6,10 +6,7 @@ import com.mx.fciencias.scrumsoftware.modelo.Pregunta;
 import com.mx.fciencias.scrumsoftware.modelo.Credencial;
 import com.mx.fciencias.scrumsoftware.modelo.ConexionBD;
 import com.mx.fciencias.scrumsoftware.vista.AgregaRespuestaIH;
-import com.mx.fciencias.scrumsoftware.vista.InicioSesionIHBean;
 import java.util.Locale;
-import java.sql.Timestamp;
-import java.text.ParseException;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -89,5 +86,21 @@ public class AgregaRespuesta {
             String s = enviar( contenido, idPregunta, idUsuario, rol );
             return s;
         }
-    }      
+    }
+    
+    /**
+     * Elimina la Respuesta de la pregunta
+     * @param idRespuesta
+     * @return
+     */
+    public String eliminarRespuesta( String idRespuesta ) {
+        try {
+            System.out.println( "Punto de control" );
+            controladorJPA.eliminarRespuesta( idRespuesta);
+            return "EliminaRespuestaExitosoIH?faces-redirect=true";
+        }
+        catch (PersistenceException e ) {
+            return "ErrorIH?faces-redirect=true";
+        }
+    }
 }
