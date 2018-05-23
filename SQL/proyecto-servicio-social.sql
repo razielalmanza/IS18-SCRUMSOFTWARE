@@ -168,11 +168,8 @@ BEGIN
 END;
 $$ language plpgsql volatile;
 
-<<<<<<< HEAD
 --  Elimina una pregunta dentro
--- de la base de datos
-=======
->>>>>>> ae068da121ad2c0c45c35bff0923bcdfbc00b7e4
+-- de la base de datos.
 CREATE OR REPLACE FUNCTION modeloForo.eliminarRespuesta( idR TEXT ) RETURNS BOOLEAN AS
 $$
 DECLARE
@@ -182,20 +179,12 @@ BEGIN
 	
 	DELETE
 	FROM modeloForo.Respuesta
-<<<<<<< HEAD
 	WHERE IdPregunta = a;
-=======
-	WHERE idRespuesta = a;
->>>>>>> ae068da121ad2c0c45c35bff0923bcdfbc00b7e4
 
 	RETURN true;
 END;
 $$ language plpgsql volatile;
 
-<<<<<<< HEAD
-=======
-
->>>>>>> ae068da121ad2c0c45c35bff0923bcdfbc00b7e4
 -- ================================= --
 --  Registros de prueba
 -- ================================= --
