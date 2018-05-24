@@ -179,7 +179,7 @@ BEGIN
 	
 	DELETE
 	FROM modeloForo.Respuesta
-	WHERE IdPregunta = a;
+	WHERE IdRespuesta = a;
 
 	RETURN true;
 END;
