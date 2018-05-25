@@ -168,6 +168,32 @@ BEGIN
 END;
 $$ language plpgsql volatile;
 
+--  Elimina un usuario y todas
+-- las respuesta y preguntas a sociadas a
+-- esta dentro del sistema.
+CREATE OR REPLACE FUNCTION modeloForo.eliminarUsuario( idP TEXT ) RETURNS BOOLEAN AS
+$$
+DECLARE
+	a INT;
+BEGIN
+	a := CAST( idP AS INT );
+	
+	DELETE
+	FROM modeloForo.Respuesta
+	WHERE idUsuario = a;
+
+	DELETE
+	FROM modeloForo.Pregunta
+	WHERE idUsuario = a;
+
+	DELETE
+	FROM modeloForo.Usuario
+	WHERE idUsuario = a;
+
+	RETURN true;
+END;
+$$ language plpgsql volatile;
+
 --  Elimina una pregunta dentro
 -- de la base de datos.
 CREATE OR REPLACE FUNCTION modeloForo.eliminarRespuesta( idR TEXT ) RETURNS BOOLEAN AS

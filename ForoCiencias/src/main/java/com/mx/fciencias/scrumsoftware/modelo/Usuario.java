@@ -24,6 +24,7 @@ import java.sql.Date;
 @XmlRootElement
 @NamedQueries( { @NamedQuery(name = "Usuario.findById", query = "SELECT l FROM Usuario l WHERE l.idUsuario = :idUsuario" ) ,
                  @NamedQuery(name = "Usuario.findByUsuario", query = "SELECT l FROM Usuario l WHERE l.nombreUsuario = :nombreUsuario" ) } )
+@NamedNativeQueries( value = { @NamedNativeQuery( name = "Usuario.eliminar", query = "SELECT modeloforo.eliminarUsuario(?)" ) } )
 
 /**
  *  La clase <code>Usuario</code>. 
