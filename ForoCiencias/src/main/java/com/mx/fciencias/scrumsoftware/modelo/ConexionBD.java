@@ -290,6 +290,18 @@ public class ConexionBD implements Serializable {
         return preguntas.getResultList();
     }
     
+    /**
+     * Regresa la lista de preguntas cuyo título se parece al parámetro dado.
+     * @param titulo cadena a la cual comparar los títulos.
+     * @return lista de preguntas.
+     */
+    public List<Pregunta> darPreguntasPorTitulo(String titulo) {
+        EntityManager entidad = getEntityManager();
+        Query preguntas = entidad.createNamedQuery( "Pregunta.findAllByTitulo", Pregunta.class )
+                .setParameter("titulo", "%" + titulo + "%");
+        return preguntas.getResultList();
+    }
+    
     public void enviarRespuesta( Respuesta respuesta ) {
         EntityManager entidad = getEntityManager();
         entidad.getTransaction().begin();

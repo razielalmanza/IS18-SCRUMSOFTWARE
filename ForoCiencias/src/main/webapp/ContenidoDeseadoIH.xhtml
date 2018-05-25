@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    
+    <h:head>
+        <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />        
+        <link rel="stylesheet" href="./css/default.css"/>
+    </h:head>
+    
+    <body>
+        <div class="jumbotron">
+            <h:dataTable value="#{busquedaContenido.darPreguntasPorTitulo(busquedaContenido.query)}"
+                         var="pregunta" 
+                         styleClass="order-table"
+                         headerClass="order-table-header"
+                         rowClasses="order-table-odd-row,order-table-even-row">
+                <f:facet name="header">
+                    Resultados de la búsqueda
+                </f:facet>
+                
+                <h:column>
+                    <f:facet name="header">
+                        Título
+                    </f:facet>
+                    <h:outputText value="#{pregunta.titulo}" />
+                </h:column>
+                
+                <h:column>
+                    <f:facet name="header">
+                        Contenido
+                    </f:facet>
+                    <h:outputText value="#{pregunta.contenido}" />
+                </h:column>
+                
+                <h:column>
+                    <f:facet name="header">
+                        Autor
+                    </f:facet>
+                    <h:outputText value="#{sesion.darUsuario( pregunta.idUsuario ).getNombreUsuario()}" />
+                </h:column>
+                
+                <h:column>
+                    <f:facet name="header">
+                        Fecha y hora de creación
+                    </f:facet>
+                    <h:outputText value="#{pregunta.fechaPregunta}" />
+                </h:column>
+                
+                <h:column>
+                    <f:facet name="header">
+                    </f:facet>
+                    <p>
+                        <h:form id="Ver" class="form-inline my-2 my-lg-0">
+                            <h:commandButton action="#{sesion.verRespuestasPregunta( pregunta.idPregunta )}"
+                                             value="Ver respuestas"
+                                             class="btn btn-info"/>
+                        </h:form>
+                    </p>
+                </h:column>
+            </h:dataTable>
+        </div>
+    </body>
+    
+</html>

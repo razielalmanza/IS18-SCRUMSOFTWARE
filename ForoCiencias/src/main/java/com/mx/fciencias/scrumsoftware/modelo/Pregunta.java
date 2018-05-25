@@ -23,7 +23,9 @@ import java.sql.Date;
 @Entity
 @Table( catalog = "forociencias", schema = "modeloforo" )
 @XmlRootElement
-@NamedQueries( { @NamedQuery( name = "Pregunta.findAll", query = "SELECT p FROM Pregunta p" ) } )
+@NamedQueries({
+    @NamedQuery( name = "Pregunta.findAll", query = "SELECT p FROM Pregunta p" ),
+    @NamedQuery( name = "Pregunta.findAllByTitulo", query = "SELECT p FROM Pregunta p WHERE p.titulo LIKE :titulo" )})
 @NamedNativeQueries( value = { @NamedNativeQuery( name = "Pregunta.eliminar", query = "SELECT modeloforo.eliminarpregunta(?)" ) } )
 
 /**

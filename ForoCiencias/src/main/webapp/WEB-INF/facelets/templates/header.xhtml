@@ -15,10 +15,11 @@
             <h:form id="buscar" class="form-inline my-2 my-lg-0">
                 <p:inputText 
                              placeholder="Buscar contenido"
-                             required="false" 
-                             id="Buscar"
+                             required="true" 
+                             value="#{busquedaContenido.query}"
                              size="25" />
                 <h:commandButton 
+                    action="ContenidoDeseadoIH?faces-redirect=true"
                                  value="Buscar"
                                  class="btn btn-info"/>
             </h:form>
