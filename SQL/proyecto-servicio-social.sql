@@ -146,6 +146,32 @@ $$
                               cuentaVerificada ~ 'S' );
 $$ language sql stable;
 
+--  Elimina un usuario y todas
+-- las respuesta y preguntas a sociadas a
+-- esta dentro del sistema.
+CREATE OR REPLACE FUNCTION modeloForo.eliminarUsuario( idU TEXT ) RETURNS BOOLEAN AS
+$$
+DECLARE
+	a INT;
+BEGIN
+	a := CAST( idU AS INT );
+	
+	DELETE
+	FROM modeloForo.Respuesta
+	WHERE idUsuario = a;
+
+	DELETE
+	FROM modeloForo.Pregunta
+	WHERE idUsuario = a;
+
+	DELETE
+	FROM modeloForo.Usuario
+	WHERE idUsuario = a;
+
+	RETURN true;
+END;
+$$ language plpgsql volatile;
+
 --  Elimina una pregunta y todas
 -- las respuesta a sociadas a
 -- esta dentro del sistema.
@@ -163,32 +189,6 @@ BEGIN
 	DELETE
 	FROM modeloForo.Pregunta
 	WHERE IdPregunta = a;
-
-	RETURN true;
-END;
-$$ language plpgsql volatile;
-
---  Elimina un usuario y todas
--- las respuesta y preguntas a sociadas a
--- esta dentro del sistema.
-CREATE OR REPLACE FUNCTION modeloForo.eliminarUsuario( idP TEXT ) RETURNS BOOLEAN AS
-$$
-DECLARE
-	a INT;
-BEGIN
-	a := CAST( idP AS INT );
-	
-	DELETE
-	FROM modeloForo.Respuesta
-	WHERE idUsuario = a;
-
-	DELETE
-	FROM modeloForo.Pregunta
-	WHERE idUsuario = a;
-
-	DELETE
-	FROM modeloForo.Usuario
-	WHERE idUsuario = a;
 
 	RETURN true;
 END;
