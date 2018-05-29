@@ -26,7 +26,7 @@ import java.sql.Date;
 @NamedQueries({
     @NamedQuery( name = "Pregunta.findAll", query = "SELECT p FROM Pregunta p" ),
     @NamedQuery( name = "Pregunta.findAllByTitulo", query = "SELECT p FROM Pregunta p WHERE p.titulo LIKE :titulo" )})
-@NamedNativeQueries( value = { @NamedNativeQuery( name = "Pregunta.eliminar", query = "SELECT modeloforo.eliminarpregunta(?)" ) } )
+@NamedNativeQueries( value = { @NamedNativeQuery( name = "Pregunta.eliminar", query = "SELECT modeloforo.eliminarPregunta(?)" ) } )
 
 /**
  *  La clase <code>Pregunta</code>.
