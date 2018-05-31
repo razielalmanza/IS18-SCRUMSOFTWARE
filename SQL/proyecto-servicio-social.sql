@@ -3,7 +3,7 @@
 --          SCRUM SOFTWARE
 -- --------------------------------- --
 --  Responsable:
---       Jose Luis Vazquez Lazaro
+--       Jose Luis Vazquez Lazaro.
 -- ================================= --
 
 
