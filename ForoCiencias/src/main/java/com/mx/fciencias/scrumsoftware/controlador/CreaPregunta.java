@@ -97,7 +97,6 @@ public class CreaPregunta {
       
     public String eliminarPregunta( String idPregunta ) {
         try {
-            System.out.println( "Punto de control" );
             controladorJPA.eliminarPregunta( idPregunta );
             return "EliminaPreguntaExitosoIH?faces-redirect=true";
         }

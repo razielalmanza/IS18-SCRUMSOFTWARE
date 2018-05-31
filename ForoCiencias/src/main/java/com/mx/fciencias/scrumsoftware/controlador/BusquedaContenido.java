@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.mx.fciencias.scrumsoftware.controlador;
 
 import com.mx.fciencias.scrumsoftware.modelo.ConexionBD;
@@ -39,8 +34,8 @@ public class BusquedaContenido {
      * Devuelve la lista de preguntas de la base de datos.
      * @return <code>List<Pregunta></code> - La lista de preguntas de la base de datos.
      */    
-    public List<Pregunta> darPreguntasPorTitulo(String titulo) {
-        return controladorJPA.darPreguntasPorTitulo(titulo);
+    public List<Pregunta> darPreguntasPorTitulo( String titulo ) {
+        return controladorJPA.darPreguntasPorTitulo( titulo );
     }
     
     /**
@@ -55,7 +50,7 @@ public class BusquedaContenido {
      * Fija el query del usuario.
      * @param query el parámetro dado por el usuario.
      */
-    public void setQuery(String query) {
+    public void setQuery( String query ) {
         this.query = query;
     }
     

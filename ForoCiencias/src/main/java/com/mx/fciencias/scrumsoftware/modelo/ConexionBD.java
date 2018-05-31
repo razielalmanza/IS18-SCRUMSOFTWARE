@@ -251,7 +251,7 @@ public class ConexionBD implements Serializable {
     }
      
     /**
-     * Registra
+     * Registra un usuario en el sistema.
      * @param user - EL objeto de tipo Usuario (entidad) a persistir
      * @return <code>void</code> -
      */
@@ -265,7 +265,7 @@ public class ConexionBD implements Serializable {
     /**
      * Activa usuario
      * @param user - El nombre del usuario a activar en la BD
-     * @return <code>void</code> -
+     * @return <code>void</code>.
      */
     public void activaUsuario( String nombreUsuario ) {
         EntityManager entidad = getEntityManager();
@@ -277,6 +277,22 @@ public class ConexionBD implements Serializable {
        
     }
     
+    /**
+     * Devuelve la lista de los usuarios que no son administradores.
+     * @param administrador - El identificador de usuarios convencionales.
+     * @return <code>List<Usuario></code> - La lista de usuarios convenconales.
+     */
+    public List<Usuario> darUsuarios() {
+        char admin = 'N';
+        EntityManager entidad = getEntityManager();
+        Query usuarios = entidad.createNamedQuery( "Usuario.findAll", Usuario.class ).setParameter( "administrador", admin );
+        return usuarios.getResultList();
+    }
+    
+    /**
+     * Permite registrar una pregunta de un usuario en el sistema.
+     * @param pregunta - La pregunta a registrar.
+     */
     public void subirPregunta( Pregunta pregunta ) {
         EntityManager entidad = getEntityManager();
         entidad.getTransaction().begin();
@@ -284,6 +300,10 @@ public class ConexionBD implements Serializable {
         entidad.getTransaction().commit();
     }
     
+    /**
+     * Devuelve la lista de todas las preguntas del sistema. 
+     * @return <code>List<Pregunta></code> - La lista de preguntas.
+     */
     public List<Pregunta> darPreguntas() {
         EntityManager entidad = getEntityManager();
         Query preguntas = entidad.createNamedQuery( "Pregunta.findAll", Pregunta.class );
@@ -297,8 +317,7 @@ public class ConexionBD implements Serializable {
      */
     public List<Pregunta> darPreguntasPorTitulo(String titulo) {
         EntityManager entidad = getEntityManager();
-        Query preguntas = entidad.createNamedQuery( "Pregunta.findAllByTitulo", Pregunta.class )
-                .setParameter("titulo", "%" + titulo + "%");
+        Query preguntas = entidad.createNamedQuery( "Pregunta.findAllByTitulo", Pregunta.class ).setParameter( "titulo", "%" + titulo + "%" );
         return preguntas.getResultList();
     }
     
@@ -337,9 +356,7 @@ public class ConexionBD implements Serializable {
     
     public boolean eliminarUsuario( String idUsuario ) {
         EntityManager entidad = getEntityManager();
-        Usuario a = consultarRegistroUsuario( idUsuario );
-        String id = Integer.toString(a.getIdUsuario());
-        Query q = entidad.createNamedQuery( "Usuario.eliminar" ).setParameter( 1, id );
+        Query q = entidad.createNamedQuery( "Usuario.eliminar" ).setParameter( 1, idUsuario );
         boolean p =  ( boolean ) q.getSingleResult();
         return p;
     }

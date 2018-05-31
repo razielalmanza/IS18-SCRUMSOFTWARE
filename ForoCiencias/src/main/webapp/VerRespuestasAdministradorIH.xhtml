@@ -22,9 +22,6 @@
         <div class="jumbotron">
             <div class="container">
                 <h1 class="display-3" align="center" >Discusión General</h1>
-                <p>
-                    
-                </p>
             </div>
             <h:dataTable value="#{sesion.darRespuestas( inicioSesionIHBean.pregunta.idPregunta )}"
                          var="respuesta" 
@@ -61,7 +58,7 @@
                     </f:facet>
                     <p>
                         <h:form id="Eliminar" class="form-inline my-2 my-lg-0">
-                            <h:commandButton action="#{agregaRespuesta.eliminarRespuesta(respuesta.idRespuesta.toString())}"
+                            <h:commandButton action="#{agregaRespuesta.eliminarRespuesta( respuesta.idRespuesta.toString() )}"
                                              value="Eliminar"
                                              class="btn btn-light"/>
                         </h:form>

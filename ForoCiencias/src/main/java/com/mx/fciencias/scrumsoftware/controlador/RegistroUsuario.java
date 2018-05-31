@@ -12,6 +12,7 @@ import javax.faces.context.FacesContext;
 import java.util.regex.Pattern;
 import java.text.ParseException;
 import java.util.regex.Matcher;
+import javax.persistence.PersistenceException;
 
  /**
   *  La clase <code>RegistroUsuario</code>. 
@@ -125,5 +126,15 @@ public class RegistroUsuario {
                 return "RegistroExitosoIH?faces-redirect=true";
             }
         }    
+    }
+   
+    public String eliminarUsuario( String idUsuario ) {
+        try {
+            controladorJPA.eliminarUsuario( idUsuario );
+            return "EliminaUsuarioExitosoIH?faces-redirect=true";
+        }
+        catch ( PersistenceException e ) {
+            return "ErrorIH?faces-redirect=true";
+        }
     }
 }

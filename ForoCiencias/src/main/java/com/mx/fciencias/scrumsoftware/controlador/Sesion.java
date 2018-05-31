@@ -182,9 +182,18 @@ public class Sesion {
     
     /**
      * Devuelve la lista de respuestas de una pregunta.
+     * @param idPregunta - El identificador de la pregunta deseada.
      * @return <code>List<Respuesta></code> - La lista de respuestas de la pregunta.
      */    
     public List<Respuesta> darRespuestas( Integer idPregunta ) {
         return controladorJPA.darRespuestas( idPregunta );
+    }
+    
+    /**
+     * Devuelve la lista de todos los usuarios convencionales del sistema.
+     * @return <code>List<Usuario></code> - La lista de respuestas de la pregunta.
+     */    
+    public List<Usuario> darUsuarios() {
+        return controladorJPA.darUsuarios();
     }
 }
